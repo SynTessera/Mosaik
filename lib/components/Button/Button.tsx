@@ -16,7 +16,7 @@ import { FitX, Sizes } from "@/types/Size";
 import { ColorMode } from "@/types/Theme";
 import { useTheme } from "@/hooks/useTheme";
 import { baseClasses } from "@/utils/theme";
-import styles from "./Button.module.css";
+import styles from "~/components/Button/Button.module.css";
 
 export type ButtonElements = "button" | "a";
 export type ButtonAttributeMap = {
