@@ -1,0 +1,18 @@
+@reference '../../assets/styles/index.css';
+
+.root {
+    @apply font-semibold;
+}
+
+.root.auto {
+    @apply h-auto w-auto min-w-7 min-h-7;
+}
+:global(.ButtonGroup) .root {
+    @apply rounded-none;
+}
+:global(.ButtonGroup) .root:first-child {
+    @apply rounded-tl-sm;
+}
+:global(.ButtonGroup) .root:last-child {
+    @apply rounded-tr-sm;
+}

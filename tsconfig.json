@@ -13,8 +13,7 @@
     "declaration": true,
     "types": ["node"],
     "paths": {
-      "@/*": ["./lib/*"],
-      "~/*": ["./src/*"]
+      "@/*": ["./lib/*"]
     }
   },
   "files": ["./lib/svg.d.ts"],

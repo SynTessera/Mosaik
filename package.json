@@ -5,7 +5,8 @@
   "main": "./dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc -b && tsc-alias",
+    "copy:css": "copyfiles -u 1 ./lib/**/*.module.css dist/",
+    "build": "tsc -b && tsc-alias && npm run copy:css",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",
+    "copyfiles": "^2.4.1",
     "i18n": "^0.15.1",
     "i18next": "^24.2.2",
     "jotai": "^2.12.1",

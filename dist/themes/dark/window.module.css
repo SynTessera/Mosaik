@@ -1,0 +1,37 @@
+@reference '../../assets/styles/index.css';
+
+.root {
+  @apply flex-shrink min-w-[200px] overflow-hidden h-full max-h-[100vh];
+}
+
+.level-1 {
+  @apply bg-black/70;
+}
+
+.level-2 {
+  @apply bg-black/40;
+}
+
+.level-3 {
+  @apply bg-black/30;
+}
+
+.fullWidth {
+  @apply flex-1;
+}
+
+.fullHeight {
+  @apply h-full;
+}
+
+.grow {
+  @apply h-auto grow;
+}
+
+.title {
+  @apply backdrop-blur-md;
+}
+
+.content {
+  @apply backdrop-blur-xs;
+}

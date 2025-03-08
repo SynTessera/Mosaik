@@ -10,7 +10,7 @@ import { FitX, Sizes } from "../../types/Size.js";
 import { ColorMode } from "../../types/Theme.js";
 import { useTheme } from "../../hooks/useTheme.js";
 import { baseClasses } from "../../utils/theme.js";
-import styles from "~/components/Button/Button.module.css";
+import styles from "../../components/Button/Button.module.css";
 export const Button = ({ className, children, onClick, tooltip, allowDisabledClick, onDisabledClick, id, tooltipPlacement, as = "button", size = Sizes.auto, fit = [FitX.auto], colorMode, ...rest }) => {
     const linkProps = {};
     const { disabled } = rest;
