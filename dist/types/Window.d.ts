@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
-import { IconName } from "./Icon";
-import { FitX, FitY, Sizes } from "./Size";
+import { IconName } from "./Icon.js";
+import { FitX, FitY, Sizes } from "./Size.js";
 export type WindowState = {
     maximized: boolean;
 };

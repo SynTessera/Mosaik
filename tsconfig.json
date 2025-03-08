@@ -19,9 +19,6 @@
   "files": ["./lib/svg.d.ts"],
   "include": ["./lib/**/*.*", "./lib/svg.d.ts", "./lib/global.d.ts"],
   "tsc-alias": {
-    "fileExtensions": {
-      "inputGlob": "**/*.{js,jsx,mjs}",
-    },
     "verbose": false,
     "resolveFullPaths": true
   }

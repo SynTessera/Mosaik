@@ -1,8 +1,8 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { IconButton } from "./Button";
+import { IconButton } from "./Button.js";
 import copy from "copy-to-clipboard";
 import clsx from "clsx";
-import { useGlobalNotification } from "../Notification/Notification";
+import { useGlobalNotification } from "../Notification/Notification.js";
 export const CopyButton = (props) => {
     const { className, copy: text } = props;
     const [, setNotification] = useGlobalNotification();

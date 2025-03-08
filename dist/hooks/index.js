@@ -1,2 +1,2 @@
-export * from "./useOnClickOutside";
-export * from "./useTheme";
+export * from "./useOnClickOutside.js";
+export * from "./useTheme.js";
