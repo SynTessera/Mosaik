@@ -1,0 +1,5 @@
+@reference './index.css';
+
+.root {
+  @apply border-black border-[1.5px] text-black;
+}

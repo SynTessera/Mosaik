@@ -1,0 +1,17 @@
+@reference '../../assets/styles/index.css';
+
+.root {
+  @apply border-toggle;
+}
+
+.active {
+  @apply !bg-white/80 hover:!bg-white/70 !text-gray-800;
+}
+
+.active.deselectable {
+    @apply hover:!bg-white/40
+}
+
+.inactive {
+  @apply !bg-white/20 hover:!bg-white/70;
+}

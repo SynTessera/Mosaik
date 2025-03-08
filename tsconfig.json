@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "rootDirs": ["lib"],
+    "outDir": "dist",
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+    "paths": {
+      "@/*": ["./lib/*"]
+    }
+  },
+  "include": ["./lib/*.ts"],
+  "tsc-alias": {
+    "verbose": false,
+    "resolveFullPaths": true
+  }
+}

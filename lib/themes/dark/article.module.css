@@ -1,0 +1,27 @@
+@reference '../../assets/styles/index.css';
+
+.root {
+  @apply bg-white/70;
+}
+
+:global(.light) .root,
+.root.light {
+  @apply bg-bglight/70 text-bgdark;
+}
+
+:global(.dark) .light,
+.root.dark {
+  @apply bg-bgdark/20 text-bglight;
+}
+
+.dimension {
+  @apply h-auto w-auto;
+}
+
+.dimension:global(.size-md) {
+  @apply h-auto w-full;
+}
+
+.layout {
+  @apply flex flex-col p-2;
+}

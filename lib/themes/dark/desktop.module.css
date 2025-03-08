@@ -1,0 +1,13 @@
+@reference '../../assets/styles/index.css';
+
+.root {
+  @apply bg-gray-500/20;
+}
+
+.dimension {
+  @apply !h-[100vh] !w-[100vw] !overflow-hidden;
+}
+
+.layout {
+  @apply flex gap-0.5;
+}

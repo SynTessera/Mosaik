@@ -1,0 +1,5 @@
+@reference './index.css';
+
+.root select {
+    @apply !bg-black/50 border-2 !border-white !text-white;
+}

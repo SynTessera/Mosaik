@@ -1,0 +1,5 @@
+@reference './index.css';
+
+.root {
+    @apply bg-bgdark;
+}
