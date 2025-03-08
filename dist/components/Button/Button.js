@@ -1,16 +1,16 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import clsx from "clsx";
-import { Icon } from "../Icon/index.js";
+import { Icon } from "../Icon";
 import ReactDOM from "react-dom";
 import { useRef, useState, } from "react";
-import { useOnClickOutside } from "../../hooks/index.js";
+import { useOnClickOutside } from "@/hooks";
 import { Tooltip } from "react-tooltip";
 import { Link, useLocation } from "react-router";
-import { FitX, Sizes } from "../../types/Size.js";
-import { ColorMode } from "../../types/Theme.js";
-import { useTheme } from "../../hooks/useTheme.js";
-import { baseClasses } from "../../utils/theme.js";
-import styles from "../../components/Button/Button.module.css";
+import { FitX, Sizes } from "@/types/Size";
+import { ColorMode } from "@/types/Theme";
+import { useTheme } from "@/hooks/useTheme";
+import { baseClasses } from "@/utils/theme";
+import styles from "@/components/Button/Button.module.css";
 export const Button = ({ className, children, onClick, tooltip, allowDisabledClick, onDisabledClick, id, tooltipPlacement, as = "button", size = Sizes.auto, fit = [FitX.auto], colorMode, ...rest }) => {
     const linkProps = {};
     const { disabled } = rest;

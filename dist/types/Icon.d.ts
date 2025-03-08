@@ -1,2 +1,2 @@
-import allIcons from "../components/Icon/icons.js";
+import allIcons from "@/components/Icon/icons";
 export type IconName = keyof typeof allIcons;

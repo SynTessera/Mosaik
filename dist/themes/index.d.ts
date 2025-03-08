@@ -1,4 +1,4 @@
-import { dark } from "./dark/index.js";
-export declare const defaultTheme: import("../types/Theme.js").Theme;
+import { dark } from "./dark";
+export declare const defaultTheme: import("../types/Theme").Theme;
 export default defaultTheme;
 export { dark };

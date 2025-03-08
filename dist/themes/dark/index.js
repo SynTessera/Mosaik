@@ -1,3 +1,3 @@
-import dark from "./dark.js";
+import dark from "./dark";
 export { dark };
 export default dark;

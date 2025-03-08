@@ -1,5 +1,5 @@
 import React from "react";
-import { Theme } from "../../types/Theme.js";
+import { Theme } from "../../types/Theme";
 export type ThemeContext = {
     theme: Theme;
 };
