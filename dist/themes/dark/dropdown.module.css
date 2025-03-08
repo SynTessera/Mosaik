@@ -1,5 +1,13 @@
-@reference './index.css';
-
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 .root select {
-    @apply !bg-black/50 border-2 !border-white !text-white;
+  border-style: var(--tw-border-style);
+  border-width: 2px;
+  border-color: var(--color-white, #fff) !important;
+  background-color: color-mix(in oklab, var(--color-black, #000) 50%, transparent) !important;
+  color: var(--color-white, #fff) !important;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }

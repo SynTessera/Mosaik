@@ -1,27 +1,27 @@
-@reference '../../assets/styles/index.css';
-
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 .root {
-  @apply bg-white/70;
+  background-color: color-mix(in oklab, var(--color-white, #fff) 70%, transparent);
 }
-
 :global(.light) .root,
 .root.light {
-  @apply bg-bglight/70 text-bgdark;
+  background-color: color-mix(in oklab, var(--color-bglight, var(--color-gray-200)) 70%, transparent);
+  color: var(--color-bgdark, var(--color-gray-800));
 }
-
 :global(.dark) .light,
 .root.dark {
-  @apply bg-bgdark/20 text-bglight;
+  background-color: color-mix(in oklab, var(--color-bgdark, var(--color-gray-800)) 20%, transparent);
+  color: var(--color-bglight, var(--color-gray-200));
 }
-
 .dimension {
-  @apply h-auto w-auto;
+  height: auto;
+  width: auto;
 }
-
 .dimension:global(.size-md) {
-  @apply h-auto w-full;
+  height: auto;
+  width: 100%;
 }
-
 .layout {
-  @apply flex flex-col p-2;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--spacing, 0.25rem) * 2);
 }

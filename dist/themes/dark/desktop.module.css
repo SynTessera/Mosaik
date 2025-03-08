@@ -1,13 +1,13 @@
-@reference '../../assets/styles/index.css';
-
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 .root {
-  @apply bg-gray-500/20;
+  background-color: color-mix(in oklab, var(--color-gray-500, oklch(0.551 0.027 264.364)) 20%, transparent);
 }
-
 .dimension {
-  @apply !h-[100vh] !w-[100vw] !overflow-hidden;
+  height: 100vh !important;
+  width: 100vw !important;
+  overflow: hidden !important;
 }
-
 .layout {
-  @apply flex gap-0.5;
+  display: flex;
+  gap: calc(var(--spacing, 0.25rem) * 0.5);
 }

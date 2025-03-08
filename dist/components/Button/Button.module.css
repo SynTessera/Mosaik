@@ -1,18 +1,24 @@
-@reference '../../assets/styles/index.css';
-
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 .root {
-    @apply font-semibold;
+  --tw-font-weight: var(--font-weight-semibold, 600);
+  font-weight: var(--font-weight-semibold, 600);
 }
-
 .root.auto {
-    @apply h-auto w-auto min-w-7 min-h-7;
+  height: auto;
+  min-height: calc(var(--spacing, 0.25rem) * 7);
+  width: auto;
+  min-width: calc(var(--spacing, 0.25rem) * 7);
 }
 :global(.ButtonGroup) .root {
-    @apply rounded-none;
+  border-radius: 0;
 }
 :global(.ButtonGroup) .root:first-child {
-    @apply rounded-tl-sm;
+  border-top-left-radius: var(--radius-sm, 0.25rem);
 }
 :global(.ButtonGroup) .root:last-child {
-    @apply rounded-tr-sm;
+  border-top-right-radius: var(--radius-sm, 0.25rem);
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
 }

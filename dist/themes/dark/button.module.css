@@ -1,5 +1,12 @@
-@reference './index.css';
-
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 .root {
-  @apply border-black border-[1.5px] text-black;
+  border-style: var(--tw-border-style);
+  border-width: 1.5px;
+  border-color: var(--color-black, #000);
+  color: var(--color-black, #000);
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
 }

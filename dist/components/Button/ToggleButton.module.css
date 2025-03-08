@@ -1,17 +1,28 @@
-@reference '../../assets/styles/index.css';
-
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 .root {
-  @apply border-toggle;
+  border-color: var(--color-toggle, var(--color-info-400));
 }
-
 .active {
-  @apply !bg-white/80 hover:!bg-white/70 !text-gray-800;
+  background-color: color-mix(in oklab, var(--color-white, #fff) 80%, transparent) !important;
+  color: var(--color-gray-800, oklch(0.278 0.033 256.848)) !important;
+  &:hover {
+    @media (hover: hover) {
+      background-color: color-mix(in oklab, var(--color-white, #fff) 70%, transparent) !important;
+    }
+  }
 }
-
 .active.deselectable {
-    @apply hover:!bg-white/40
+  &:hover {
+    @media (hover: hover) {
+      background-color: color-mix(in oklab, var(--color-white, #fff) 40%, transparent) !important;
+    }
+  }
 }
-
 .inactive {
-  @apply !bg-white/20 hover:!bg-white/70;
+  background-color: color-mix(in oklab, var(--color-white, #fff) 20%, transparent) !important;
+  &:hover {
+    @media (hover: hover) {
+      background-color: color-mix(in oklab, var(--color-white, #fff) 70%, transparent) !important;
+    }
+  }
 }

@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "copy:css": "copyfiles -u 1 ./lib/**/*.css dist/",
-    "build": "tsc -b && tsc-alias && npm run copy:css",
+    "postcss": "postcss  --config postcss.config.js ./dist/**/*module.css --replace",
+    "build": "tsc -b && tsc-alias && npm run copy:css && npm run postcss",
     "lint": "eslint ."
   },
   "dependencies": {
     "@syntessera/tesseract": "SynTessera/tesseract",
-    "@tailwindcss/postcss": "^4.0.11",
+    "@tailwindcss/postcss": "^4.0.12",
     "@tailwindcss/vite": "^4.0.10",
     "@types/node": "^22.13.9",
     "@types/react-router": "^5.1.20",
@@ -22,6 +23,7 @@
     "i18n": "^0.15.1",
     "i18next": "^24.2.2",
     "jotai": "^2.12.1",
+    "postcss-cli": "^11.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-i18next": "^15.4.1",

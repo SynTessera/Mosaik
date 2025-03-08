@@ -1,5 +1,4 @@
-@reference './index.css';
-
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 .root {
-    @apply bg-bgdark;
+  background-color: var(--color-bgdark, var(--color-gray-800));
 }

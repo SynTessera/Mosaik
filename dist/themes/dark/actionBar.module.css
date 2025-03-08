@@ -1,17 +1,16 @@
-@reference '../../assets/styles/index.css';
-
+/*! tailwindcss v4.0.12 | MIT License | https://tailwindcss.com */
 .root {
-  @apply bg-white/20;
+  background-color: color-mix(in oklab, var(--color-white, #fff) 20%, transparent);
 }
-
 .dimension {
-  @apply h-auto w-auto;
+  height: auto;
+  width: auto;
 }
-
 .dimension:global(.size-md) {
-  @apply h-auto w-full;
+  height: auto;
+  width: 100%;
 }
-
 .layout {
-  @apply flex items-center;
+  display: flex;
+  align-items: center;
 }
