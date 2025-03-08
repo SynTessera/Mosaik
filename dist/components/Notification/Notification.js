@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { IconButton } from "../Button";
-import { Icon } from "../Icon";
+import { IconButton } from "../Button/index.js";
+import { Icon } from "../Icon/index.js";
 import { useState } from "@syntessera/tesseract";
 export const GlobalNotification = () => {
     const [title, setNotification] = useGlobalNotification();
