@@ -2,9 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { IconButton } from "../Button";
 import { Icon } from "../Icon";
-import { useState } from "tesseract";
+import { useState } from "@syntessera/tesseract";
 export const GlobalNotification = () => {
-  const [title, setNotification] = useGlobalNotification();
+  const [title, setNotification] = useGlobalNotification() as [string, any];
 
   useEffect(() => {
     const to = setTimeout(() => setNotification(""), 5000);

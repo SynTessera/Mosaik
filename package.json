@@ -9,8 +9,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@syntessera/tesseract": "SynTessera/tesseract",
     "@tailwindcss/postcss": "^4.0.11",
     "@tailwindcss/vite": "^4.0.10",
+    "@types/node": "^22.13.9",
+    "@types/react-router": "^5.1.20",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",

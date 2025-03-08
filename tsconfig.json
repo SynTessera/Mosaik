@@ -3,17 +3,21 @@
     "rootDirs": ["lib"],
     "outDir": "dist",
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "typeRoots": ["./node_modules/@types", "./lib"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable", "ESNext"],
     "module": "esnext",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "declaration": true,
     "types": ["node"],
     "paths": {
       "@/*": ["./lib/*"]
     }
   },
-  "include": ["./lib/*.ts"],
+  "files": ["./lib/svg.d.ts"],
+  "include": ["./lib/**/*.*", "./lib/svg.d.ts", "./lib/global.d.ts"],
   "tsc-alias": {
     "verbose": false,
     "resolveFullPaths": true

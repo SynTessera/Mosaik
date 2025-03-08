@@ -1,5 +1,5 @@
-export * from "./components/Notification/Notification.tsx";
-export * from "./components/Button/CopyButton.tsx";
-export * from "./components/Icon/Icon.tsx";
+export * from "./components/Notification/Notification";
+export * from "./components/Button/CopyButton";
+export * from "./components/Icon/Icon";
 
-import './signature.d.ts';
+import "./mosaik.d.ts";
