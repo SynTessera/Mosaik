@@ -1,4 +1,4 @@
-import { BaseClasses, ThemeModuleClasses } from "@/types/Theme";
+import { BaseClasses, ThemeModuleClasses } from "@/types/Theme.js";
 
 export const baseClasses = <T extends string>(
   classes?: ThemeModuleClasses<BaseClasses | T>

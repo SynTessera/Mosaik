@@ -5,9 +5,9 @@
     "target": "ES2022",
     "typeRoots": ["./node_modules/@types", "./lib"],
     "lib": ["ES2023", "DOM", "DOM.Iterable", "ESNext"],
-    "module": "esnext",
+    "module": "NodeNext",
     "jsx": "react-jsx",
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "declaration": true,
@@ -17,6 +17,7 @@
     }
   },
   "files": ["./lib/svg.d.ts"],
+  "exclude": ["node_modules/@syntessera/tesseract/lib/tesseract.d.ts"],
   "include": ["./lib/**/*.*", "./lib/svg.d.ts", "./lib/global.d.ts"],
   "tsc-alias": {
     "verbose": false,

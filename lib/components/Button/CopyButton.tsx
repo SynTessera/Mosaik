@@ -1,9 +1,9 @@
 import React from "react";
-import { IconButton } from "./Button";
 import copy from "copy-to-clipboard";
 import clsx from "clsx";
-import { useGlobalNotification } from "../Notification/Notification";
-import { CopyButtonProps } from "@/types/CopyButton";
+import { IconButton } from "./Button.js";
+import { useGlobalNotification } from "../Notification/Notification.js";
+import { CopyButtonProps } from "@/types/CopyButton.js";
 
 export const CopyButton = (props: CopyButtonProps) => {
   const { className, copy: text } = props;
@@ -16,7 +16,9 @@ export const CopyButton = (props: CopyButtonProps) => {
           copy(text);
           setNotification("Copied to clipboard.");
         }}
-      ></IconButton>
+      >
+        {text}
+      </IconButton>
     </div>
   );
 };

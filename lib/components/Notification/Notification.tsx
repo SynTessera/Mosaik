@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
-import { IconButton } from "../Button";
-import { Icon } from "../Icon";
+import { IconButton } from "../Button/index.js";
+import { Icon } from "../Icon/index.js";
 import { useState } from "@syntessera/tesseract";
 export const GlobalNotification = () => {
   const [title, setNotification] = useGlobalNotification() as [string, any];

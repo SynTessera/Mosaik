@@ -23,6 +23,6 @@ export const allIcons = {
   ...IO,
   ...SI,
   ...BI,
-} as Record<string, ComponentType>;
+} as unknown as Record<string, ComponentType>;
 
 export default allIcons;

@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
-import { ThemeContext } from "./ThemeProvider";
-import defaultTheme from '@/themes'
+import { ThemeContext } from "./ThemeProvider.js";
+import defaultTheme from '@/themes/index.js'
 
 export const themeContext = createContext<ThemeContext>({
   theme: defaultTheme,

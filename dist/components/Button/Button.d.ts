@@ -1,7 +1,7 @@
 import React from "react";
 import { AnchorHTMLAttributes } from "react";
 import { PlacesType } from "react-tooltip";
-import { LinkProps } from "react-router";
+import { LinkProps } from "react-router-dom";
 import { FitX, Sizes } from "../../types/Size.js";
 import { ColorMode } from "../../types/Theme.js";
 export type ButtonElements = "button" | "a";

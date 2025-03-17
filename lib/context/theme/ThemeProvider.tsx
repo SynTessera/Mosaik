@@ -1,6 +1,6 @@
 import React from "react";
-import { Theme } from "../../types/Theme";
-import { Provider as ThemeContextProvider } from "./themeContext";
+import { Theme } from "../../types/Theme.js";
+import { Provider as ThemeContextProvider } from "./themeContext.js";
 
 export type ThemeContext = {
   theme: Theme;

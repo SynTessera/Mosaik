@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Icon } from "../Icon";
+import { Icon } from "../Icon/index.js";
 import ReactDOM from "react-dom";
 import {
   AnchorHTMLAttributes,
@@ -9,13 +9,13 @@ import {
   useRef,
   useState,
 } from "react";
-import { useOnClickOutside } from "@/hooks";
 import { PlacesType, Tooltip } from "react-tooltip";
-import { Link, LinkProps, useLocation } from "react-router";
-import { FitX, Sizes } from "@/types/Size";
-import { ColorMode } from "@/types/Theme";
-import { useTheme } from "@/hooks/useTheme";
-import { baseClasses } from "@/utils/theme";
+import { Link, LinkProps, useLocation } from "react-router-dom";
+import { useOnClickOutside } from "@/hooks/index.js";
+import { FitX, Sizes } from "@/types/Size.js";
+import { ColorMode } from "@/types/Theme.js";
+import { useTheme } from "@/hooks/useTheme.js";
+import { baseClasses } from "@/utils/theme.js";
 import styles from "@/components/Button/Button.module.css";
 
 export type ButtonElements = "button" | "a";

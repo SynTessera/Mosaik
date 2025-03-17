@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import allIcons from "./icons";
+import allIcons from "./icons.js";
 import { ComponentType } from "react";
 
 export const Icon = ({

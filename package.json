@@ -7,7 +7,7 @@
   "scripts": {
     "copy:css": "copyfiles -u 1 ./lib/**/*.css dist/",
     "postcss": "postcss  --config postcss.config.js ./dist/**/*module.css --replace",
-    "build": "tsc -b && tsc-alias && npm run copy:css && npm run postcss",
+    "build": "tsc -b && tsc-alias && ts-add-js-extension --dir=dist && npm run copy:css && npm run postcss",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -24,17 +24,19 @@
     "i18next": "^24.2.2",
     "jotai": "^2.12.1",
     "postcss-cli": "^11.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "react-i18next": "^15.4.1",
     "react-icons": "^5.5.0",
-    "react-router": "^7.3.0",
     "react-tooltip": "^5.28.0",
     "tailwindcss": "^4.0.10",
     "tesseract": "SynTessera/tesseract",
     "tsc-alias": "^1.8.11"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.3.0",
+    "react-router-dom": "^7.3.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@types/react": "^19.0.10",
@@ -43,7 +45,10 @@
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "fix-esm-import-path": "^1.10.1",
     "globals": "^15.15.0",
+    "react-router-dom": "^7.3.0",
+    "ts-add-js-extension": "^1.6.5",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0"

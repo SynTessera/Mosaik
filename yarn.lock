@@ -605,7 +605,7 @@
 
 "@syntessera/tesseract@SynTessera/tesseract":
   version "0.0.1"
-  resolved "https://codeload.github.com/SynTessera/tesseract/tar.gz/1ee5e8a7c0de04474f12526ce4d584504afbbc21"
+  resolved "https://codeload.github.com/SynTessera/tesseract/tar.gz/009f9ed9aab0eaafa297a35f807cea9329dfa263"
   dependencies:
     jotai "^2.12.1"
     react "^19.0.0"
@@ -1372,6 +1372,13 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
+fix-esm-import-path@^1.10.1:
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/fix-esm-import-path/-/fix-esm-import-path-1.10.1.tgz#c68059a33680eb436d2494b69a75dd5da60aa96d"
+  integrity sha512-9PyPwTRujdf6UWDWMz4W1HUlPVHliD68aOC2tpRO+XvRfM1lQjJb8eo1yNVo8G9XZfYoWLPstoXxaUnnpP3TIA==
+  dependencies:
+    debug "^4.3.2"
+
 flat-cache@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-4.0.1.tgz#0ece39fcb14ee012f4b0410bd33dd9c1f011127c"
@@ -2058,7 +2065,14 @@ react-refresh@^0.14.2:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.2.tgz#3833da01ce32da470f1f936b9d477da5c7028bf9"
   integrity sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==
 
-react-router@^7.3.0:
+react-router-dom@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-7.3.0.tgz#170e569b7536ffd71ff16016cb0f4458d1f23d83"
+  integrity sha512-z7Q5FTiHGgQfEurX/FBinkOXhWREJIAB2RiU24lvcBa82PxUpwqvs/PAXb9lJyPjTs2jrl6UkLvCZVGJPeNuuQ==
+  dependencies:
+    react-router "7.3.0"
+
+react-router@7.3.0:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-7.3.0.tgz#14fb630f088d919386e97f91199a2bc4abcdd85d"
   integrity sha512-466f2W7HIWaNXTKM5nHTqNxLrHTyXybm7R0eBlVSt0k/u55tTCDO194OIx/NrYD4TS5SXKTNekXfT37kMKUjgw==
@@ -2280,14 +2294,6 @@ tapable@^2.2.0:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.1.tgz#1967a73ef4060a82f12ab96af86d52fdb76eeca0"
   integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
 
-tesseract@SynTessera/tesseract:
-  version "0.0.1"
-  resolved "https://codeload.github.com/SynTessera/tesseract/tar.gz/1ee5e8a7c0de04474f12526ce4d584504afbbc21"
-  dependencies:
-    jotai "^2.12.1"
-    react "^19.0.0"
-    react-dom "^19.0.0"
-
 thenby@^1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/thenby/-/thenby-1.3.4.tgz#81581f6e1bb324c6dedeae9bfc28e59b1a2201cc"
@@ -2312,6 +2318,13 @@ toggle-selection@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/toggle-selection/-/toggle-selection-1.0.6.tgz#6e45b1263f2017fa0acc7d89d78b15b8bf77da32"
   integrity sha512-BiZS+C1OS8g/q2RRbJmy59xpyghNBqrr6k5L/uKBGRsTfxmu3ffiRnd8mlGPUVayg8pvfi5urfnu8TU7DVOkLQ==
+
+ts-add-js-extension@^1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/ts-add-js-extension/-/ts-add-js-extension-1.6.5.tgz#24f37d3d4d744863244e88d540b3d7df6edab934"
+  integrity sha512-ijPXEuexDZorzkqBRGwYSS9tyqJYhhCvK92qIRussMnQD7FC4b38aL58XDI5OhLMQUR5fAyA9FCQmV+RCRfukA==
+  dependencies:
+    typescript "^5.6.3"
 
 ts-api-utils@^2.0.1:
   version "2.0.1"
@@ -2350,6 +2363,11 @@ typescript-eslint@^8.24.1:
     "@typescript-eslint/eslint-plugin" "8.26.0"
     "@typescript-eslint/parser" "8.26.0"
     "@typescript-eslint/utils" "8.26.0"
+
+typescript@^5.6.3:
+  version "5.8.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.8.2.tgz#8170b3702f74b79db2e5a96207c15e65807999e4"
+  integrity sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==
 
 typescript@~5.7.2:
   version "5.7.3"
