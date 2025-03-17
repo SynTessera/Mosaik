@@ -27,7 +27,7 @@
     "react-i18next": "^15.4.1",
     "react-icons": "^5.5.0",
     "react-tooltip": "^5.28.0",
-    "tailwindcss": "^4.0.10",
+    "tailwindcss": "4.x.x",
     "tesseract": "SynTessera/tesseract",
     "tsc-alias": "^1.8.11"
   },
