@@ -9,15 +9,6 @@ type PageProps = {
   params: Promise<{ view: string[] }>;
 };
 
-export const generateStaticParams = async () => {
-  const routes = [...(await fetchRoutes()), ...staticRoutes];
-
-  return [
-    {
-      view: routes.map((r) => r.slug.split("/")?.pop()),
-    },
-  ];
-};
 
 const Page = async ({ params }: PageProps) => {
   const awaitedParams = await params;
