@@ -1,5 +1,14 @@
-import { PropsWithChildren } from "react";
+import { ScrollContainer } from "@/components/ScrollContainer";
+import React, { PropsWithChildren } from "react";
 
 export const BlogPosts = ({ children }: PropsWithChildren) => {
-  return <ul>{children}</ul>;
+  return (
+    <ScrollContainer>
+      <ul>
+        {React.Children.map(children, (child) => (
+          <li>{child}</li>
+        ))}
+      </ul>
+    </ScrollContainer>
+  );
 };

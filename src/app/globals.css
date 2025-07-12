@@ -87,3 +87,8 @@ article h3 {
 article h4 {
   @apply ml-0 my-2 text-[1.2rem] font-semibold;
 }
+
+/** List Styles */
+ul li {
+  @apply mb-4;
+}
