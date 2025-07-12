@@ -21,7 +21,12 @@ const Page = async () => {
         routes={routes}
         params={{ view: "blog" }}
       ></AppRouter>
-      <AppNavigation slot="navigation" routes={routes} route={`/mosaik/blog`} />
+      <AppNavigation
+        slot="navigation"
+        routes={routes}
+        route={`/mosaik/blog`}
+        baseUrl="/mosaik"
+      />
     </App>
   );
 };
