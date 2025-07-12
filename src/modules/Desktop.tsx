@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 import { ViewHostProvider } from "./ViewHost";
 import { Slot } from "./Slot";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
