@@ -5,7 +5,12 @@ import { View } from "../modules/View";
 import { useAppState } from "@/context/StateContext";
 import { AppNavigationProps } from "@/types/AppNavigationProps";
 
-export function AppNavigation({ routes, route, slot = "navigation" }: AppNavigationProps) {
+export function AppNavigation({
+  routes,
+  route,
+  slot = "navigation",
+  baseUrl = "",
+}: AppNavigationProps) {
   const Nav = useThemedComponent("Navigation");
   const NavLink = useThemedComponent("NavigationLink");
   const { state } = useAppState();
@@ -16,7 +21,7 @@ export function AppNavigation({ routes, route, slot = "navigation" }: AppNavigat
           <NavLink
             icon={r.icon}
             key={r.slug}
-            href={r.slug}
+            href={`${baseUrl}/${r.slug}`}
             label={r.label}
             isActive={route === r.slug}
             iconOnly={state?.sidebar.collapsed === true}

@@ -33,6 +33,7 @@ const Page = async ({ params }: PageProps) => {
         params={awaitedParams}
       ></AppRouter>
       <AppNavigation
+        baseUrl="/mosaik"
         slot="navigation"
         routes={routes}
         route={`/mosaik/${awaitedParams.view}`}
