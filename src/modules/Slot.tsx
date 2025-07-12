@@ -11,15 +11,12 @@ export const Slot: React.FC<SlotProps> = ({ name }) => {
   const { slots } = useViewHost();
 
   const elements = slots[name];
-  useEffect(() => {
-    console.log("Slots", slots);
-  }, []);
   if (!elements || elements.length === 0) return null;
 
   return (
     <>
       {elements.map((element, i) => (
-        <React.Fragment key={name + i   }>{element}</React.Fragment>
+        <React.Fragment key={name + i}>{element}</React.Fragment>
       ))}
     </>
   );

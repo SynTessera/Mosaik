@@ -76,14 +76,6 @@ function desktopReducer(
 export function Desktop({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(desktopReducer, initialState);
   const Desktop = useThemedComponent("DesktopLayout") || (() => null);
-  // For now: stub for URL sync
-  useEffect(() => {
-    // TODO: parse pathname/query -> state
-    // e.g. ?windows=mail,settings&focus=mail
-    // router.replace(...) on state changes
-    console.log("DESKTOP");
-  }, []);
-
   const value: DesktopContextValue = { state, dispatch };
 
   return (

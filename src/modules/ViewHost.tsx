@@ -39,7 +39,6 @@ export const ViewHostProvider = ({
 
   const registerView = useCallback(
     (view: ViewConfig) => {
-      console.log("REGISTER VIEW", view);
       setViews((prev) => {
         // Prevent duplicate IDs:
         if (prev.find((v) => v.slot === view.slot))
@@ -50,7 +49,6 @@ export const ViewHostProvider = ({
     [setViews       ]
   );
 
-  console.log ("VIEWS", views)
   // --- Here you could later apply constraints, state graph, URL solving:
   const slots = useMemo(() => {
     const slots: Record<string, React.ReactNode[]> = {};

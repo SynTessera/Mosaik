@@ -27,7 +27,6 @@ export const View: React.FC<ViewProps> = ({
   effects,
 }) => {
   const { registerView } = useViewHost();
-  console.log("VIEW ", slot);
   const mem = useCallback(() => <>{children}</>, [children]);
   useEffect(() => {
     registerView({

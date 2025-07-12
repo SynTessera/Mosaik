@@ -28,6 +28,7 @@ const Page = async ({ params }: PageProps) => {
     ...appConfig.pages,
     [awaitedParams.view?.[0]]: appConfig.pages?.[":slug"],
   };
+  console.log ("IS ACTIVE", awaitedParams.view[0], routes)
   return (
     <App slug="/mosaik/:view">
       <AppRouter
@@ -41,7 +42,7 @@ const Page = async ({ params }: PageProps) => {
         baseUrl="/mosaik"
         slot="navigation"
         routes={routes}
-        pathname={`/mosaik/${awaitedParams.view}`}
+        slug={awaitedParams.view?.[0]}
       />
     </App>
   );

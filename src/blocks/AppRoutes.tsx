@@ -8,7 +8,7 @@ import { ExternalRoute, Route } from "@/types/Route";
 
 export function AppNavigation({
   routes,
-  pathname,
+  slug,
   slot = "navigation",
   baseUrl = "",
 }: AppNavigationProps) {
@@ -27,7 +27,7 @@ export function AppNavigation({
               key={route.slug || externalRoute.href}
               href={externalRoute.href || `${baseUrl}/${route.slug}`}
               label={r.label}
-              isActive={pathname === route.slug}
+              isActive={slug === route.slug}
               iconOnly={state?.sidebar.collapsed === true}
               external={!!externalRoute.href}
             />
