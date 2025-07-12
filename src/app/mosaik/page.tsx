@@ -5,28 +5,22 @@ import { AppRouter } from "@/modules/UrlDetailView";
 import appConfig from ".";
 import { fetchBlogPosts } from "./dataSources/strapi";
 
-type PageProps = {
-  params: Promise<{ view: string[] }>;
-};
-
-
-const Page = async ({ params }: PageProps) => {
-  const awaitedParams = await params;
+const Page = async () => {
   const blogPosts = await fetchBlogPosts();
   const routes = [...(await fetchRoutes()), ...staticRoutes];
   return (
-    <App slug="/mosaik/:view">
+    <App slug="/mosaik">
       <AppRouter
         pages={appConfig.pages}
-        page={awaitedParams.view[0]}
+        page={"about"}
         data={blogPosts}
         routes={routes}
-        params={awaitedParams}
+        params={{ view: "about" }}
       ></AppRouter>
       <AppNavigation
         slot="navigation"
         routes={routes}
-        route={`/mosaik/${awaitedParams.view}`}
+        route={`/mosaik/about`}
       />
     </App>
   );
