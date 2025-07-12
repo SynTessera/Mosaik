@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useViewHost } from "./ViewHost";
 
 type SlotProps = {
