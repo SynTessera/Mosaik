@@ -24,10 +24,14 @@ const Page = async ({ params }: PageProps) => {
   const awaitedParams = await params;
   const blogPosts = await fetchBlogPosts();
   const routes = [...(await fetchRoutes()), ...staticRoutes];
+  const pages = {
+    ...appConfig.pages,
+    [awaitedParams.view?.[0]]: appConfig.pages?.[":slug"],
+  };
   return (
     <App slug="/mosaik/:view">
       <AppRouter
-        pages={appConfig.pages}
+        pages={pages}
         page={awaitedParams.view[0]}
         data={blogPosts}
         routes={routes}

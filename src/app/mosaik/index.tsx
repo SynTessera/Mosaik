@@ -8,6 +8,7 @@ export const pages = {
   ssr: Section,
   "state-management": Section,
   blog: Blog,
+  ":slug": Section,
   "blog/:slug": BlogPost
 };
 
