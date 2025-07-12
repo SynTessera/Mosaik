@@ -7,13 +7,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
-npm run dev
-# or
+yarn
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -36,6 +31,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 🧩 Mosaik — Build Sites from Themeable Components. Ship Static-Fast. Scale Forever.
+
+**Mosaik** is an _edge-first_, _themeable_ framework built on **Next.js 15** — designed for sites that blend static speed with dynamic content from _any_ headless CMS.
+
+✨ **Why Mosaik?**
+
+-   **Compose Like Lego:** Every page is built from _themeable components_. No locked-in page builder — connect any headless CMS you prefer.
+    
+-   **Deploy Static, Update Live:** **ISR** and edge caching keep your site always fresh — and blazing fast.
+    
+-   **Theme Anything, Tree-Shake Everything:** Swap layouts & components at build or runtime — with **server-side theming** that’s fully **tree-shakable** for minimal bundle size.
+    
+-   **Pure State, Clear Effects:** Mosaik’s state system uses fully serializable reducers & effects — proven Redux/Saga ideas, modernized with React hooks.
+    
+-   **No Vendor Lock:** It’s just Next.js, your content, and your edge. No hidden runtime, no extra backend, no rent to pay.
+    
+
+🛠️ **Status:** Mosaik is **experimental** — it’s powering its own docs today (via Strapi on Railway). It’s small, open-source, and ready for your ideas. **PRs welcome!**
+
+--------
 
 ## About this project
 
