@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import clsx from "clsx";
 import { Icon } from "./Icon";
 import ReactDOM from "react-dom";
@@ -37,7 +36,7 @@ export const Button = ({
 }: ReactButton) => {
   const body = useBody();
   const Cmp = href ? Link : "button";
-  let props = {} as any;
+  const props = {} as any;
   if (href) props.href = href;
   return (
     <>

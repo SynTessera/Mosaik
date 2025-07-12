@@ -9,8 +9,9 @@ export type SlotRenderer = (
 ) => React.ReactNode;
 
 export type Theme = {
-  slots: Record<string, SlotRenderer>;
-  tokens?: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  components: Record<string, React.FC<any>>;
+  slots?: Record<string, SlotRenderer>;
   settings: {
     navigation: {
       showTooltip: boolean;
@@ -24,22 +25,21 @@ export type Theme = {
   };
 };
 
-export type StaticTheme = Record<string, React.FC> & {
+export type StaticTheme = {
   settings: Theme["settings"];
-};
+} & Theme;
 // --- 2️⃣ Context ---
 
 export function ThemeProvider({
   theme,
   children,
 }: {
-  theme: Theme | StaticTheme;
+  theme: Theme;
   children: React.ReactNode;
 }) {
   const [tmpTheme, setTheme] = useState(useMemo(() => theme, [theme]));
 
   useEffect(() => {
-    console.log("THEME", theme);
     const renderedTheme = tmpTheme;
     if (
       renderedTheme.settings.preferences.autoMode[0] === "system" &&

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Route } from "@/types/Route";
 import { View } from "./View";
 
@@ -8,8 +9,8 @@ export const AppRouter = ({
   routes,
   params,
 }: {
-  pages: Record<string, React.FC>;
-  page: string | (() => React.FC);
+  pages: Record<string, React.FC<any>>;
+  page: string | (() => React.FC<any>);
   data: any;
   routes: Route[];
   params: any;

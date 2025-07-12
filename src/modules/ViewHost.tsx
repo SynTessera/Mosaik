@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, {
@@ -22,7 +23,7 @@ type ViewConfig = {
 type ViewHostContextType = {
   registerView: (view: ViewConfig) => void;
   slots: Record<string, React.ReactNode[]>;
-  views: React.ReactNode[];
+  views: ViewConfig[];
 };
 
 const ViewHostContext = createContext<ViewHostContextType | undefined>(
@@ -60,7 +61,7 @@ export const ViewHostProvider = ({
     return slots;
   }, [views]);
 
-  const mem = useMemo(() => ({ registerView, slots }), [registerView, slots]);
+  const mem = useMemo(() => ({ registerView, slots, views }), [registerView, slots, views]);
   return (
     <ViewHostContext.Provider value={mem}>{children}</ViewHostContext.Provider>
   );

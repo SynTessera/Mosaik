@@ -9,7 +9,7 @@ const staticParams = {
   view: staticRoutes.map((r) => r.slug.split("/")?.pop()),
 };
 export const generateStaticParams = () => [staticParams];
-const Page = async ({ params, children }) => {
+const Page = async () => {
   const blogPosts = await fetchBlogPosts();
   const routes = [...(await fetchRoutes()), ...staticRoutes];
   return (

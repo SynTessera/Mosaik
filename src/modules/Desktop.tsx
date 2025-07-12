@@ -75,7 +75,7 @@ function desktopReducer(
 // --- 4️⃣ Desktop Provider ---
 export function Desktop({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(desktopReducer, initialState);
-  const Desktop = useThemedComponent("DesktopLayout");
+  const Desktop = useThemedComponent("DesktopLayout") || (() => null);
   // For now: stub for URL sync
   useEffect(() => {
     // TODO: parse pathname/query -> state

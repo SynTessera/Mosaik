@@ -11,7 +11,7 @@ hljs.registerLanguage("powershell", powershell);
 
 const renderer = new Renderer();
 
-renderer.code = function ({ text, lang = "bash", escaped }) {
+renderer.code = function ({ text, lang = "bash" }) {
   const validLang = lang && hljs.getLanguage(lang);
   const highlighted = validLang
     ? hljs.highlight(text, { language: lang }).value

@@ -4,11 +4,12 @@ import React, { PropsWithChildren, useContext } from "react";
 import { ActionsContext } from "./contexts/actions";
 import { Action } from "@/types/Action";
 
-export function ActionProvider<P>({
+export function ActionProvider({
   actions,
   children,
 }: PropsWithChildren<{
-  actions: Record<string, (payload?: P) => Action<string, string, P>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  actions: Record<string, (payload?: any) => Action<string, string, object>>;
 }>) {
   return (
     <ActionsContext.Provider value={{ actions }}>

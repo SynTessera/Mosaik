@@ -6,5 +6,6 @@ import { createContext, Dispatch } from "react";
 
 export const StateContext = createContext<{
   state: State | undefined;
-  dispatch: Dispatch<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dispatch: Dispatch<any>;
 }>({ state: initialState, dispatch: () => null });

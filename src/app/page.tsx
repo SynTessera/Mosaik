@@ -4,11 +4,12 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { Desktop } from "@/modules/Desktop";
 import * as light from "@/themes/light/index";
 
+const {settings, ...components} = light;
+
 export default function Home() {
-  console.log ("THEME", light)
   return (
     <div className="">
-      <ThemeProvider theme={light}>
+      <ThemeProvider theme={{components, settings}}>
         <Desktop>
           <Sidebar></Sidebar>
           <Content></Content>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import clsx from "clsx";
@@ -26,7 +27,7 @@ export const settings: Theme["settings"] = {
 
 // === Individual static slot exports ===
 
-export const DesktopLayout = ({ children, theme }) => (
+export const DesktopLayout = ({ children, theme }: any) => (
   <div
     className={clsx("w-screen h-screen flex", {
       "bg-white": theme.userPreferences.mode === "light",
@@ -37,11 +38,11 @@ export const DesktopLayout = ({ children, theme }) => (
   </div>
 );
 
-export const DesktopSidebar = ({ children, theme }) => (
+export const DesktopSidebar = ({ children }: any) => (
   <div className={classes.DesktopSidebar}>{children}</div>
 );
 
-export const DesktopContent = ({ children, theme }) => (
+export const DesktopContent = ({ children }: any) => (
   <main
     className={clsx(
       classes.DesktopContent,
@@ -52,13 +53,13 @@ export const DesktopContent = ({ children, theme }) => (
   </main>
 );
 
-export const DesktopFooter = ({ children, theme }) => (
+export const DesktopFooter = ({}: any) => (
   <div className="p-4 border-t dark:border-t-gray-800 mt-auto">
     <small>v1.0.0</small>
   </div>
 );
 
-export const ActionBar = ({ children }) => {
+export const ActionBar = ({ children }: any) => {
   return (
     <div className="flex p-2 justify-end border-b bg-gray-800">{children}</div>
   );

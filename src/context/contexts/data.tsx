@@ -1,4 +1,4 @@
-import { ActionContext } from "@/types/ActionContext";
+import { DataContextShape } from "@/types/DataContextShape";
 import { createContext } from "react";
 
-export const DataContext = createContext<DataContext | undefined>(undefined);
+export const DataContext = createContext<DataContextShape | null>(null);

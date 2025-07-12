@@ -14,7 +14,6 @@ import clsx from "clsx";
 
 export const Icon = ({
   icon,
-  tooltip,
   id,
   children,
   containerClsn,

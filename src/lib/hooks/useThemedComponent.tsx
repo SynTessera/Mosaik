@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ThemeContext } from "@/context/contexts/theme";
 import { useContext, useMemo } from "react";
 
@@ -13,16 +14,20 @@ export function useTheme() {
 export function useThemedComponent(
   slot: string,
   ...fallbackSlot: string[]
-): React.FC<any> {
-  const { settings, ...slots } = useTheme();
+): // eslint-disable-next-line @typescript-eslint/no-explicit-any
+React.FC<any> {
+  const { settings, components } = useTheme();
 
   const render =
-    slots[slot] ||
-    fallbackSlot.reduce((cmp, slot) => cmp || slots[slot], null) ||
+    components[slot] ||
+    fallbackSlot.reduce(
+      (cmp, slot) => cmp || (components[slot] as any),
+      null
+    ) ||
     (() => null);
 
   const Cmp = useMemo(
-    () => (props) => render({ ...props, theme: settings }),
+    () => (props: any) => render({ ...props, theme: settings }),
     []
   );
   if (!render) {

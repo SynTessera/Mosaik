@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { PropsWithChildren, useMemo } from "react";
 import { Slot } from "@/modules/Slot"; // Adjust imports to your structure
 import { View } from "@/modules/View"; // Adjust imports to your structure
 import { ActionProvider } from "@/context/ActionContext";
@@ -12,10 +12,15 @@ import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 export const Sidebar = () => {
   const { state } = useAppState();
 
-  const actions = {};
-  if (state?.sidebar.collapsed) actions.EXPAND = {};
+  const actions = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const actions = {} as Record<string, any>;
 
-  if (!state?.sidebar.collapsed) actions.COLLAPSE = COLLAPSE;
+    if (state?.sidebar.collapsed) actions.EXPAND = {};
+    if (!state?.sidebar.collapsed) actions.COLLAPSE = COLLAPSE;
+
+    return actions;
+  }, [state?.sidebar.collapsed]);
 
   return (
     <View id="SidebarNavigation" slot="sidebar">
@@ -31,7 +36,7 @@ export const Sidebar = () => {
 };
 
 // Example sub-components:
-const SidebarNavigation = (props: any) => {
+const SidebarNavigation = (props: PropsWithChildren) => {
   const Cmp = useThemedComponent("DesktopSidebar");
 
   return (

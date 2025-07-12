@@ -5,11 +5,21 @@ import { AppRouter } from "@/modules/UrlDetailView";
 import appConfig from "..";
 import { fetchBlogPosts } from "../dataSources/strapi";
 
-const staticParams = {
-  view: staticRoutes.map((r) => r.slug.split("/")?.pop()),
+type PageProps = {
+  params: Promise<{ view: string[] }>;
 };
-export const generateStaticParams = () => [staticParams];
-const Page = async ({ params, children }) => {
+
+export const generateStaticParams = async () => {
+  const routes = [...(await fetchRoutes()), ...staticRoutes];
+
+  return [
+    {
+      view: routes.map((r) => r.slug.split("/")?.pop()),
+    },
+  ];
+};
+
+const Page = async ({ params }: PageProps) => {
   const awaitedParams = await params;
   const blogPosts = await fetchBlogPosts();
   const routes = [...(await fetchRoutes()), ...staticRoutes];

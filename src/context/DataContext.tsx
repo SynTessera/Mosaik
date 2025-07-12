@@ -4,12 +4,8 @@ import React, {
   PropsWithChildren,
   useContext,
   useEffect,
-  useReducer,
   useState,
 } from "react";
-import { StateContext } from "./contexts/state";
-import { State } from "@/types/State";
-import { Action } from "@/types/Action";
 import { DataContext } from "./contexts/data";
 
 // --- 1️⃣ Slot type ---
@@ -19,7 +15,6 @@ export type SlotRenderer = (
 
 export type Theme = {
   slots: Record<string, SlotRenderer>;
-  tokens?: Record<string, any>;
   settings: {
     userPreferences: {
       mode: "light" | "dark";
@@ -39,24 +34,29 @@ export function DataProvider({
   fetcher,
   children,
   initialData = null,
+  type,
 }: PropsWithChildren<{
   fetcher: () => Promise<Response> | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialData: any;
+  type: string;
 }>) {
   const [data, setData] = useState(initialData);
   useEffect(() => {
     if (data !== null) return;
     (async () => {
       const prom = await fetcher();
-      const json = await prom.json();
+      const json = await prom?.json();
       setData(json);
     })();
   });
   return (
-    <DataContext.Provider value={{ data }}>{children}</DataContext.Provider>
+    <DataContext.Provider value={{ data, type }}>
+      {children}
+    </DataContext.Provider>
   );
 }
 
 export const useData = () => {
-  return useContext(DataContext).data;
+  return useContext(DataContext)?.data;
 };
