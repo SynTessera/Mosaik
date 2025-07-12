@@ -12,9 +12,10 @@ export const AppRouter = ({
   pages: Record<string, React.FC<any>>;
   page: string | (() => React.FC<any>);
   data: any;
-  routes: Route[];
+  routes?: Route[];
   params: any;
 }) => {
+  console.log("APP ROUTER",page, data);
   let Cmp;
   if (typeof page === "function") {
     Cmp = page() || (() => null);

@@ -7,7 +7,7 @@ import { DataView } from "@/blocks/DataView";
 const Blog = async ({ data }: any) => {
   return (
     <DataProvider fetcher={clientOnly(fetchBlogPosts)} initialData={data} type={""}>
-      <DataView initialData={data} container="BlogPosts" type="BlogPost" themeName="light" />
+      <DataView initialData={data} container="BlogPosts" type="BlogPostTeaser" themeName="light" />
     </DataProvider>
   );
 };

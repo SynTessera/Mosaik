@@ -71,3 +71,19 @@ article ul li {
 article hr {
   @apply my-4;
 }
+
+article h1 {
+  @apply mb-4 text-[3rem];
+}
+
+article h2 {
+  @apply ml-0 my-7 text-[2rem] font-semibold leading-[2rem];
+}
+
+article h3 {
+  @apply ml-0 my-3 text-[1.4rem] font-semibold;
+}
+
+article h4 {
+  @apply ml-0 my-2 text-[1.2rem] font-semibold;
+}

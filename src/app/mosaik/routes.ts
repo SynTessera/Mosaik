@@ -4,7 +4,6 @@ import { Section } from "@/typesCMS/Section";
 
 export const fetchRoutes = async () => {
   const sections = (await strapi.fetchSections()) as Section[];
-  console.log("SECTIONS", sections);
   return sections.map(({ slug, icon, title: label, content }) => {
     return { slug, icon, label, content };
   });
