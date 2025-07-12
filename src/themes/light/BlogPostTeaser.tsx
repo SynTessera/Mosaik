@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TextContainer } from "@/components/TextContainer";
 import { coverImageLink } from "@/lib/util/links";
 import Link from "next/link";
 import { MarkdownContainer } from "./MarkdownContainer";
