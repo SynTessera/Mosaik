@@ -34,3 +34,103 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## About this project
+
+> ⚠️ **Disclaimer**
+> Mosaik is **100% a work in progress** — currently an early-stage **proof of concept**.
+> It’s just a small Next.js app exploring flexible theming, composable state, and modern data-driven rendering.
+> **Anyone who wants to help is welcome to contribute!** Please feel free to open issues, share ideas, or create PRs — all collaboration is very welcome.
+
+---
+
+## 🧩 About Mosaik
+
+**Mosaik** is a modern, opinionated frontend framework designed for building highly composable, themeable, and data-driven user interfaces — without sacrificing developer control or performance.
+
+At its core, Mosaik helps you think of your application as a living **mosaic**: a dynamic arrangement of reusable, self-contained pieces — **slots**, **themes**, **actions**, and **data providers** — that adapt fluidly to your users’ needs, your design system, and your content sources.
+
+----------
+
+### ✨ **Why Mosaik?**
+
+Today’s digital products demand more than static pages and brittle components. **Mosaik** is built for teams who want:
+
+-   **Composability** — break your UI into isolated, discoverable slots and actions.
+    
+-   **Dynamic theming** — swap out slots and components at runtime or design time, without rewriting your logic.
+    
+-   **Data as a first-class citizen** — inject, transform, and consume structured data from multiple sources using intuitive, declarative providers.
+    
+-   **Isomorphic rendering** — render the same building blocks on the server for fast, SEO-friendly output, but hydrate them on the client for rich interactivity.
+    
+-   **Flexibility** — use Mosaik’s minimal conventions to shape your own design system, your own CMS backend, and your own rendering logic — no lock-in.
+    
+
+----------
+
+### 🧩 **Key Concepts**
+
+**✅ Slots**  
+Every piece of UI is a slot: an isolated, replaceable area you can render with a themed component. Want to restyle your `Header`, `Sidebar`, or `ListItem`? Just swap the slot renderer.
+
+**✅ Themes**  
+Themes are structured maps of slots, tokens, and design rules. Mosaik’s theme system lets you dynamically switch components or styles based on user preferences, brand context, or device mode.
+
+**✅ Actions**  
+Actions describe the possible interactions in your app: they’re exposed by providers and consumed by views. This makes it trivial to conditionally render buttons, toggles, or menus based on your app’s state.
+
+**✅ State Providers**  
+Manage local or global app state using React’s modern `useReducer` pattern, with clear boundaries for server vs. client responsibilities.
+
+**✅ Data Providers**  
+Connect your views to any source: a headless CMS, an API, or static JSON. Providers abstract data fetching, shape-checking, and caching so your components stay clean and declarative.
+
+----------
+
+### 🔗 **Where Mosaik Fits**
+
+**Mosaik** is not a new rendering engine — it’s a compositional layer that lives on top of **React** (and frameworks like **Next.js**). It embraces React Server Components and modern React patterns for hybrid static + dynamic rendering.
+
+Whether you’re:
+
+-   Building a marketing site with personalized sections,
+    
+-   Crafting a dashboard with dynamic widgets,
+    
+-   Or assembling a fully CMS-powered app that editors can reconfigure at runtime…
+    
+
+**Mosaik** gives you the primitives to scale it all elegantly — without rigid page builders or monolithic component trees.
+
+----------
+
+### 🚀 **Built for teams**
+
+Mosaik works best when designers, developers, and content editors collaborate:
+
+-   **Designers** define slots and themes.
+    
+-   **Developers** wire up state, actions, and data providers.
+    
+-   **Editors** feed structured content via your CMS of choice.
+    
+
+Everything stays decoupled — yet works seamlessly together.
+
+----------
+
+## 🗂️ **What’s next?**
+
+-   Dive into **Getting Started** to create your first slots and themes.
+    
+-   Learn how to wire up a **headless CMS**.
+    
+-   Discover best practices for mixing **server-side rendering** with **client-side interactivity**.
+    
+-   See advanced examples of how to override, merge, and reuse slots across different contexts.
+    
+
+----------
+
+## 🧩 **Mosaik** — your UI, piece by piece.
