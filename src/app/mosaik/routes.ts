@@ -11,5 +11,5 @@ export const fetchRoutes = async () => {
 };
 
 export const routes: Route[] = [
-  { slug: "/mosaik/blog", label: "Blog", icon: "FaBlog" },
+  { slug: "blog", label: "Blog", icon: "FaBlog" },
 ];
