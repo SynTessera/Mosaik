@@ -1,0 +1,1 @@
+export const clientOnly = (val: any) => typeof window === 'undefined' ? null : val;

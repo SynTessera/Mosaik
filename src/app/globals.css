@@ -19,8 +19,55 @@
   }
 }
 
+@theme {
+  --color-info-100: #387842;
+  --color-info-200: oklch(0.98 0.04 113.22);
+  --color-info-300: oklch(0.94 0.11 115.03);
+  --color-info-400: oklch(0.92 0.19 114.08);
+  --color-info-500: oklch(0.84 0.18 117.33);
+  --color-info-600: oklch(0.53 0.12 118.34);
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Roboto, Helvetica, sans-serif;
+  font-size: var(--text-2xl); /* 1.5rem (24px) */
+  line-height: var(--text-2xl--line-height); /* calc(2 / 1.5) */
+}
+
+/** Mosaik Theme Variables */
+body {
+  --app-content-padding: 8px;
+}
+
+article > p {
+  margin-bottom: 1rem;
+  font-weight: 200;
+  font-size: 1.4rem;
+}
+
+article > p > p {
+  @apply overflow-x-auto max-w-full my-4;
+}
+
+article p > pre {
+  margin-bottom: 1rem;
+  @apply overflow-x-auto max-w-full bg-white/10;
+}
+
+
+article p > code {
+  @apply overflow-x-auto overflow-y-clip max-w-full py-1.5 px-2 bg-[#0D111744] leading-[2] rounded-md border-[1.5px] border-black;
+}
+
+article ul li {
+  /* margin-bottom: 1rem; */
+  @apply ml-8;
+}
+
+article hr {
+  @apply my-4;
 }

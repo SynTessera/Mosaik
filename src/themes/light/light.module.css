@@ -1,0 +1,13 @@
+@reference '../../app/globals.css';
+
+.NavigationLink {
+  @apply p-4 hover:bg-gray-500;
+}
+
+.NavigationLink.active {
+  @apply bg-gray-400;
+}
+
+.DesktopContent {
+    padding: var(--app-content-padding);
+}
