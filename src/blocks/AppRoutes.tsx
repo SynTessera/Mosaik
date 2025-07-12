@@ -4,10 +4,11 @@ import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 import { View } from "../modules/View";
 import { useAppState } from "@/context/StateContext";
 import { AppNavigationProps } from "@/types/AppNavigationProps";
+import { ExternalRoute, Route } from "@/types/Route";
 
 export function AppNavigation({
   routes,
-  route,
+  pathname,
   slot = "navigation",
   baseUrl = "",
 }: AppNavigationProps) {
@@ -17,16 +18,21 @@ export function AppNavigation({
   return (
     <View id="Navigation" slot={slot}>
       <Nav>
-        {routes.map((r) => (
-          <NavLink
-            icon={r.icon}
-            key={r.slug}
-            href={`${baseUrl}/${r.slug}`}
-            label={r.label}
-            isActive={route === r.slug}
-            iconOnly={state?.sidebar.collapsed === true}
-          />
-        ))}
+        {routes.map((r) => {
+          const route = r as Route;
+          const externalRoute = r as ExternalRoute;
+          return (
+            <NavLink
+              icon={r.icon}
+              key={route.slug || externalRoute.href}
+              href={externalRoute.href || `${baseUrl}/${route.slug}`}
+              label={r.label}
+              isActive={pathname === route.slug}
+              iconOnly={state?.sidebar.collapsed === true}
+              external={!!externalRoute.href}
+            />
+          );
+        })}
       </Nav>
     </View>
   );

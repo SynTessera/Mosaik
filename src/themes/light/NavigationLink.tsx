@@ -14,6 +14,7 @@ export const NavigationLink = ({
   iconOnly = false,
   isActive = false,
   theme,
+  external = false,
 }: NavigationLinkProps) => {
   let body;
   try {
@@ -23,7 +24,6 @@ export const NavigationLink = ({
     body = null;
   }
   const id = href.split("/").pop();
-  console.log("NAV", theme);
   const tooltip =
     theme?.navigation?.showTooltip &&
     body &&
@@ -38,6 +38,7 @@ export const NavigationLink = ({
       <Link
         id={id}
         href={href}
+        target={external ? "_blank" : "_self"}
         className={clsx(classes.NavigationLink, "flex gap-2 items-center", {
           [classes.active]: isActive,
         })}

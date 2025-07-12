@@ -1,8 +1,8 @@
-import { Route } from "./Route";
+import { ExternalRoute, Route } from "./Route";
 
 export type AppNavigationProps = {
-  route: string;
+  pathname: string;
   baseUrl: string;
-  routes: Route[];
+  routes: Array<Route | ExternalRoute>;
   slot?: string;
 };

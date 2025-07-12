@@ -24,7 +24,7 @@ const Page = async () => {
       <AppNavigation
         slot="navigation"
         routes={routes}
-        route={`/mosaik/blog`}
+        pathname={`/mosaik/blog`}
         baseUrl="/mosaik"
       />
     </App>

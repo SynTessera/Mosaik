@@ -1,4 +1,4 @@
-import { Route } from "@/types/Route";
+import { ExternalRoute, Route } from "@/types/Route";
 import { strapi } from "./dataSources";
 import { Section } from "@/typesCMS/Section";
 
@@ -9,6 +9,11 @@ export const fetchRoutes = async () => {
   });
 };
 
-export const routes: Route[] = [
+export const routes: Array<Route | ExternalRoute> = [
   { slug: "blog", label: "Blog", icon: "FaBlog" },
+  {
+    href: "https://github.com/SynTessera/Mosaik",
+    label: "Github",
+    icon: "FaGithub",
+  },
 ];

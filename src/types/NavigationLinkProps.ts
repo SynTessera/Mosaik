@@ -6,5 +6,6 @@ export type NavigationLinkProps = {
   icon: string;
   iconOnly?: boolean;
   isActive?: boolean;
-  theme: Theme['settings'];
+  theme: Theme["settings"];
+  external: boolean;
 };

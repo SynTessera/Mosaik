@@ -4,6 +4,7 @@ import { routes as staticRoutes, fetchRoutes } from "../routes";
 import { AppRouter } from "@/modules/UrlDetailView";
 import appConfig from "..";
 import { fetchBlogPosts } from "../dataSources/strapi";
+import { Route } from "@/types/Route";
 
 type PageProps = {
   params: Promise<{ view: string[] }>;
@@ -11,10 +12,10 @@ type PageProps = {
 
 export const generateStaticParams = async () => {
   const routes = [...(await fetchRoutes()), ...staticRoutes];
-
+  const noExternalRoutes = routes.filter((r) => !!(r as Route).slug) as Route[];
   return [
     {
-      view: routes.map((r) => r.slug.split("/")?.pop()),
+      view: noExternalRoutes.map((r) => r.slug.split("/")?.pop()),
     },
   ];
 };
@@ -36,7 +37,7 @@ const Page = async ({ params }: PageProps) => {
         baseUrl="/mosaik"
         slot="navigation"
         routes={routes}
-        route={`/mosaik/${awaitedParams.view}`}
+        pathname={`/mosaik/${awaitedParams.view}`}
       />
     </App>
   );
