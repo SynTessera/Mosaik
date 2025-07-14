@@ -20,6 +20,9 @@
 }
 
 @theme {
+  --color-hover: oklch(55.1% 0.027 264.364);
+  --color-active: oklch(70.7% 0.022 261.325);
+
   --color-info-100: #387842;
   --color-info-200: oklch(0.98 0.04 113.22);
   --color-info-300: oklch(0.94 0.11 115.03);
@@ -37,11 +40,6 @@ body {
   font-size: var(--text-1xl); /* 1.5rem (24px) */
   line-height: var(--text-1xl--line-height); /* calc(2 / 1.5) */
   @apply overflow-hidden;
-}
-
-/** Mosaik Theme Variables */
-body {
-  --app-content-padding: 8px;
 }
 
 article > p {
@@ -96,4 +94,12 @@ ul li {
 ul li::before {
   content: "—";
   @apply mr-2 font-bold;
+}
+
+/** Mosaik Theme Variables */
+body {
+  --app-content-padding: 8px;
+}
+
+.NavigationLink {
 }

@@ -25,7 +25,7 @@ export const Sidebar = () => {
   return (
     <View id="SidebarNavigation" slot="sidebar">
       <ActionProvider actions={actions}>
-        <aside className="w-fit bg-gray-100 dark:bg-gray-900 border-r h-full flex flex-col">
+        <aside className="w-max bg-gray-100 dark:bg-gray-900 border-r h-full flex flex-col shrink-0">
           <ActionBar />
           <SidebarNavigation />
           <SidebarFooter />
