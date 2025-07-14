@@ -5,7 +5,7 @@ export const DesktopContent = ({ children }: any) => (
   <main
     className={clsx(
       classes.DesktopContent,
-      "flex-1 p-4 bg-info-100 max-w-full w-full h-full overflow-hidden"
+      "flex-1 p-4 bg-info-100 max-w-full w-full  h-min overflow-hidden"
     )}
   >
     {children}

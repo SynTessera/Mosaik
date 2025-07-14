@@ -8,7 +8,7 @@ import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 export const Content = ({ children }: any) => {
   return (
     <View id="MainContent" slot="content">
-      <div className="flex flex-col grow">
+      <div className="flex flex-col grow overflow-hidden max-h-screen w-full">
         <MainContent>{children}</MainContent>
         <MainFooter />
       </div>
