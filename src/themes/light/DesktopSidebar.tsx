@@ -1,5 +1,6 @@
+import clsx from "clsx";
 import classes from "./light.module.css";
 
 export const DesktopSidebar = ({ children }: any) => (
-  <div className={classes.DesktopSidebar}>{children}</div>
+  <div className={clsx(classes.DesktopSidebar, "max-h-full")}>{children}</div>
 );

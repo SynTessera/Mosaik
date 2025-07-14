@@ -4,5 +4,5 @@ import { PropsWithChildren } from "react";
 export const Navigation = ({
   children,
 }: PropsWithChildren<NavigationLinkProps>) => {
-  return <nav>{children}</nav>;
+  return <nav className="overflow-y-auto max-h-full">{children}</nav>;
 };
