@@ -88,12 +88,12 @@ article h4 {
 
 /** List Styles */
 ul li {
-  @apply mb-4 flex;
+  @apply mb-4;
 }
 
 ul li::before {
   content: "—";
-  @apply mr-2 font-bold;
+  @apply mr-2 font-bold inline-flex;
 }
 
 /** Mosaik Theme Variables */
