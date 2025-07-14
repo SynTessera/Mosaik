@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { Desktop } from "@/modules/Desktop";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { DesktopSidebar } from "@/components/DesktopSidebar";
+import { DesktopSidebar } from "@/blocks/DesktopSidebar";
 import { DesktopContent } from "@/components/Content";
 import { settings } from "@/themes/light/index";
 import { StateProvider } from "@/context/StateContext";

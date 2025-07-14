@@ -5,7 +5,7 @@ import { Slot } from "@/modules/Slot"; // Adjust imports to your structure
 import { View } from "@/modules/View"; // Adjust imports to your structure
 import { ActionProvider } from "@/context/ActionContext";
 import { COLLAPSE } from "@/actions/SidebarActions";
-import { ActionBar } from "./ActionBar";
+import { ActionBar } from "../components/ActionBar";
 import { useAppState } from "@/context/StateContext";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 import { collapse } from "@/app/mosaik/actions/COLLAPSE";
