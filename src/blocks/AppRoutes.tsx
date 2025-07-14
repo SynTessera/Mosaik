@@ -17,7 +17,6 @@ export async function AppNavigation({
         {routes
           .sort((a, b) => a.order - b.order)
           .map((r) => {
-            console.log("ROUTE ORDER", r);
             const route = r as Route;
             const externalRoute = r as ExternalRoute;
             return (
