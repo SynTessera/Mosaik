@@ -10,9 +10,8 @@ export type SlotRenderer = (
 
 export type Theme = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  components: Record<string, React.FC<any>>;
-  slots?: Record<string, SlotRenderer>;
   settings: {
+    theme: string;
     navigation: {
       showTooltip: boolean;
     };

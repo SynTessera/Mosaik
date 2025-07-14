@@ -3,4 +3,5 @@ export type Section = {
   icon: string;
   slug: string;
   content: string;
+  order: number;
 };

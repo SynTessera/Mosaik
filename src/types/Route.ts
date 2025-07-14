@@ -3,6 +3,7 @@ export type Route = {
   label: string;
   icon: string;
   content?: string;
+  order: number;
 } 
 
 export type ExternalRoute = {
@@ -10,4 +11,5 @@ export type ExternalRoute = {
   label: string;
   icon: string;
   content?: string;
+  order: number;
 };

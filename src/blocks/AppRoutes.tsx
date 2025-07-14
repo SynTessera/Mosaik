@@ -1,38 +1,36 @@
-"use client";
-
-import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 import { View } from "../modules/View";
-import { useAppState } from "@/context/StateContext";
 import { AppNavigationProps } from "@/types/AppNavigationProps";
 import { ExternalRoute, Route } from "@/types/Route";
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
 
-export function AppNavigation({
+export async function AppNavigation({
   routes,
   slug,
   slot = "navigation",
   baseUrl = "",
 }: AppNavigationProps) {
-  const Nav = useThemedComponent("Navigation");
-  const NavLink = useThemedComponent("NavigationLink");
-  const { state } = useAppState();
+  const Nav = await getThemedComponent("Navigation");
+  const NavLink = await getThemedComponent("NavigationLinkClient");
   return (
     <View id="Navigation" slot={slot}>
       <Nav>
-        {routes.map((r) => {
-          const route = r as Route;
-          const externalRoute = r as ExternalRoute;
-          return (
-            <NavLink
-              icon={r.icon}
-              key={route.slug || externalRoute.href}
-              href={externalRoute.href || `${baseUrl}/${route.slug}`}
-              label={r.label}
-              isActive={slug === route.slug}
-              iconOnly={state?.sidebar.collapsed === true}
-              external={!!externalRoute.href}
-            />
-          );
-        })}
+        {routes
+          .sort((a, b) => a.order - b.order)
+          .map((r) => {
+            console.log("ROUTE ORDER", r);
+            const route = r as Route;
+            const externalRoute = r as ExternalRoute;
+            return (
+              <NavLink
+                icon={r.icon}
+                key={route.slug || externalRoute.href}
+                href={externalRoute.href || `${baseUrl}/${route.slug}`}
+                label={r.label}
+                isActive={slug === route.slug}
+                external={!!externalRoute.href}
+              />
+            );
+          })}
       </Nav>
     </View>
   );

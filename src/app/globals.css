@@ -59,7 +59,6 @@ article p > pre {
   @apply overflow-x-auto max-w-full bg-white/10;
 }
 
-
 article p > code {
   @apply overflow-x-auto overflow-y-clip max-w-full py-1.5 px-2 bg-[#0D111744] leading-[2] rounded-md border-[1.5px] border-black;
 }
@@ -91,5 +90,10 @@ article h4 {
 
 /** List Styles */
 ul li {
-  @apply mb-4;
+  @apply mb-4 flex;
+}
+
+ul li::before {
+  content: "—";
+  @apply mr-2 font-bold;
 }

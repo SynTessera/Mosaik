@@ -27,10 +27,13 @@ export const fetchBlogPost = async (id: string) => {
 };
 
 export const fetchSections = async () => {
-  const url = `${process.env.STRAPI_API}/sections?[pagination][pageSize]=1000&populate=*`;
+  const url = `${process.env.STRAPI_API}/sections?populate=*`;
   const prom = await fetch(url, {
     headers: {
       Authorization: process.env.STRAPI_TOKEN || "",
+    },
+    next: {
+      revalidate: 30,
     },
   });
   const json = await prom.json();
