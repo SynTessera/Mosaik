@@ -1,5 +1,11 @@
 @reference '../../app/globals.css';
 
+/** Mosaik Theme Variables */
+.DesktopLayout {
+  --app-content-padding: 8px;
+  --desktop-header-min-height: 4rem;
+}
+
 .NavigationLink {
   @apply p-4 hover:bg-hover;
 }
@@ -10,4 +16,8 @@
 
 .DesktopContent {
   padding: var(--app-content-padding);
+}
+
+.DesktopSidebar .ActionBar {
+  @apply h-[var(--desktop-header-min-height)];
 }

@@ -1,14 +1,17 @@
 import clsx from "clsx";
-import classes from "./light.module.css";
+import { PropsWithChildren } from "react";
+import classes from "@/themes/light/light.module.css";
 
-export const DesktopSidebar = ({ children }: any) => (
-  <div
-    className={clsx(
-      "DesktopSidebar",
-      classes.DesktopSidebar,
-      "flex-1 overflow-y-auto max-h-full"
-    )}
-  >
-    {children}
-  </div>
-);
+export const DesktopSidebar = ({ children }: PropsWithChildren) => {
+  return (
+    <aside
+      className={clsx(
+        "DesktopSidebar",
+        classes.DesktopSidebar,
+        "w-max bg-gray-100 dark:bg-gray-900 border-r min-h-full flex flex-col shrink-0"
+      )}
+    >
+      {children}
+    </aside>
+  );
+};

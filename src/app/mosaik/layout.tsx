@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 
 import { Desktop } from "@/modules/Desktop";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { Sidebar } from "@/components/Sidebar";
-import { Content } from "@/components/Content";
+import { DesktopSidebar } from "@/components/DesktopSidebar";
+import { DesktopContent } from "@/components/Content";
 import { settings } from "@/themes/light/index";
 import { StateProvider } from "@/context/StateContext";
 import { appReducer } from "./reducer";
 import { initialState } from "./state";
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
 
 export const metadata: Metadata = {
   title: "Mosaik - Rethinking Headless Architecture",
@@ -20,13 +21,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const Container = await getThemedComponent(
+    "FluidContainer",
+    process.env.MOSAIK_THEME
+  );
   return (
     <ThemeProvider theme={{ settings }}>
       <StateProvider reducer={appReducer} initialState={initialState}>
-        <Desktop>
-          <Sidebar></Sidebar>
-          <Content>{children}</Content>
-        </Desktop>
+        <Container>
+          <Desktop>
+            <DesktopSidebar />
+            <DesktopContent>{children}</DesktopContent>
+          </Desktop>
+        </Container>
       </StateProvider>
     </ThemeProvider>
   );

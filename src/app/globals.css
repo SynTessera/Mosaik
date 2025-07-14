@@ -99,10 +99,7 @@ ul li::before {
   @apply mr-2 font-bold inline-flex;
 }
 
-/** Mosaik Theme Variables */
-body {
-  --app-content-padding: 8px;
-}
+
 
 .NavigationLink {
 }

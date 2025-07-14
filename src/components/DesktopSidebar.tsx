@@ -1,6 +1,6 @@
 "use client";
 
-import React, { PropsWithChildren, useMemo } from "react";
+import React, { PropsWithChildren, useEffect, useMemo } from "react";
 import { Slot } from "@/modules/Slot"; // Adjust imports to your structure
 import { View } from "@/modules/View"; // Adjust imports to your structure
 import { ActionProvider } from "@/context/ActionContext";
@@ -8,9 +8,10 @@ import { COLLAPSE } from "@/actions/SidebarActions";
 import { ActionBar } from "./ActionBar";
 import { useAppState } from "@/context/StateContext";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+import { collapse } from "@/app/mosaik/actions/COLLAPSE";
 
-export const Sidebar = () => {
-  const { state } = useAppState();
+export const DesktopSidebar = () => {
+  const { state, dispatch } = useAppState();
 
   const actions = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,14 +23,21 @@ export const Sidebar = () => {
     return actions;
   }, [state?.sidebar.collapsed]);
 
+  useEffect(() => {
+    if (window.innerWidth <= 425) {
+      dispatch(collapse(state!));
+    }
+  }, [typeof window === "undefined" ? null : window.innerWidth]);
+
+  const Cmp = useThemedComponent("DesktopSidebar");
   return (
     <View id="SidebarNavigation" slot="sidebar">
       <ActionProvider actions={actions}>
-        <aside className="w-max bg-gray-100 dark:bg-gray-900 border-r h-full flex flex-col shrink-0">
+        <Cmp>
           <ActionBar />
           <SidebarNavigation />
           <SidebarFooter />
-        </aside>
+        </Cmp>
       </ActionProvider>
     </View>
   );
@@ -37,7 +45,7 @@ export const Sidebar = () => {
 
 // Example sub-components:
 const SidebarNavigation = (props: PropsWithChildren) => {
-  const Cmp = useThemedComponent("DesktopSidebar");
+  const Cmp = useThemedComponent("DesktopSidebarNavigation");
 
   return (
     <Cmp {...props}>
