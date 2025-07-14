@@ -13,11 +13,5 @@ export const Slot: React.FC<SlotProps> = ({ name }) => {
   const elements = slots[name];
   if (!elements || elements.length === 0) return null;
 
-  return (
-    <>
-      {elements.map((element, i) => (
-        <React.Fragment key={name + i}>{element}</React.Fragment>
-      ))}
-    </>
-  );
+  return <>{elements.map((element) => element)}</>;
 };
