@@ -3,27 +3,23 @@ import { ExternalRoute, Route } from "@/types/Route";
 import { View } from "./View";
 
 export const AppRouter = ({
-  pages,
-  page,
+  Component,
   data,
   routes,
-  params,
+  section,
 }: {
-  pages: Record<string, React.FC<any>>;
-  page: string | (() => React.FC<any>);
+  Component: React.FC<{
+    data: any;
+    routes: Array<Route | ExternalRoute>;
+    section: string;
+  }>;
   data: any;
   routes?: Array<Route | ExternalRoute>;
-  params: any;
+  section: string;
 }) => {
-  let Cmp;
-  if (typeof page === "function") {
-    Cmp = page() || (() => null);
-  } else {
-    Cmp = pages[page] || (() => null);
-  }
   return (
-    <View id={page.toString()} slot="app">
-      <Cmp data={data} routes={routes} view={params.view[0]} />
+    <View id={section.toString()} slot="app">
+      <Component data={data} routes={routes || []} section={section} />
     </View>
   );
 };

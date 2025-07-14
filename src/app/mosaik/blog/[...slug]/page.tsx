@@ -2,8 +2,8 @@ import { App } from "@/modules/App";
 import { AppNavigation } from "@/blocks/AppRoutes";
 import { routes as staticRoutes, fetchRoutes } from "@/app/mosaik/routes";
 import { AppRouter } from "@/modules/UrlDetailView";
-import appConfig from "@/app/mosaik";
 import { fetchBlogPost } from "@/app/mosaik/dataSources/strapi";
+import Blog from "../../pages/Blog";
 
 const Page = async ({ params }: any) => {
   const resParams = await params;
@@ -13,11 +13,10 @@ const Page = async ({ params }: any) => {
   return (
     <App slug="/mosaik/blog/:slug">
       <AppRouter
-        pages={appConfig.pages}
-        page={"blog/:slug"}
+        Component={Blog}
         data={[blogPost]}
         routes={routes}
-        params={{ view: "blog" }}
+        section="blog"
       ></AppRouter>
       <AppNavigation
         slot="navigation"

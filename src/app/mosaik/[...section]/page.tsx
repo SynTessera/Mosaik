@@ -2,12 +2,12 @@ import { App } from "@/modules/App";
 import { AppNavigation } from "@/blocks/AppRoutes";
 import { routes as staticRoutes, fetchRoutes } from "../routes";
 import { AppRouter } from "@/modules/UrlDetailView";
-import appConfig from "..";
 import { fetchBlogPosts } from "../dataSources/strapi";
 import { Route } from "@/types/Route";
+import Section from "../pages/Section";
 
 type PageProps = {
-  params: Promise<{ view: string[] }>;
+  params: Promise<{ section: string[] }>;
 };
 
 export const generateStaticParams = async () => {
@@ -23,26 +23,22 @@ export const generateStaticParams = async () => {
 const Page = async ({ params }: PageProps) => {
   const awaitedParams = await params;
   const blogPosts = await fetchBlogPosts();
+  const section = awaitedParams.section?.[0];
   const routes = [...(await fetchRoutes()), ...staticRoutes];
-  const pages = {
-    ...appConfig.pages,
-    [awaitedParams.view?.[0]]: appConfig.pages?.[":slug"],
-  };
-  console.log ("IS ACTIVE", awaitedParams.view[0], routes)
+
   return (
     <App slug="/mosaik/:view">
       <AppRouter
-        pages={pages}
-        page={awaitedParams.view[0]}
+        Component={Section}
         data={blogPosts}
         routes={routes}
-        params={awaitedParams}
+        section={section}
       ></AppRouter>
       <AppNavigation
         baseUrl="/mosaik"
         slot="navigation"
         routes={routes}
-        slug={awaitedParams.view?.[0]}
+        slug={section}
       />
     </App>
   );

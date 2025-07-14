@@ -1,10 +1,16 @@
 import { ScrollContainer } from "@/components/ScrollContainer";
 import { MarkdownContainer } from "@/themes/light/MarkdownContainer";
-import { Route } from "@/types/Route";
+import { ExternalRoute, Route } from "@/types/Route";
 
-const Section = ({ routes, view }: { routes: Route[]; view: string }) => {
+const Section = ({
+  routes,
+  section,
+}: {
+  routes: Array<Route | ExternalRoute>;
+  section: string;
+}) => {
   const { content = "" } = routes.find((r) => {
-    return r.slug === view;
+    return (r as Route).slug === section;
   }) || { content: "" };
   return (
     <ScrollContainer>
