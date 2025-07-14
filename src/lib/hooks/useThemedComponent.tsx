@@ -13,7 +13,6 @@ export function useTheme() {
   return ctx;
 }
 
-const Null = () => null;
 /**
  * Hook:
  * Dynamically import themed component by slot name with fallback.
@@ -54,7 +53,9 @@ export function useThemedComponent(
     };
 
     load();
-    return () => (cancelled = true);
+    return () => {
+      cancelled = true;
+    };
   }, [slot]);
 
   return Component;
