@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Slot } from "./Slot";
-import { DesktopRowLayout } from "@/layouts/DesktopRowLayout";
+import { DesktopColLayout } from "@/layouts/DesktopColLayout";
 
 export type AppProps = {
   /**
@@ -38,10 +38,10 @@ export const App: React.FC<AppProps> = async ({
   // Inject matched params as props to each valid React element
   return (
     <>
-      <DesktopRowLayout slots={slots}>
+      <DesktopColLayout slots={slots}>
         <Slot name="app" slots={slots}></Slot>
         {children}
-      </DesktopRowLayout>
+      </DesktopColLayout>
     </>
   );
 };
