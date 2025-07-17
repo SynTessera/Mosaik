@@ -1,2 +1,3 @@
-export * from "./collapse";
-export * from "./expand";
+import { collapse } from "./collapse";
+import { expand } from "./expand";
+export { collapse, expand };

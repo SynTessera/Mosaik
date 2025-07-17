@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren, useMemo } from "react";
 import { ActionProvider } from "@/context/ActionContext";
-import { collapse, expand } from "@/app/mosaik/actions/";
+import { collapse, expand } from "@/app/mosaik/actions";
 import { useAppState } from "@/context/StateContext";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 import { initialState } from "@/app/mosaik/state";
