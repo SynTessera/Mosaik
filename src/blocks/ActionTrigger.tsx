@@ -1,4 +1,4 @@
-import * as ActionButtons from "@/components/ActionButtons";
+import * as ActionButtons from "@/blocks/ActionButtons";
 
 export type ActionTriggerTypes = keyof typeof ActionButtons;
 export const ActionTrigger = ({

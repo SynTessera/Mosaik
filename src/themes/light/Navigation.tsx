@@ -1,8 +1,13 @@
-import { NavigationLinkProps } from "@/types/NavigationLinkProps";
+import clsx from "clsx";
 import { PropsWithChildren } from "react";
 
 export const Navigation = ({
   children,
-}: PropsWithChildren<NavigationLinkProps>) => {
-  return <nav className="overflow-y-auto max-h-full">{children}</nav>;
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
+  return (
+    <nav className={clsx("overflow-y-auto max-h-full", className, "test")}>
+      {children}
+    </nav>
+  );
 };

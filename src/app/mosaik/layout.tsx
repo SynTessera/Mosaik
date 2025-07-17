@@ -1,14 +1,8 @@
-import type { Metadata } from "next";
+// SynTessera\aegis\src\app\mosaik\layout.tsx
 
-import { Desktop } from "@/modules/Desktop";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { DesktopSidebar } from "@/blocks/DesktopSidebar";
-import { DesktopContent } from "@/components/Content";
-import { settings } from "@/themes/light/index";
-import { StateProvider } from "@/context/StateContext";
-import { appReducer } from "./reducer";
-import { initialState } from "./state";
+import type { Metadata } from "next";
 import { getThemedComponent } from "@/lib/server/getThemedComponent";
+// import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
 
 export const metadata: Metadata = {
   title: "Mosaik - Rethinking Headless Architecture",
@@ -25,16 +19,5 @@ export default async function RootLayout({
     "FluidContainer",
     process.env.MOSAIK_THEME
   );
-  return (
-    <ThemeProvider theme={{ settings }}>
-      <StateProvider reducer={appReducer} initialState={initialState}>
-        <Container>
-          <Desktop>
-            <DesktopSidebar />
-            <DesktopContent>{children}</DesktopContent>
-          </Desktop>
-        </Container>
-      </StateProvider>
-    </ThemeProvider>
-  );
+  return <Container>{children}</Container>;
 }

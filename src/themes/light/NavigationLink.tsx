@@ -1,7 +1,7 @@
 import { Icon } from "@/components/Icon";
 import clsx from "clsx";
 import Link from "next/link";
-import classes from "./light.module.css";
+import { themeClasses as classes } from "@/themes";
 import { NavigationLinkProps } from "@/types/NavigationLinkProps";
 // import { Tooltip } from "react-tooltip";
 
@@ -12,6 +12,7 @@ export const NavigationLink = ({
   iconOnly = false,
   isActive = false,
   external = false,
+  className,
 }: NavigationLinkProps) => {
   const id = href.split("/").pop();
   return (
@@ -20,9 +21,14 @@ export const NavigationLink = ({
         id={id}
         href={href}
         target={external ? "_blank" : "_self"}
-        className={clsx(classes.NavigationLink, "flex gap-2 items-center", {
-          [classes.active]: isActive,
-        })}
+        className={clsx(
+          classes.NavigationLink,
+          "flex gap-2 items-center",
+          {
+            [classes.active]: isActive,
+          },
+          className
+        )}
       >
         <Icon icon={icon} containerClsn={clsx({ "mx-auto": iconOnly })} />
         {!iconOnly && label}

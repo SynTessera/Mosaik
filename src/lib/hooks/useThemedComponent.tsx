@@ -1,54 +1,35 @@
+// src/lib/hooks/useThemedComponent.tsx
 "use client";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ThemeContext } from "@/context/contexts/theme";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { loadThemedComponent } from "@/lib/util/loadThemedComponent";
+import { useTheme } from "@/context/ThemeContext";
 
-/**
- * Hook: useTheme context safely
- */
-export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useTheme must be used inside <ThemeProvider>");
-  return ctx;
-}
-
-/**
- * Hook:
- * Dynamically import themed component by slot name with fallback.
- */
 export function useThemedComponent(
   slot: string,
   ...fallbackSlots: string[]
 ): React.FC<any> {
-  const { settings } = useTheme();
+  const { settings } = useTheme() || {};
   const [Component, setComponent] = useState<React.FC<any>>(() => () => null);
+
   useEffect(() => {
     let cancelled = false;
-
-    const importComponent = async (name: string) => {
-      try {
-        const mod = await import(`@/themes/${settings.theme}/${name}`);
-        return mod[name];
-      } catch {
-        console.warn(`Could not import ${name} for theme ${settings.theme}`);
-        return null;
-      }
-    };
+    const theme = settings?.theme || "light";
 
     const load = async () => {
-      let Found = await importComponent(slot);
-      if (!Found) {
-        for (const fallback of fallbackSlots) {
-          Found = await importComponent(fallback);
-          if (!Found) break;
+      const allSlots = [slot, ...fallbackSlots];
+
+      for (const s of allSlots) {
+        const Cmp = await loadThemedComponent(theme, s);
+        if (Cmp && !cancelled) {
+          setComponent(
+            () =>
+              function ThemedComponent(props: any) {
+                return <Cmp {...props} theme={settings} />;
+              }
+          );
+          return;
         }
-      }
-      if (!cancelled && Found) {
-        // eslint-disable-next-line react/display-name
-        setComponent(() => (props: any) => (
-          <Found {...props} theme={settings} />
-        ));
       }
     };
 
@@ -56,7 +37,7 @@ export function useThemedComponent(
     return () => {
       cancelled = true;
     };
-  }, [slot]);
+  }, [slot, settings?.theme]);
 
   return Component;
 }

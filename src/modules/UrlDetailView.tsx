@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ExternalRoute, Route } from "@/types/Route";
-import { View } from "./View";
 
 export const AppRouter = ({
   Component,
@@ -17,9 +16,5 @@ export const AppRouter = ({
   routes?: Array<Route | ExternalRoute>;
   section: string;
 }) => {
-  return (
-    <View id={section.toString()} slot="app">
-      <Component data={data} routes={routes || []} section={section} />
-    </View>
-  );
+  return <Component data={data} routes={routes || []} section={section} />;
 };

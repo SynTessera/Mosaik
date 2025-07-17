@@ -1,0 +1,28 @@
+import clsx from "clsx";
+import { themeClasses as classes } from "@/themes";
+import { State } from "@/types/State";
+import { PropsWithChildren } from "react";
+
+export const SidebarContent = ({
+  children,
+  state = { sidebar: { expanded: 2 } },
+  className,
+}: PropsWithChildren<{
+  state?: State;
+  className?: string;
+}>) => (
+  <div
+    className={clsx(
+      "SidebarContent",
+      classes.SidebarContent,
+      "flex-1 overflow-y-auto max-h-full",
+      {
+        hidden: state.sidebar?.expanded === 0,
+        block: state.sidebar.expanded > 0,
+      },
+      className
+    )}
+  >
+    {children}
+  </div>
+);

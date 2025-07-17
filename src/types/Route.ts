@@ -4,7 +4,7 @@ export type Route = {
   icon: string;
   content?: string;
   order: number;
-} 
+};
 
 export type ExternalRoute = {
   href: string;
@@ -13,3 +13,5 @@ export type ExternalRoute = {
   content?: string;
   order: number;
 };
+
+export type Routes = Array<Route | ExternalRoute>;

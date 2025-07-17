@@ -4,6 +4,7 @@
 .DesktopLayout {
   --app-content-padding: 8px;
   --desktop-header-min-height: 4rem;
+  --sidebar-min-width: 4rem;
 }
 
 .NavigationLink {
@@ -20,4 +21,17 @@
 
 .DesktopSidebar .ActionBar {
   @apply h-[var(--desktop-header-min-height)];
+}
+
+.DesktopContent article ul {
+  @apply max-w-full w-full;
+}
+/** List Styles */
+.DesktopContent article ul li {
+  @apply mb-4  max-w-full w-full;
+}
+
+.DesktopContent article ul li::before {
+  content: "—";
+  @apply mr-2 font-bold inline-flex;
 }

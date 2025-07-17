@@ -1,22 +1,23 @@
 import React from "react";
-import { ViewHostProvider } from "./ViewHost";
-import { Slot } from "./Slot";
 import { getThemedComponent } from "@/lib/server/getThemedComponent";
+import { SidebarActionsProvider } from "@/context/SiderbarActionsProvider";
 
-export async function Desktop({ children }: { children: React.ReactNode }) {
-  const Desktop =
+export async function Desktop({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const DesktopLayout =
     (await getThemedComponent("DesktopLayout", process.env.MOSAIK_THEME)) ||
     (() => null);
 
   return (
-    <div className="desktop">
-      <Desktop>
-        <ViewHostProvider>
-          {children}
-          <Slot name="sidebar"></Slot>
-          <Slot name="content"></Slot>
-        </ViewHostProvider>
-      </Desktop>
-    </div>
+    <DesktopLayout className={className}>
+      {/* <ViewHostProvider> */}
+      <SidebarActionsProvider>{children}</SidebarActionsProvider>
+      {/*</ViewHostProvider> */}
+    </DesktopLayout>
   );
 }

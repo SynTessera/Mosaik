@@ -1,13 +1,14 @@
 import clsx from "clsx";
-import classes from "@/themes/light/light.module.css";
-
-export const ActionBar = ({ children }: any) => {
+import { themeClasses as classes } from "@/themes";
+export const ActionBar = ({ children, className }: any) => {
   return (
     <div
       className={clsx(
         "ActionBar",
         classes.ActionBar,
-        "flex p-2 justify-end border-b bg-gray-800 items-center"
+        "h-[var(--desktop-header-min-height)] w-[var(--sidebar-min-width)]",
+        "flex p-2 justify-end border-b bg-black/20 items-center",
+        className
       )}
     >
       {children}

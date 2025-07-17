@@ -7,12 +7,13 @@ import React, {
   useState,
   useMemo,
   useCallback,
+  PropsWithChildren,
 } from "react";
 
 type ViewConfig = {
   id: string;
   slot: string;
-  component: React.ComponentType<any>;
+  component?: React.ReactElement;
   props?: Record<string, any>;
   constraints?: Record<string, any>;
   states?: string[];
@@ -22,7 +23,7 @@ type ViewConfig = {
 
 type ViewHostContextType = {
   registerView: (view: ViewConfig) => void;
-  slots: Record<string, React.ReactNode[]>;
+  slots: Record<string, React.ReactElement[]>;
   views: ViewConfig[];
 };
 
@@ -30,36 +31,35 @@ const ViewHostContext = createContext<ViewHostContextType | undefined>(
   undefined
 );
 
-export const ViewHostProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const ViewHostProvider = ({ children }: PropsWithChildren) => {
   const [views, setViews] = useState<ViewConfig[]>([]);
 
   const registerView = useCallback(
     (view: ViewConfig) => {
       setViews((prev) => {
-        // Prevent duplicate IDs:
+        // // Prevent duplicate IDs:
         if (prev.find((v) => v.slot === view.slot))
           return prev.filter((v) => v.slot !== view.slot).concat([view]);
         return [...prev, view];
       });
     },
-    [setViews       ]
+    [setViews]
   );
 
-  // --- Here you could later apply constraints, state graph, URL solving:
   const slots = useMemo(() => {
-    const slots: Record<string, React.ReactNode[]> = {};
+    const slots: Record<string, React.ReactElement[]> = {};
     for (const view of views) {
       if (!slots[view.slot]) slots[view.slot] = [];
-      slots[view.slot].push(React.createElement(view.component, view.props));
+      if (view.component)
+        slots[view.slot].push(React.cloneElement(view.component, view.props));
     }
     return slots;
   }, [views]);
 
-  const mem = useMemo(() => ({ registerView, slots, views }), [registerView, slots, views]);
+  const mem = useMemo(
+    () => ({ registerView, slots, views }),
+    [registerView, slots, views]
+  );
   return (
     <ViewHostContext.Provider value={mem}>{children}</ViewHostContext.Provider>
   );
@@ -71,21 +71,4 @@ export const useViewHost = (): ViewHostContextType => {
     throw new Error("useViewHost must be used within a <ViewHostProvider>");
   }
   return ctx;
-};
-
-// The actual mounting of slots:
-export const ViewHost = () => {
-  const { slots } = useViewHost();
-
-  return (
-    <>
-      {Object.entries(slots).map(([slotName, elements]) => (
-        <React.Fragment key={slotName}>
-          {elements.map((element, i) => (
-            <React.Fragment key={i}>{element}</React.Fragment>
-          ))}
-        </React.Fragment>
-      ))}
-    </>
-  );
 };

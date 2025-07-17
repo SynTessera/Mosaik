@@ -25,7 +25,7 @@ export const DataView = async ({
   return (
     <Container>
       {arr.map((child, i) => (
-        <Cmp key={child.id || i} {...child} />
+        <Cmp key={type + i} {...child} />
       ))}
     </Container>
   );

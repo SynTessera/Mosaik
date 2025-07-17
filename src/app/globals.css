@@ -86,18 +86,6 @@ article h4 {
   @apply ml-0 my-2 text-[1.2rem] font-semibold;
 }
 
-ul {
-  @apply max-w-full w-full;
-}
-/** List Styles */
-ul li {
-  @apply mb-4  max-w-full w-full;
-}
-
-ul li::before {
-  content: "—";
-  @apply mr-2 font-bold inline-flex;
-}
 
 
 

@@ -1,6 +1,12 @@
 "use client";
 
-import React, { PropsWithChildren, useEffect, useMemo, useState } from "react";
+import React, {
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { ThemeContext } from "./contexts/theme";
 
 // --- 1️⃣ Slot type ---
@@ -61,3 +67,7 @@ export function ThemeProvider({
     <ThemeContext.Provider value={tmpTheme}>{children}</ThemeContext.Provider>
   );
 }
+
+export const useTheme = () => {
+  return useContext(ThemeContext);
+};

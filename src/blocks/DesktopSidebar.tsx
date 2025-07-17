@@ -1,62 +1,35 @@
 "use client";
 
-import React, { PropsWithChildren, useEffect, useMemo } from "react";
-import { Slot } from "@/modules/Slot"; // Adjust imports to your structure
-import { View } from "@/modules/View"; // Adjust imports to your structure
+import React, { PropsWithChildren, useMemo } from "react";
 import { ActionProvider } from "@/context/ActionContext";
-import { COLLAPSE } from "@/actions/SidebarActions";
-import { ActionBar } from "../components/ActionBar";
+import { collapse, expand } from "@/app/mosaik/actions/";
 import { useAppState } from "@/context/StateContext";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
-import { collapse } from "@/app/mosaik/actions/COLLAPSE";
+import { initialState } from "@/app/mosaik/state";
 
-export const DesktopSidebar = () => {
-  const { state, dispatch } = useAppState();
+export const useSidebarActions = () => {
+  const { state = initialState } = useAppState();
 
   const actions = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const actions = {} as Record<string, any>;
 
-    if (state?.sidebar.collapsed) actions.EXPAND = {};
-    if (!state?.sidebar.collapsed) actions.COLLAPSE = COLLAPSE;
+    if (state.sidebar.expanded < 2) actions.expand = expand();
+    if (state.sidebar.expanded === 2) actions.collapse = collapse();
 
     return actions;
-  }, [state?.sidebar.collapsed]);
+  }, [state?.sidebar.expanded]);
+  return actions;
+};
 
-  useEffect(() => {
-    if (window.innerWidth <= 425) {
-      dispatch(collapse(state!));
-    }
-  }, [typeof window === "undefined" ? null : window.innerWidth]);
-
+export const DesktopSidebar = ({ children }: PropsWithChildren) => {
   const Cmp = useThemedComponent("DesktopSidebar");
+  const { state } = useAppState();
+  const actions = useSidebarActions();
   return (
-    <View id="SidebarNavigation" slot="sidebar">
+    <div>
       <ActionProvider actions={actions}>
-        <Cmp>
-          <ActionBar />
-          <SidebarNavigation />
-          <SidebarFooter />
-        </Cmp>
+        <Cmp state={state}>{children}</Cmp>
       </ActionProvider>
-    </View>
+    </div>
   );
 };
-
-// Example sub-components:
-const SidebarNavigation = (props: PropsWithChildren) => {
-  const Cmp = useThemedComponent("DesktopSidebarNavigation");
-
-  return (
-    <Cmp {...props}>
-      <Slot name="navigation" />
-      {props.children}
-    </Cmp>
-  );
-};
-
-const SidebarFooter = () => (
-  <div className="p-4 border-t dark:border-t-gray-800 mt-auto">
-    <small>v1.0.0</small>
-  </div>
-);

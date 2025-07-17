@@ -1,38 +1,37 @@
 "use client";
 
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useViewHost } from "./ViewHost";
 
 type ViewProps = {
   id: string;
   slot: string;
-  component?: React.ComponentType<any>;
   props?: Record<string, any>;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   constraints?: Record<string, any>;
   states?: string[];
   actions?: string[];
   effects?: string[];
 };
 
-export const View: React.FC<ViewProps> = ({
+export const View = ({
   id,
   slot,
-  component,
   props,
   children,
   constraints,
   states,
   actions,
   effects,
-}) => {
+}: ViewProps) => {
   const { registerView } = useViewHost();
-  const mem = useCallback(() => <>{children}</>, [children]);
+  const mem = useMemo(() => children, [children]);
   useEffect(() => {
+    const child = Array.isArray(children) ? <>{children}</> : children;
     registerView({
       id,
       slot,
-      component: component ? component : mem,
+      component: child,
       props,
       constraints,
       states,
@@ -42,7 +41,6 @@ export const View: React.FC<ViewProps> = ({
   }, [
     registerView,
     mem,
-    component,
     actions,
     constraints,
     effects,

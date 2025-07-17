@@ -2,8 +2,8 @@
 
 import { Action } from "@/types/Action";
 import { State } from "@/types/State";
-import { collapse } from "./actions/COLLAPSE";
-import { expand } from "./actions/EXPAND";
+import { collapse } from "./collapse";
+import { expand } from "./expand";
 
 export const appReducer = (
   state: State,

@@ -1,7 +1,7 @@
 import clsx from "clsx";
-import classes from "@/themes/light/light.module.css";
+import { themeClasses as classes } from "@/themes";
 
-export const DesktopLayout = ({ children, theme }: any) => {
+export const DesktopLayout = ({ children, theme, className }: any) => {
   return (
     <div
       className={clsx(
@@ -11,7 +11,8 @@ export const DesktopLayout = ({ children, theme }: any) => {
         {
           "bg-white": theme.userPreferences.mode === "light",
           "bg-info-100": theme.userPreferences.mode === "dark",
-        }
+        },
+        className
       )}
     >
       {children}

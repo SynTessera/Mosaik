@@ -1,15 +1,12 @@
-"use client"
+"use client";
 
-import actions, { payloads } from "@/app/mosaik/actions";
 import { useAppState } from "@/context/StateContext";
+import { Action } from "@/types/Action";
 
-const useAction = <T extends keyof typeof actions>(
-  type: T,
-  payload: payloads[T]
-) => {
+const useDispatch = (action: Action<string, string, object>) => {
   const { dispatch } = useAppState();
 
-  return () => dispatch({ type: type, payload });
+  return () => dispatch(action);
 };
 
-export default useAction;
+export default useDispatch;

@@ -5,6 +5,7 @@ import bash from "highlight.js/lib/languages/bash";
 import powershell from "highlight.js/lib/languages/powershell";
 import footnote from "marked-footnote";
 import { PropsWithChildren } from "react";
+import clsx from "clsx";
 
 hljs.registerLanguage("bash", bash);
 hljs.registerLanguage("powershell", powershell);
@@ -25,13 +26,18 @@ renderer.code = function ({ text, lang = "bash" }) {
 marked.use({ renderer });
 marked.use(footnote());
 
-export const MarkdownContainer = ({ children }: PropsWithChildren) => {
+export const MarkdownContainer = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
   const htmlContent = marked(children?.toString() || "");
 
-  return <article className="bg-black/30 p-2 md:p-4 post ">
-    <p
-      dangerouslySetInnerHTML={{ __html: htmlContent }}
-      className="max-w-[80ch] mx-auto prose prose-invert"
-    />
-  </article>;
+  return (
+    <article className="bg-black/30 p-2 md:p-4 post ">
+      <p
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+        className={clsx("max-w-[80ch] mx-auto prose prose-invert", className)}
+      />
+    </article>
+  );
 };

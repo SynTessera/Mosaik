@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "mosaik-cms-production.up.railway.app",
+        // Optional: Restrict to specific paths
+        pathname: "/uploads/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

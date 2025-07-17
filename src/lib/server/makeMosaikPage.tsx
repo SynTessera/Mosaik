@@ -1,7 +1,10 @@
 import { App } from "@/modules/App";
-import { AppRouter } from "@/modules/UrlDetailView";
-import { AppNavigation } from "@/blocks/AppRoutes";
 import { routes as staticRoutes, fetchRoutes } from "@/app/mosaik/routes";
+import { getDesktopSlots } from "@/views/getDesktopSlots";
+import { AppRouter } from "@/modules/UrlDetailView";
+import { StateProvider } from "@/context/StateContext";
+import { appReducer } from "@/app/mosaik/reducers";
+import { initialState } from "@/app/mosaik/state";
 
 export function makeMosaikPage({
   Component,
@@ -17,22 +20,22 @@ export function makeMosaikPage({
     const routes = [...(await fetchRoutes()), ...staticRoutes];
     const data = (await fetcher?.({ params: resolvedParams })) || [];
     const section = resolvedParams.section?.[0] ?? view;
-
+    const slots = await getDesktopSlots({
+      params: resolvedParams,
+      fetcher: fetcher!,
+      routes,
+    });
     return (
-      <App slug={`/mosaik/${view}`}>
-        <AppRouter
-          Component={Component}
-          data={data}
-          routes={routes}
-          section={section}
-        />
-        <AppNavigation
-          slot="navigation"
-          routes={routes}
-          baseUrl="/mosaik"
-          slug={section}
-        />
-      </App>
+      <StateProvider reducer={appReducer} initialState={initialState}>
+        <App slug={`/mosaik/${view}`} slots={slots} params={resolvedParams}>
+          <AppRouter
+            Component={Component}
+            data={data}
+            routes={routes}
+            section={section}
+          />
+        </App>
+      </StateProvider>
     );
   };
 }

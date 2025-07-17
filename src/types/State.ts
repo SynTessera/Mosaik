@@ -1,5 +1,5 @@
 export type SidebarState = {
-    collapsed: boolean;
+    expanded: 0 | 1 | 2;
 }
 
 export type State = {
