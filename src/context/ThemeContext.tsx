@@ -17,6 +17,7 @@ export type SlotRenderer = (
 export type Theme = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   settings: {
+    classNames?: Record<string, string>;
     theme: string;
     navigation: {
       showTooltip: boolean;

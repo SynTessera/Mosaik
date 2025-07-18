@@ -40,6 +40,11 @@ export default function RootLayout({
           href="/apple-touch-icon.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="11e43a2b-3205-4bda-b639-7f9b671a44f0"
+        ></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

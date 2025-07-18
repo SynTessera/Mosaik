@@ -1,6 +1,8 @@
-import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
+"use client"
+
 import clsx from "clsx";
+import { Button } from "@/blocks/Button";
+import { Icon } from "@/components/Icon";
 
 export const ExpandButton = ({
   onClick,
@@ -10,8 +12,8 @@ export const ExpandButton = ({
   className?: string;
 }) => {
   return (
-    <Button onClick={onClick} className="p-2 m-1">
-      <Icon icon="FaChevronRight" className={clsx("!h-6 !w-6", className)} />
+    <Button onClick={onClick} className={clsx("p-2 ", className)}>
+      <Icon icon="FaChevronRight" className="!h-6 !w-6" />
     </Button>
   );
 };

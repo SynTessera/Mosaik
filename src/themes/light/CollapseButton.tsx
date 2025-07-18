@@ -1,5 +1,7 @@
+"use client";
+
 import clsx from "clsx";
-import { Button } from "@/components/Button";
+import { Button } from "@/blocks/Button";
 import { Icon } from "@/components/Icon";
 
 export const CollapseButton = ({
@@ -10,7 +12,7 @@ export const CollapseButton = ({
   className?: string;
 }) => {
   return (
-    <Button onClick={onClick} className="p-2 ">
+    <Button onClick={onClick}>
       <Icon icon="FaChevronLeft" className={clsx("!h-6 !w-6", className)} />
     </Button>
   );
