@@ -12,7 +12,7 @@ export const CollapseButton = ({
   className?: string;
 }) => {
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} label="Collapse" >
       <Icon icon="FaChevronLeft" className={clsx("!h-6 !w-6", className)} />
     </Button>
   );
