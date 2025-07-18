@@ -7,7 +7,7 @@ export const ActionBar = ({ children, className }: any) => {
         "ActionBar",
         classes.ActionBar,
         "h-[var(--desktop-header-min-height)] w-[var(--sidebar-min-width)]",
-        "flex p-2 justify-end border-b bg-black/20 items-center",
+        "flex p-2 justify-end border-b border-black/40 bg-black/20 items-center",
         className
       )}
     >

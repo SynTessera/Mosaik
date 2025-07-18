@@ -24,7 +24,7 @@ export const getDesktopSlots = async ({
       </div>
     ),
     desktopheader: (
-      <div>
+      <div className="w-full">
         <ThemedComponent name="DesktopHeader" />
       </div>
     ),
