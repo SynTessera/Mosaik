@@ -3,22 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useAppState } from "@/context/StateContext";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
-import { useEffect, useState } from "react";
+import { createHydratableComponent } from "@/lib/createHydratableComponent ";
 
-export const NavigationLinkClient = ({ Component, ...props }: any) => {
+export const NavigationLinkClient = createHydratableComponent((props: any) => {
   const NavLink = useThemedComponent("NavigationLink");
   const { state } = useAppState();
   const router = useRouter();
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
-  if (!hydrated || !NavLink) {
-    // Before hydration, render the server-rendered static fallback
-    return Component;
-  }
   return (
     <NavLink
       {...props}
@@ -26,4 +16,4 @@ export const NavigationLinkClient = ({ Component, ...props }: any) => {
       iconOnly={state?.sidebar.expanded === 1}
     />
   );
-};
+});
