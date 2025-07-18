@@ -3,8 +3,8 @@ import { ThemedComponent } from "@/blocks/ThemedComponent";
 import { PropsWithChildren } from "react";
 import { getPageSlots } from "./getPageSlots";
 import { Slot } from "@/modules/Slot";
-import { SidebarContentServer } from "@/blocks/SidebarContentServer";
 import { Routes } from "@/types/Route";
+import { SidebarContent } from "@/blocks/hybrid/SidebarContent";
 
 export const getDesktopSlots = async ({
   children,
@@ -30,9 +30,9 @@ export const getDesktopSlots = async ({
     ),
     sidebarcontent: (
       <div>
-        <SidebarContentServer>
+        <SidebarContent>
           <Slot name="navigation" slots={pageSlots} />
-        </SidebarContentServer>
+        </SidebarContent>
       </div>
     ),
     desktopcontent: <div>{children}</div>,

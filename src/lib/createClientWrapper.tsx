@@ -1,3 +1,5 @@
+"use client" 
+
 import React, { useEffect, useState, ReactElement } from "react";
 
 export function createClientWrapper<ClientProps>(
