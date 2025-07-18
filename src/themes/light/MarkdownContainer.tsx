@@ -36,7 +36,7 @@ export const MarkdownContainer = ({
     <article className="bg-black/30 p-2 md:p-4 post ">
       <div
         dangerouslySetInnerHTML={{ __html: htmlContent }}
-        className={clsx("max-w-[80ch] mx-auto prose prose-invert", className)}
+        className={clsx("max-w-[80ch] prose prose-invert", className)}
       />
     </article>
   );
