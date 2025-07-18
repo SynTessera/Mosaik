@@ -16,7 +16,10 @@ export function createHydratableComponent<T extends BaseProps>(
     const [hydrated, setHydrated] = useState(false);
 
     useEffect(() => {
-      setHydrated(true);
+      const id = requestIdleCallback(() => {
+        setHydrated(true);
+      });
+      return () => cancelIdleCallback(id);
     }, []);
 
     const client = renderClient({ ...rest, Component, hydrated } as T & {
