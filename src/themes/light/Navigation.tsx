@@ -6,7 +6,7 @@ export const Navigation = ({
   className,
 }: PropsWithChildren<{ className?: string }>) => {
   return (
-    <nav className={clsx("overflow-y-auto max-h-full", className, "test")}>
+    <nav className={clsx("overflow-y-auto max-h-full", className)}>
       {children}
     </nav>
   );

@@ -20,9 +20,8 @@
 }
 
 @theme {
-  --color-hover: oklch(55.1% 0.027 264.364);
-  --color-active: oklch(70.7% 0.022 261.325);
-
+  --color-hover: #00000022;
+  --color-active: #00000044;
   --color-info-100: #387842;
   --color-info-200: oklch(0.98 0.04 113.22);
   --color-info-300: oklch(0.94 0.11 115.03);
@@ -84,10 +83,4 @@ article h3 {
 
 article h4 {
   @apply ml-0 my-2 text-[1.2rem] font-semibold;
-}
-
-
-
-
-.NavigationLink {
 }
