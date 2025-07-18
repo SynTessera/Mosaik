@@ -18,22 +18,19 @@ export function StateProvider({
   reducer: (state: State, action: Action<string, string, object>) => State;
   initialState: State;
 }>) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    try {
-      const localState = JSON.parse(
-        localStorage.getItem("state") || JSON.stringify(initialState)
-      );
-      dispatch({ type: "HYDRATE", payload: localState });
-    } catch {}
-  }, []);
+  let hydratedState = initialState;
+  try {
+    hydratedState = JSON.parse(
+      localStorage.getItem("state") || JSON.stringify(initialState)
+    );
+  } catch {}
+  const [state, dispatch] = useReducer(reducer, hydratedState);
 
   useEffect(() => {
     localStorage.setItem("state", JSON.stringify(state));
   }, [state]);
   return (
-    <StateContext.Provider value={{ state: { ...state }, dispatch }}>
+    <StateContext.Provider value={{ state, dispatch }}>
       {children}
     </StateContext.Provider>
   );

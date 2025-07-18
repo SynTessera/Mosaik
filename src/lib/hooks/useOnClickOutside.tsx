@@ -39,6 +39,6 @@ export const useOnClickOutside = (
      * ... but to optimize you can wrap handler in useCallback before ...
      * ... passing it into this hook.
      */
-    [ref, handler, active]
+    [ref.current, handler, active]
   );
 };

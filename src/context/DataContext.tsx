@@ -49,7 +49,7 @@ export function DataProvider({
       const json = await prom?.json();
       setData(json);
     })();
-  });
+  },[]);
   return (
     <DataContext.Provider value={{ data, type }}>
       {children}

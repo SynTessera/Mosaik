@@ -8,7 +8,6 @@ import { PropsWithChildren } from "react";
 export const ActionBar = (props: PropsWithChildren) => {
   const { actions } = useActions() || {};
   const castedActions = actions as Record<ActionTriggerTypes, unknown>;
-  console.log("ACTIONS", castedActions);
   const Cmp = useThemedComponent("ActionBar");
   return (
     <Cmp {...props}>

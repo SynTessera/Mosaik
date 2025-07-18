@@ -4,7 +4,6 @@ import React, {
   PropsWithChildren,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 import { ThemeContext } from "./contexts/theme";
@@ -43,7 +42,7 @@ export function ThemeProvider({
   theme: Theme;
   children: React.ReactNode;
 }) {
-  const [tmpTheme, setTheme] = useState(useMemo(() => theme, [theme]));
+  const [tmpTheme, setTheme] = useState(theme);
 
   useEffect(() => {
     const renderedTheme = tmpTheme;
@@ -62,7 +61,7 @@ export function ThemeProvider({
 
       setTheme(() => renderedTheme);
     }
-  }, [tmpTheme]);
+  }, []);
 
   return (
     <ThemeContext.Provider value={tmpTheme}>{children}</ThemeContext.Provider>
