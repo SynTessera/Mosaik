@@ -5,6 +5,7 @@ import { AppRouter } from "@/modules/UrlDetailView";
 import { StateProvider } from "@/context/StateContext";
 import { appReducer } from "@/app/mosaik/reducers";
 import { initialState } from "@/app/mosaik/state";
+import { DesktopColLayout } from "@/layouts/DesktopColLayout";
 
 export function makeMosaikPage({
   Component,
@@ -27,13 +28,15 @@ export function makeMosaikPage({
     });
     return (
       <StateProvider reducer={appReducer} initialState={initialState}>
-        <App slug={`/mosaik/${view}`} slots={slots} params={resolvedParams}>
-          <AppRouter
-            Component={Component}
-            data={data}
-            routes={routes}
-            section={section}
-          />
+        <App slug={`/mosaik/${view}`}>
+          <DesktopColLayout slots={slots}>
+            <AppRouter
+              Component={Component}
+              data={data}
+              routes={routes}
+              section={section}
+            />
+          </DesktopColLayout>
         </App>
       </StateProvider>
     );

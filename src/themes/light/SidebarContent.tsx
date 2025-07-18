@@ -15,7 +15,7 @@ export const SidebarContent = ({
     className={clsx(
       "SidebarContent",
       classes.SidebarContent,
-      "flex-1 overflow-y-auto max-h-full",
+      "min-w-[var(--sidebar-min-width)] flex-1 overflow-y-auto max-h-full",
       {
         hidden: state.sidebar?.expanded === 0,
         block: state.sidebar.expanded > 0,

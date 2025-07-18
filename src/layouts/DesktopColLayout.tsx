@@ -1,18 +1,18 @@
 // SynTessera\aegis\src\layouts\DesktopColLayout.tsx
 
-import { DesktopSidebar } from "@/blocks/DesktopSidebar";
 import { DesktopContent } from "@/blocks/DesktopContent";
 import { Desktop } from "@/modules/Desktop";
 import { Slot } from "@/modules/Slot";
 import { PropsWithChildren, ReactElement } from "react";
 import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
+import { DesktopSidebarWrapper } from "@/blocks/DesktopSidebarWrapper";
 
 export const DesktopColLayout = async ({
   children,
   slots,
-}: PropsWithChildren<{
-  slots: Record<string, ReactElement | ReactElement[]>;
-}>) => {
+  }: PropsWithChildren<{
+    slots: Record<string, ReactElement | ReactElement[]>;
+  }>) => {
   return (
     <Desktop className="flex-col">
       <div className="flex w-full">
@@ -20,9 +20,9 @@ export const DesktopColLayout = async ({
         <Slot name="desktopheader" slots={slots}></Slot>
       </div>
       <DesktopContent className="flex-row">
-        <DesktopSidebar>
+        <DesktopSidebarWrapper>
           <Slot name="sidebarcontent" slots={slots}></Slot>
-        </DesktopSidebar>
+        </DesktopSidebarWrapper>
         {/* <Content> */}
         <Slot name="desktopcontent" slots={slots}></Slot>
         {children}

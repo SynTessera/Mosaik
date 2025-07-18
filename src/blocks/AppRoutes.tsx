@@ -1,7 +1,7 @@
 import { AppNavigationProps } from "@/types/AppNavigationProps";
 import { ExternalRoute, Route } from "@/types/Route";
 import { getThemedComponent } from "@/lib/server/getThemedComponent";
-import { NavigationLink } from "./NavigationLink";
+import { NavigationLinkServer } from "./NavigationLinkServer";
 
 export async function AppNavigation({
   routes,
@@ -18,7 +18,7 @@ export async function AppNavigation({
           const route = r as Route;
           const externalRoute = r as ExternalRoute;
           return (
-            <NavigationLink
+            <NavigationLinkServer
               icon={r.icon}
               key={route.slug || externalRoute.href}
               href={externalRoute.href || `${baseUrl}/${route.slug}`}

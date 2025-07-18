@@ -13,7 +13,7 @@ export const DesktopSidebar = ({
       className={clsx(
         "DesktopSidebar",
         classes.DesktopSidebar,
-        "min-w-[var(--sidebar-min-width)] w-max bg-gray-100 dark:bg-gray-900 border-r min-h-full h-full flex flex-col shrink-0 overflow-y-auto",
+        "w-max bg-white/20 shadow-md shadow-black dark:bg-black/40 min-h-full h-full flex flex-col shrink-0 overflow-y-auto",
         {
           hidden: state.sidebar.expanded === 0,
         },
