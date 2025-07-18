@@ -21,5 +21,5 @@ export type IconNames = keyof typeof Icons;
 export const Icon = ({icon,className}: {icon:keyof typeof Icons, className?: string}) => {
   const Icn = (Icons as any)[icon] ;
   if (!Icn) return <div className={clsx(icon,className)} />
-  return <Icn />
+  return <Icn className={className}/>
 }
