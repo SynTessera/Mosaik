@@ -31,7 +31,7 @@ export const NavigationLink = ({
         className
       )}
     >
-      <Icon icon={icon} containerClsn={clsx({ "mx-auto": iconOnly })} />
+      <Icon icon={icon} />
       {!iconOnly && label}
     </Link>
   );
