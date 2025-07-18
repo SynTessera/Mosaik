@@ -10,9 +10,9 @@ import { DesktopSidebarWrapper } from "@/blocks/DesktopSidebarWrapper";
 export const DesktopColLayout = async ({
   children,
   slots,
-  }: PropsWithChildren<{
-    slots: Record<string, ReactElement | ReactElement[]>;
-  }>) => {
+}: PropsWithChildren<{
+  slots: Record<string, ReactElement | ReactElement[]>;
+}>) => {
   return (
     <Desktop className="flex-col">
       <div className="flex w-full">
@@ -23,10 +23,8 @@ export const DesktopColLayout = async ({
         <DesktopSidebarWrapper>
           <Slot name="sidebarcontent" slots={slots}></Slot>
         </DesktopSidebarWrapper>
-        {/* <Content> */}
         <Slot name="desktopcontent" slots={slots}></Slot>
         {children}
-        {/* </Content> */}
       </DesktopContent>
       <Slot name="desktopfooter" slots={slots}></Slot>
       <AutoCollapseSidebarOnMobileEffect />

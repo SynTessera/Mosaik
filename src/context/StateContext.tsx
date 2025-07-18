@@ -1,6 +1,11 @@
 "use client";
 
-import React, { PropsWithChildren, useContext, useReducer } from "react";
+import React, {
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
 import { StateContext } from "./contexts/state";
 import { State } from "@/types/State";
 import { Action } from "@/types/Action";
@@ -14,6 +19,19 @@ export function StateProvider({
   initialState: State;
 }>) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    try {
+      const localState = JSON.parse(
+        localStorage.getItem("state") || JSON.stringify(initialState)
+      );
+      dispatch({ type: "HYDRATE", payload: localState });
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("state", JSON.stringify(state));
+  }, [state]);
   return (
     <StateContext.Provider value={{ state: { ...state }, dispatch }}>
       {children}

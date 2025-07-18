@@ -1,3 +1,5 @@
+"use client"
+
 import clsx from "clsx";
 import { themeClasses as classes } from "@/themes";
 import { State } from "@/types/State";

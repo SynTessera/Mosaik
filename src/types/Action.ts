@@ -7,5 +7,5 @@ export type Action<
 > = {
   type: ActionTypes;
   payload: P;
-  effects: Effect<EffectTypes>[];
+  effects?: Effect<EffectTypes>[];
 };

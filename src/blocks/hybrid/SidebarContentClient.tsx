@@ -1,11 +1,28 @@
 "use client";
 
 import { useAppState } from "@/context/StateContext";
-import { createClientWrapper } from "@/lib/createClientWrapper";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+import { useEffect, useState, ReactElement } from "react";
 
-export const SidebarContentClient = createClientWrapper((props: any) => {
+type Props = {
+  Component: ReactElement;
+  [key: string]: any;
+};
+
+export function SidebarContentClient(props: Props) {
+  const { Component, ...rest } = props;
   const SidebarContent = useThemedComponent("SidebarContent");
   const { state } = useAppState();
-  return <SidebarContent {...props} state={state} />;
-});
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated || !SidebarContent) {
+    // Before hydration, render the server-rendered static fallback
+    return Component;
+  }
+
+  return <SidebarContent {...rest} state={state} hydrated={hydrated} />;
+}

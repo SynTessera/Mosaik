@@ -1,15 +1,14 @@
-// lib/hybrid/createHybridServerWrapper.tsx
-import React from "react";
-
-export function createHybridServerWrapper<P>(
+export function createHybridServerWrapper(
   componentName: string,
-  ClientComponent: React.ComponentType<P & { Component: React.ReactElement }>
+  ClientComponent: any
 ) {
-  return async function ServerWrapper(props: P) {
+  return async function ServerWrapper(props: any) {
     const { getThemedComponent } = await import(
       "@/lib/server/getThemedComponent"
     );
     const Themed = await getThemedComponent(componentName);
-    return <ClientComponent Component={<Themed {...props} />} {...props} />;
+    // Render THEMED fully on server as fallback HTML and pass it as prop to client wrapper
+    const themedElement = <Themed key="test" {...props} />;
+    return <ClientComponent Component={themedElement} {...props} />;
   };
 }
