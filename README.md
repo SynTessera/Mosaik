@@ -140,13 +140,10 @@ Everything stays decoupled — yet works seamlessly together.
 
 ## 🗂️ **What’s next?**
 
--   Dive into **Getting Started** to create your first slots and themes.
-    
--   Learn how to wire up a **headless CMS**.
-    
--   Discover best practices for mixing **server-side rendering** with **client-side interactivity**.
-    
--   See advanced examples of how to override, merge, and reuse slots across different contexts.
+-   Dive into **Mosail** by [running the project locally[]().](https://mosaik.javascript.moe/mosaik/run-the-docs-locally)
+-   Discover [best practices](https://mosaik.javascript.moe/mosaik/key-principles) for mixing **server-side rendering** with **client-side interactivity**.
+-   ~~Learn how to wire up a **headless CMS**.~~*(wip)*
+-   ~~See advanced examples of how to override, merge, and reuse slots across different contexts.~~ *(wip)*
     
 
 ----------
