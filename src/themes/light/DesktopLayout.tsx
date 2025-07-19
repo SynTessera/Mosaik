@@ -8,7 +8,7 @@ export const DesktopLayout = ({ children, className }: any) => {
         "DesktopLayout",
         classes.DesktopLayout,
         "w-full h-full flex max-w-screen max-h-screen overflow-hidden",
-        "bg-[var(--background)]",
+        "bg-sky-300 dark:bg-green-700",
         className
       )}
     >
