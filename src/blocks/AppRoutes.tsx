@@ -5,11 +5,12 @@ import { NavigationLink } from "./hybrid/NavigationLink";
 
 export async function AppNavigation({
   routes,
+  searchParams,
   slug,
   baseUrl = "",
 }: AppNavigationProps) {
   const Nav = await getThemedComponent("Navigation");
-
+console.log ("APP NAV", searchParams)
   return (
     <Nav>
       {routes
@@ -25,6 +26,7 @@ export async function AppNavigation({
               label={r.label}
               isActive={slug === route.slug}
               external={!!externalRoute.href}
+              iconOnly={searchParams?.sidebarExpanded == "1"}
             />
           );
         })}

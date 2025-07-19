@@ -7,6 +7,7 @@ import { expand } from "@/app/mosaik/actions/expand";
 import { useAppState } from "@/context/StateContext";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 import { initialState } from "@/app/mosaik/state";
+import { Effects } from "@/services/Effects";
 
 export const useSidebarActions = () => {
   const { state = initialState } = useAppState();
@@ -31,6 +32,11 @@ export const DesktopSidebar = ({ children }: PropsWithChildren) => {
       <ActionProvider actions={actions}>
         <Cmp state={state}>{children}</Cmp>
       </ActionProvider>
+      <Effects
+        when="mount"
+        effects={[{ type: "syncCollapsedState", actions: { success: [] } }]}
+        deps={[state?.sidebar.expanded]}
+      />
     </div>
   );
 };

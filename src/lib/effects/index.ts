@@ -1,3 +1,3 @@
-import { AutoCollapseSidebarOnMobile } from "./generators/AutoCollapseSidebarOnMobile";
 
-export { AutoCollapseSidebarOnMobile };
+export * from './AutoCollapseSidebarOnMobile'
+export * from './SyncCollapsedStateToUrl'

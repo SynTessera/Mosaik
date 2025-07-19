@@ -10,8 +10,10 @@ import { DesktopSidebarWrapper } from "@/blocks/DesktopSidebarWrapper";
 export const DesktopColLayout = async ({
   children,
   slots,
+  searchParams,
 }: PropsWithChildren<{
   slots: Record<string, ReactElement | ReactElement[]>;
+  searchParams: any;
 }>) => {
   return (
     <Desktop className="flex-col">
@@ -20,7 +22,7 @@ export const DesktopColLayout = async ({
         <Slot name="desktopheader" slots={slots}></Slot>
       </div>
       <DesktopContent className="flex-row">
-        <DesktopSidebarWrapper>
+        <DesktopSidebarWrapper expanded={+searchParams.sidebarExpanded} >
           <Slot name="sidebarcontent" slots={slots}></Slot>
         </DesktopSidebarWrapper>
         <Slot name="desktopcontent" slots={slots}></Slot>

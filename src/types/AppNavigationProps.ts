@@ -5,4 +5,5 @@ export type AppNavigationProps = {
   baseUrl: string;
   routes: Array<Route | ExternalRoute>;
   slot?: string;
+  searchParams: any;
 };

@@ -12,7 +12,7 @@ export const DesktopRowLayout = async ({
 }>) => {
   return (
     <Desktop>
-      <DesktopSidebarWrapper>
+      <DesktopSidebarWrapper expanded={1}>
         <Slot name="sidebarheader" slots={slots}></Slot>
         <Slot name="sidebarcontent" slots={slots}></Slot>
         <Slot name="sidebarfooter" slots={slots}></Slot>

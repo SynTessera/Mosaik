@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { themeClasses as classes } from "@/themes";
 
-export const DesktopLayout = ({ children, theme, className }: any) => {
+export const DesktopLayout = ({ children, className }: any) => {
   return (
     <div
       className={clsx(

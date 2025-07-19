@@ -9,14 +9,16 @@ import { SidebarContent } from "@/blocks/hybrid/SidebarContent";
 export const getDesktopSlots = async ({
   children,
   params,
+  searchParams,
   fetcher,
   routes,
 }: PropsWithChildren<{
   params: object;
   fetcher?: (ctx: any) => Promise<any>;
   routes: Routes;
+  searchParams: any;
 }>) => {
-  const pageSlots = await getPageSlots({ params, fetcher, routes });
+  const pageSlots = await getPageSlots({ params, searchParams, fetcher, routes });
   return {
     sidebarheader: (
       <div>

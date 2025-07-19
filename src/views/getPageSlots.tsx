@@ -1,6 +1,6 @@
 import { AppNavigation } from "@/blocks/AppRoutes";
 
-export const getPageSlots = async ({ params, routes }: any) => {
+export const getPageSlots = async ({ params, searchParams, routes }: any) => {
   return {
     navigation: (
       <div>
@@ -8,6 +8,7 @@ export const getPageSlots = async ({ params, routes }: any) => {
           baseUrl="/mosaik"
           slug={params.section?.[0]}
           routes={routes}
+          searchParams={searchParams}
         />
       </div>
     ),

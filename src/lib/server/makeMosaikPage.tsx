@@ -16,12 +16,19 @@ export function makeMosaikPage({
   fetcher?: (ctx: any) => Promise<any>;
   view?: string | ((ctx: any) => Promise<any>);
 }) {
-  return async function Page({ params }: { params: any }) {
+  return async function Page({
+    params,
+    searchParams,
+  }: {
+    params: any;
+    searchParams: any;
+  }) {
     const resolvedParams = params ? await params : {};
     const routes = [...(await fetchRoutes()), ...staticRoutes];
     const data = (await fetcher?.({ params: resolvedParams })) || [];
     const section = resolvedParams.section?.[0] ?? view;
     const slots = await getDesktopSlots({
+      searchParams: await searchParams,
       params: resolvedParams,
       fetcher: fetcher!,
       routes,
@@ -29,7 +36,7 @@ export function makeMosaikPage({
     return (
       <StateProvider reducer={appReducer} initialState={initialState}>
         <App slug={`/mosaik/${view}`}>
-          <DesktopColLayout slots={slots}>
+          <DesktopColLayout slots={slots} searchParams={await searchParams}>
             <AppRouter
               Component={Component}
               data={data}

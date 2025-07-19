@@ -15,7 +15,7 @@ export const AutoCollapseSidebarOnMobile = (): Effect<string> | null => {
     return {
       type: "AutoCollapseSidebarOnMobile",
       actions: {
-        success: [collapse(), expand()],
+        success: [collapse(), expand() as any],
       },
     };
   return {
