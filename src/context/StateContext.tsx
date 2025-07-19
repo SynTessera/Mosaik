@@ -9,6 +9,7 @@ import React, {
 import { StateContext } from "./contexts/state";
 import { State } from "@/types/State";
 import { Action } from "@/types/Action";
+import { getCookie } from "@/lib/util/getCookie";
 
 export function StateProvider({
   reducer,
@@ -18,16 +19,17 @@ export function StateProvider({
   reducer: (state: State, action: Action<string, string, object>) => State;
   initialState: State;
 }>) {
-  let hydratedState = initialState;
+  let hydratedState = null;
   try {
-    hydratedState = JSON.parse(
-      localStorage.getItem("state") || JSON.stringify(initialState)
-    );
+    const uiStateRaw = getCookie("uiState");
+    hydratedState = uiStateRaw ? JSON.parse(uiStateRaw) : initialState;
   } catch {}
   const [state, dispatch] = useReducer(reducer, hydratedState);
 
   useEffect(() => {
-    localStorage.setItem("state", JSON.stringify(state));
+    document.cookie = `uiState=${encodeURIComponent(
+      JSON.stringify(state)
+    )}; path=/; SameSite=Lax`;
   }, [state]);
   return (
     <StateContext.Provider value={{ state, dispatch }}>

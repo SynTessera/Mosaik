@@ -1,13 +1,13 @@
-import { ActionBar } from "@/blocks/ActionBar";
 import { ThemedComponent } from "@/blocks/ThemedComponent";
 import { PropsWithChildren } from "react";
 import { getSectionSlots } from "./getSectionSlots";
-import { Slot } from "@/modules/Slot";
 import { Routes } from "@/types/Route";
 import { SidebarContent } from "@/blocks/hybrid/SidebarContent";
 import { getDesktopSidebarActions } from "@/actions/getDesktopSidebarActions";
-import { fetchMOTD } from "@/app/mosaik/dataSources/strapi";
-import { MOTDProps } from "@/themes/light/MOTD";
+import { getServerUiState } from "@/lib/util/getServerUIState";
+import { SidebarActionBar } from "@/blocks/hybrid/SidebarActionBar";
+import { Icon, IconNames } from "@/components/Icon";
+import clsx from "clsx";
 
 export const getDesktopSlots = async ({
   children,
@@ -21,9 +21,9 @@ export const getDesktopSlots = async ({
   routes: Routes;
   searchParams: any;
 }>) => {
-  const motd = await fetchMOTD();
+  const state = await getServerUiState();
   const sidebarActions = await getDesktopSidebarActions({
-    serverState: { sidebar: { expanded: searchParams.sidebarExpanded } },
+    serverState: { sidebar: { expanded: state?.sidebar?.expanded } },
   });
 
   const sectionSlots = await getSectionSlots({
@@ -35,27 +35,34 @@ export const getDesktopSlots = async ({
   return {
     sidebarheader: (
       <div>
-        <ActionBar actions={sidebarActions} />
+        <SidebarActionBar actions={sidebarActions}>
+          {Object.entries(sidebarActions).map(([key, action]) => {
+            return (
+              <ThemedComponent key={key} name="ActionButton" action={action}>
+                <Icon
+                  icon={
+                    clsx({
+                      FaChevronRight: Number(state?.sidebar.expanded) < 2,
+                      FaChevronLeft: state?.sidebar.expanded === 2,
+                    }) as IconNames
+                  }
+                />
+              </ThemedComponent>
+            );
+          })}
+        </SidebarActionBar>
       </div>
     ),
     desktopheader: (
       <div className="w-full">
         <ThemedComponent name="DesktopHeader">
-          {motd?.enabled && !params.slug && (
-            <ThemedComponent<MOTDProps>
-              name="MOTD"
-              severity={motd?.severity}
-              message={motd?.message}
-            />
-          )}
+          {sectionSlots.motd}
         </ThemedComponent>
       </div>
     ),
     sidebarcontent: (
       <div>
-        <SidebarContent>
-          <Slot name="navigation" slots={sectionSlots} />
-        </SidebarContent>
+        <SidebarContent state={state}>{sectionSlots.navigation}</SidebarContent>
       </div>
     ),
     desktopcontent: (

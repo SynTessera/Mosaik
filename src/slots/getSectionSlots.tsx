@@ -1,7 +1,27 @@
+import { fetchMOTD } from "@/app/mosaik/dataSources/strapi";
 import { AppNavigation } from "@/blocks/AppRoutes";
+import { ThemedComponent } from "@/blocks/ThemedComponent";
+import { MOTDProps } from "@/themes/light/MOTD";
 
-export const getSectionSlots = async ({ params, searchParams, routes }: any) => {
+export const getSectionSlots = async ({
+  params,
+  searchParams,
+  routes,
+}: any) => {
+  const motd = await fetchMOTD();
+
   return {
+    motd: (
+      <div>
+        {motd?.enabled && !params.slug && (
+          <ThemedComponent<MOTDProps>
+            name="MOTD"
+            severity={motd?.severity}
+            message={motd?.message}
+          />
+        )}
+      </div>
+    ),
     navigation: (
       <div>
         <AppNavigation
