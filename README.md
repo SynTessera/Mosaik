@@ -4,6 +4,15 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Clone the project.
+
+Create a *.env* file and paste these variables:
+```env
+STRAPI_API=https://mosaik-cms-production.up.railway.app/api
+NEXT_PUBLIC_STRAPI_BASE=https://mosaik-cms-production.up.railway.app
+STRAPI_TOKEN=61914051cd1191eb556fa934ab7317c134551022d8f6d9412d7213ed3828ca7ee1896c08e0dd520a01d2702af2bcde243cce528449608c60e47f202f56ba824c550d6f8426c312e5e29651c61b9fa157274b88cc0beee8f06bd6c6d9e363acf9a5f9b7d5c6171e2c3d3bc47e0c2ec56d26bd09702ff55c911760deb46fa22ff5
+```
+
 First, run the development server:
 
 ```bash
