@@ -2,7 +2,7 @@ import { Desktop } from "@/modules/Desktop";
 import { Slot } from "@/modules/Slot";
 import { PropsWithChildren, ReactElement } from "react";
 import { DesktopContent } from "@/blocks/DesktopContent";
-import { DesktopSidebarWrapper } from "@/blocks/DesktopSidebarWrapper";
+import { DesktopSidebar } from "@/blocks/hybrid/DesktopSidebar";
 
 export const DesktopRowLayout = async ({
   children,
@@ -12,11 +12,9 @@ export const DesktopRowLayout = async ({
 }>) => {
   return (
     <Desktop>
-      <DesktopSidebarWrapper expanded={1}>
-        <Slot name="sidebarheader" slots={slots}></Slot>
-        <Slot name="sidebarcontent" slots={slots}></Slot>
-        <Slot name="sidebarfooter" slots={slots}></Slot>
-      </DesktopSidebarWrapper>
+      <Slot name="sidebarheader" slots={slots}></Slot>
+      <Slot name="sidebarcontent" slots={slots}></Slot>
+      <Slot name="sidebarfooter" slots={slots}></Slot>
       <DesktopContent className="flex-col">
         <div>
           <Slot name="desktopheader" slots={slots}></Slot>

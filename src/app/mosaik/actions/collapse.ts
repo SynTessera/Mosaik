@@ -1,1 +1,3 @@
-export const collapse = () => ({ type: "COLLAPSE", payload: {}, effects: [] });
+import { ActionGenerator } from "@/types/Action";
+
+export const collapse: ActionGenerator = () => ({ type: "COLLAPSE", payload: {}, effects: [], icon: "FaChevronLeft"});

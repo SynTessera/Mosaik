@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FaServer,FaChevronLeft, FaChevronRight, FaInfo, FaCircleNotch, FaLightbulb, FaRoute, FaBlog, FaGithub} from "react-icons/fa";
+import { FaServer,FaChevronLeft, FaChevronRight, FaInfo, FaCircleNotch, FaLightbulb, FaRoute, FaBlog, FaGithub, FaExclamationTriangle} from "react-icons/fa";
 import { FaCheckToSlot, FaMagnifyingGlass } from "react-icons/fa6";
 
 
@@ -14,7 +14,8 @@ const Icons = {
   FaRoute,
   FaMagnifyingGlass,
   FaBlog,
-  FaGithub
+  FaGithub,
+  FaExclamationTriangle
 }
 
 export type IconNames = keyof typeof Icons; 

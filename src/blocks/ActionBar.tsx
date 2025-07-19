@@ -1,20 +1,19 @@
-"use client";
-
-import { useActions } from "@/context/ActionContext";
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
 import { ActionTrigger, ActionTriggerTypes } from "./ActionTrigger";
-import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 import { PropsWithChildren } from "react";
 
-export const ActionBar = (props: PropsWithChildren) => {
-  const { actions } = useActions() || {};
+export const ActionBar = async (
+  props: PropsWithChildren<{ actions: Record<ActionTriggerTypes, unknown> }>
+) => {
+  const { actions } = props;
   const castedActions = actions as Record<ActionTriggerTypes, unknown>;
-  const Cmp = useThemedComponent("ActionBar");
+  const Cmp = await getThemedComponent("ActionBar");
   return (
     <Cmp {...props}>
       {props.children ||
         Object.entries(castedActions).map(([key, action]: [string, any]) => {
           const actionType = action.type as ActionTriggerTypes;
-          return <ActionTrigger key={key} type={actionType} />;
+          return <ActionTrigger key={key} type={actionType} action={action} />;
         })}
     </Cmp>
   );

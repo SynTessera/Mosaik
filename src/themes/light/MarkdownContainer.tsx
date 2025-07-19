@@ -33,7 +33,7 @@ export const MarkdownContainer = ({
   const htmlContent = marked(children?.toString() || "");
 
   return (
-    <article className="bg-black/30 p-2 md:p-4 post ">
+    <article className="bg-white/20 dark:bg-black/20 p-2 md:p-4 post ">
       <div
         dangerouslySetInnerHTML={{ __html: htmlContent }}
         className={clsx("max-w-[80ch] prose prose-invert", className)}

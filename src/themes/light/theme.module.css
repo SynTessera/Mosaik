@@ -8,11 +8,11 @@
 }
 
 .NavigationLink {
-  @apply p-4 hover:bg-hover;
+  @apply p-4  hover:bg-white/20 dark:hover:bg-black/20 
 }
 
 .NavigationLink.active {
-  @apply bg-active;
+  @apply bg-white/70 hover:bg-white/50 dark:bg-black/30;
 }
 
 .DesktopContent {

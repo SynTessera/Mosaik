@@ -1,6 +1,6 @@
 import { App } from "@/modules/App";
 import { routes as staticRoutes, fetchRoutes } from "@/app/mosaik/routes";
-import { getDesktopSlots } from "@/views/getDesktopSlots";
+import { getDesktopSlots } from "@/slots/getDesktopSlots";
 import { AppRouter } from "@/modules/UrlDetailView";
 import { StateProvider } from "@/context/StateContext";
 import { appReducer } from "@/app/mosaik/reducers";
@@ -17,6 +17,7 @@ export function makeMosaikPage({
   view?: string | ((ctx: any) => Promise<any>);
 }) {
   return async function Page({
+    children,
     params,
     searchParams,
   }: {
@@ -32,6 +33,7 @@ export function makeMosaikPage({
       params: resolvedParams,
       fetcher: fetcher!,
       routes,
+      children,
     });
     return (
       <StateProvider reducer={appReducer} initialState={initialState}>

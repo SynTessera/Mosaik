@@ -8,7 +8,7 @@ export const themeClasses = light;
 export const settings: Theme["settings"] = {
   theme,
   classNames: {
-    Button: 'p-2',
+    Button: '',
     Icon: 'p-2 !h-7 !w-7'
   },
   navigation: {

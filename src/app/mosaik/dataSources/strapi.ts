@@ -39,3 +39,17 @@ export const fetchSections = async () => {
   const json = await prom.json();
   return json.data;
 };
+
+export const fetchMOTD = async () => {
+  const url = `${process.env.STRAPI_API}/motd?populate=*`;
+  const prom = await fetch(url, {
+    headers: {
+      Authorization: process.env.STRAPI_TOKEN || "",
+    },
+    next: {
+      revalidate: 30,
+    },
+  });
+  const json = await prom.json();
+  return json.data;
+};

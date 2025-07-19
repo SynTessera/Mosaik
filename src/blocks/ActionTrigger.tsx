@@ -1,13 +1,17 @@
 import * as ActionButtons from "@/blocks/ActionButtons";
+import { Icon } from "@/components/Icon";
+import { ActionButton } from "@/blocks/hybrid/ActionButton";
+import { Action } from "@/types/Action";
 
 export type ActionTriggerTypes = keyof typeof ActionButtons;
 export const ActionTrigger = ({
-  type,
-  ...props
+  action,
 }: {
-  type: keyof typeof ActionButtons;
+  action: Action<string, string, object>;
 }) => {
-  const Btn = ActionButtons[type] || (() => null);
-
-  return <Btn {...props} />;
+  return (
+    <ActionButton action={action} label={action.type}>
+      <Icon icon={action.icon} className="h-6 w-6" />
+    </ActionButton>
+  );
 };

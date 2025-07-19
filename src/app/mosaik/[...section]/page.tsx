@@ -3,7 +3,7 @@ import { routes as staticRoutes } from "@/app/mosaik/routes";
 import { DesktopColLayout } from "@/layouts/DesktopColLayout";
 import { AppRouter } from "@/modules/UrlDetailView";
 import { fetchRoutes } from "../routes";
-import { getDesktopSlots } from "@/views/getDesktopSlots";
+import { getDesktopSlots } from "@/slots/getDesktopSlots";
 import Section from "../sections/Section";
 
 export default async function Page({ children, params, searchParams }: any) {
@@ -13,17 +13,20 @@ export default async function Page({ children, params, searchParams }: any) {
     searchParams: await searchParams,
     fetcher: () => Promise.resolve([]), // stub if needed
     routes,
-  });
-
-  return (
-    <DesktopColLayout slots={slots} searchParams={await searchParams}>
+    children: (
       <AppRouter
         Component={Section}
         data={[]}
         routes={routes}
         section={(await params).section?.[0]}
       />
-      {children}
-    </DesktopColLayout>
+    ),
+  });
+
+  return (
+    <DesktopColLayout
+      slots={slots}
+      searchParams={await searchParams}
+    ></DesktopColLayout>
   );
 }

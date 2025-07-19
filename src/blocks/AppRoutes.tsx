@@ -10,7 +10,6 @@ export async function AppNavigation({
   baseUrl = "",
 }: AppNavigationProps) {
   const Nav = await getThemedComponent("Navigation");
-console.log ("APP NAV", searchParams)
   return (
     <Nav>
       {routes

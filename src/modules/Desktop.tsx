@@ -15,9 +15,7 @@ export async function Desktop({
 
   return (
     <DesktopLayout className={className}>
-      {/* <ViewHostProvider> */}
-      <SidebarActionsProvider>{children}</SidebarActionsProvider>
-      {/*</ViewHostProvider> */}
+      {children}
     </DesktopLayout>
   );
 }

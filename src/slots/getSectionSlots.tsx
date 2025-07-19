@@ -1,6 +1,6 @@
 import { AppNavigation } from "@/blocks/AppRoutes";
 
-export const getPageSlots = async ({ params, searchParams, routes }: any) => {
+export const getSectionSlots = async ({ params, searchParams, routes }: any) => {
   return {
     navigation: (
       <div>
