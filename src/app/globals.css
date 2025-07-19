@@ -12,7 +12,32 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  --color-hover: #00000022;
+  --color-active: #00000044;
+  --color-info-100: #387842;
+  --color-info-200: oklch(0.98 0.04 113.22);
+  --color-info-300: oklch(0.94 0.11 115.03);
+  --color-info-400: oklch(0.92 0.19 114.08);
+  --color-info-500: oklch(0.84 0.18 117.33);
+  --color-info-600: oklch(0.53 0.12 118.34);
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+}
+
 @media (prefers-color-scheme: dark) {
+  @theme {
+    --color-hover: #00000022;
+    --color-active: #00000044;
+    --color-info-100: #AAE2F9;
+    --color-info-200: oklch(0.98 0.04 113.22);
+    --color-info-300: oklch(0.94 0.11 115.03);
+    --color-info-400: oklch(0.92 0.19 114.08);
+    --color-info-500: oklch(0.84 0.18 117.33);
+    --color-info-600: oklch(0.53 0.12 118.34);
+    --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+    --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+  }
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -31,18 +56,18 @@
   }
 
   .scrollable::-webkit-scrollbar-track {
-    background: #FFFFFF11;
+    background: #ffffff11;
   }
 
   .scrollable::-webkit-scrollbar-thumb {
-    background-color: #FFFFFF22;
+    background-color: #ffffff22;
     border-radius: 4px;
     width: 8px;
     transition: background-color 0.3s ease;
   }
 
   .scrollable::-webkit-scrollbar-thumb:hover {
-    background-color: #FFFFFF22;
+    background-color: #ffffff22;
   }
 
   /* On hover: widen scrollbar */
@@ -54,7 +79,7 @@
   /* Firefox */
   .scrollable:hover {
     scrollbar-width: 12px;
-    scrollbar-color: #FFFFFF11;
+    scrollbar-color: #ffffff11;
 
     margin-right: 0px;
   }
@@ -64,18 +89,7 @@
   }
 }
 
-@theme {
-  --color-hover: #00000022;
-  --color-active: #00000044;
-  --color-info-100: #387842;
-  --color-info-200: oklch(0.98 0.04 113.22);
-  --color-info-300: oklch(0.94 0.11 115.03);
-  --color-info-400: oklch(0.92 0.19 114.08);
-  --color-info-500: oklch(0.84 0.18 117.33);
-  --color-info-600: oklch(0.53 0.12 118.34);
-  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
-  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
-}
+
 
 body {
   background: var(--background);
