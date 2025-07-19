@@ -32,10 +32,9 @@
 
 
  /* Apply to a wrapper element */
-  .scrollable {
+  .scrollable:not(.hidden) {
     overflow-y: auto;
     overflow-x: hidden;
-    margin-right: 10px;
   }
 
   /* Base thin scrollbar */
@@ -87,7 +86,6 @@
   .scrollable {
     overflow-y: auto;
     overflow-x: hidden;
-    margin-right: 10px;
   }
 
   /* Base thin scrollbar */

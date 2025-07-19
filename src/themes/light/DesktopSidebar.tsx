@@ -14,7 +14,7 @@ export const DesktopSidebar = ({
         "w-fit",
         "bg-white/20 dark:bg-black/40",
         "shadow-md shadow-black min-h-full",
-        "h-full flex flex-col shrink-0 overflow-y-auto scrollable",
+        "h-full flex flex-col shrink-0 ",
         className
       )}
     >

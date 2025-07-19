@@ -61,7 +61,7 @@ export const getDesktopSlots = async ({
       </div>
     ),
     sidebarcontent: (
-      <div>
+      <div className="h-full">
         <SidebarContent state={state}>{sectionSlots.navigation}</SidebarContent>
       </div>
     ),
