@@ -6,6 +6,7 @@ import { Slot } from "@/modules/Slot";
 import { PropsWithChildren, ReactElement } from "react";
 import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
 import { DesktopSidebarWrapper } from "@/blocks/DesktopSidebarWrapper";
+import { Effects } from "@/services/Effects";
 
 export const DesktopColLayout = async ({
   children,
@@ -22,7 +23,7 @@ export const DesktopColLayout = async ({
         <Slot name="desktopheader" slots={slots}></Slot>
       </div>
       <DesktopContent className="flex-row">
-        <DesktopSidebarWrapper expanded={+searchParams.sidebarExpanded} >
+        <DesktopSidebarWrapper expanded={+searchParams.sidebarExpanded}>
           <Slot name="sidebarcontent" slots={slots}></Slot>
         </DesktopSidebarWrapper>
         <Slot name="desktopcontent" slots={slots}></Slot>
@@ -30,6 +31,11 @@ export const DesktopColLayout = async ({
       </DesktopContent>
       <Slot name="desktopfooter" slots={slots}></Slot>
       <AutoCollapseSidebarOnMobileEffect />
+      <Effects
+        when="mount"
+        effects={[{ type: "syncCollapsedState", actions: { success: [] } }]}
+        deps={undefined}
+      />
     </Desktop>
   );
 };

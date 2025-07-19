@@ -32,11 +32,7 @@ export const DesktopSidebar = ({ children }: PropsWithChildren) => {
       <ActionProvider actions={actions}>
         <Cmp state={state}>{children}</Cmp>
       </ActionProvider>
-      <Effects
-        when="mount"
-        effects={[{ type: "syncCollapsedState", actions: { success: [] } }]}
-        deps={[state?.sidebar.expanded]}
-      />
+
     </div>
   );
 };
