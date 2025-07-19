@@ -44,7 +44,7 @@
   }
   /* Apply to a wrapper element */
   .scrollable {
-    overflow: auto;
+    overflow-y: auto;
     margin-right: 10px;
   }
 
