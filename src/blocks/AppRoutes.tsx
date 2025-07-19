@@ -18,11 +18,12 @@ console.log ("APP NAV", searchParams)
         .map((r) => {
           const route = r as Route;
           const externalRoute = r as ExternalRoute;
+          
           return (
             <NavigationLink
               icon={r.icon}
               key={route.slug || externalRoute.href}
-              href={externalRoute.href || `${baseUrl}/${route.slug}`}
+              href={externalRoute.href || `${baseUrl}/${route.slug}?sidebarExpanded=${searchParams.sidebarExpanded || "2"}`}
               label={r.label}
               isActive={slug === route.slug}
               external={!!externalRoute.href}
