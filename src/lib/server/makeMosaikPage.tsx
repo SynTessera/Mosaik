@@ -32,20 +32,20 @@ export function makeMosaikPage({
       params: resolvedParams,
       fetcher: fetcher!,
       routes,
+      children: (
+        <AppRouter
+          Component={Component}
+          data={data}
+          routes={routes}
+          section={section}
+        />
+      ),
     });
     return (
-      <StateProvider reducer={appReducer} initialState={initialState}>
-        <App slug={`/mosaik/${view}`}>
-          <DesktopColLayout slots={slots} searchParams={await searchParams}>
-            <AppRouter
-              Component={Component}
-              data={data}
-              routes={routes}
-              section={section}
-            />
-          </DesktopColLayout>
-        </App>
-      </StateProvider>
+      <DesktopColLayout
+        slots={slots}
+        searchParams={await searchParams}
+      ></DesktopColLayout>
     );
   };
 }

@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         // Optional: Restrict to specific paths
         pathname: "/uploads/**",
       },
+            {
+        protocol: "http",
+        hostname: "localhost",
+        // Optional: Restrict to specific paths
+        pathname: "/uploads/**",
+      },
     ],
   },
 };
