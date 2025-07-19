@@ -1,8 +1,6 @@
 import clsx from "clsx";
 import { themeClasses as classes } from "@/themes";
 import { PropsWithChildren } from "react";
-import { ActionTrigger } from "@/blocks/ActionTrigger";
-import { ActionButton } from "./ActionButton";
 export const ActionBar = ({ children }: PropsWithChildren) => {
   return (
     <div

@@ -10,7 +10,7 @@ export const Button = ({
 }: PropsWithChildren<{ className?: string; label: string; onClick: any }>) => {
   return (
     <button
-      aria-label={label}
+      aria-label={label || "Button"}
       {...props}
       className={clsx(
         "p-2 rounded-sm shadow-sm m-1",
