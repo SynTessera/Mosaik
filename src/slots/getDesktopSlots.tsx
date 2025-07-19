@@ -16,7 +16,7 @@ export const getDesktopSlots = async ({
   fetcher,
   routes,
 }: PropsWithChildren<{
-  params: object;
+  params: { slug?: string; section?: string };
   fetcher?: (ctx: any) => Promise<any>;
   routes: Routes;
   searchParams: any;
@@ -40,7 +40,15 @@ export const getDesktopSlots = async ({
     ),
     desktopheader: (
       <div className="w-full">
-        <ThemedComponent name="DesktopHeader" />
+        <ThemedComponent name="DesktopHeader">
+          {motd?.enabled && !params.slug && (
+            <ThemedComponent<MOTDProps>
+              name="MOTD"
+              severity={motd?.severity}
+              message={motd?.message}
+            />
+          )}
+        </ThemedComponent>
       </div>
     ),
     sidebarcontent: (
@@ -52,13 +60,6 @@ export const getDesktopSlots = async ({
     ),
     desktopcontent: (
       <div className="w-full">
-        {motd?.enabled && (
-          <ThemedComponent<MOTDProps>
-            name="MOTD"
-            severity={motd?.severity}
-            message={motd?.message}
-          />
-        )}
         <ThemedComponent name="DesktopContent">{children}</ThemedComponent>
       </div>
     ),

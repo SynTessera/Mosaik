@@ -168,6 +168,9 @@ article hr {
   @apply my-4;
 }
 
+h1 {
+  @apply text-4xl;
+}
 article h1 {
   @apply mb-4 text-[3rem];
 }
