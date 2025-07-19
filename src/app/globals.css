@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -15,7 +10,10 @@
 @theme {
   --color-hover: #00000022;
   --color-active: #00000044;
+
+  --color-success-100: #aae2f9;
   --color-info-100: #387842;
+
   --color-info-200: oklch(0.98 0.04 113.22);
   --color-info-300: oklch(0.94 0.11 115.03);
   --color-info-400: oklch(0.92 0.19 114.08);
@@ -25,21 +23,14 @@
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 }
 
+:root {
+  --background: var(--color-success-100);
+  --foreground: #171717;
+}
+
 @media (prefers-color-scheme: dark) {
-  @theme {
-    --color-hover: #00000022;
-    --color-active: #00000044;
-    --color-info-100: #AAE2F9;
-    --color-info-200: oklch(0.98 0.04 113.22);
-    --color-info-300: oklch(0.94 0.11 115.03);
-    --color-info-400: oklch(0.92 0.19 114.08);
-    --color-info-500: oklch(0.84 0.18 117.33);
-    --color-info-600: oklch(0.53 0.12 118.34);
-    --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
-    --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
-  }
   :root {
-    --background: #0a0a0a;
+    --background: var(--color-info-100);
     --foreground: #ededed;
   }
   /* Apply to a wrapper element */
@@ -88,8 +79,6 @@
     scrollbar-width: auto; /* fallback: default width when hovered */
   }
 }
-
-
 
 body {
   background: var(--background);

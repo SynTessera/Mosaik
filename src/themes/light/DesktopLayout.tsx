@@ -8,10 +8,7 @@ export const DesktopLayout = ({ children, theme, className }: any) => {
         "DesktopLayout",
         classes.DesktopLayout,
         "w-full h-full flex max-w-screen max-h-screen overflow-hidden",
-        {
-          "bg-white": theme.userPreferences.mode === "light",
-          "bg-info-100": theme.userPreferences.mode === "dark",
-        },
+        "bg-[var(--background)]",
         className
       )}
     >
