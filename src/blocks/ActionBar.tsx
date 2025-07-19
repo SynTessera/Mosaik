@@ -12,8 +12,7 @@ export const ActionBar = async (
     <Cmp {...props}>
       {props.children ||
         Object.entries(castedActions).map(([key, action]: [string, any]) => {
-          const actionType = action.type as ActionTriggerTypes;
-          return <ActionTrigger key={key} type={actionType} action={action} />;
+          return <ActionTrigger key={key} action={action} />;
         })}
     </Cmp>
   );

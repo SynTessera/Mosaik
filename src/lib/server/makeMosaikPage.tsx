@@ -17,7 +17,6 @@ export function makeMosaikPage({
   view?: string | ((ctx: any) => Promise<any>);
 }) {
   return async function Page({
-    children,
     params,
     searchParams,
   }: {
@@ -33,7 +32,6 @@ export function makeMosaikPage({
       params: resolvedParams,
       fetcher: fetcher!,
       routes,
-      children,
     });
     return (
       <StateProvider reducer={appReducer} initialState={initialState}>

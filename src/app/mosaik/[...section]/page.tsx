@@ -6,7 +6,7 @@ import { fetchRoutes } from "../routes";
 import { getDesktopSlots } from "@/slots/getDesktopSlots";
 import Section from "../sections/Section";
 
-export default async function Page({ children, params, searchParams }: any) {
+export default async function Page({ params, searchParams }: any) {
   const routes = [...(await fetchRoutes()), ...staticRoutes];
   const slots = await getDesktopSlots({
     params: await params, // pass shared params if needed

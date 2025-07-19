@@ -8,7 +8,6 @@ import { SidebarContent } from "@/blocks/hybrid/SidebarContent";
 import { getDesktopSidebarActions } from "@/actions/getDesktopSidebarActions";
 import { fetchMOTD } from "@/app/mosaik/dataSources/strapi";
 import { MOTDProps } from "@/themes/light/MOTD";
-import { DesktopContent } from "@/themes/light/DesktopContent";
 
 export const getDesktopSlots = async ({
   children,

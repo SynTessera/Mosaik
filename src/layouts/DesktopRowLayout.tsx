@@ -2,7 +2,6 @@ import { Desktop } from "@/modules/Desktop";
 import { Slot } from "@/modules/Slot";
 import { PropsWithChildren, ReactElement } from "react";
 import { DesktopContent } from "@/blocks/DesktopContent";
-import { DesktopSidebar } from "@/blocks/hybrid/DesktopSidebar";
 
 export const DesktopRowLayout = async ({
   children,

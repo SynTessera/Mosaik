@@ -1,6 +1,5 @@
 import React from "react";
 import { getThemedComponent } from "@/lib/server/getThemedComponent";
-import { SidebarActionsProvider } from "@/context/SiderbarActionsProvider";
 
 export async function Desktop({
   children,
