@@ -12,14 +12,12 @@ import clsx from "clsx";
 export const getDesktopSlots = async ({
   children,
   params,
-  searchParams,
   fetcher,
   routes,
 }: PropsWithChildren<{
-  params: { slug?: string; section?: string };
+  params: { slug?: string[]; section?: string[]};
   fetcher?: (ctx: any) => Promise<any>;
   routes: Routes;
-  searchParams: any;
 }>) => {
   const state = await getServerUiState();
   const sidebarActions = await getDesktopSidebarActions({
@@ -28,7 +26,6 @@ export const getDesktopSlots = async ({
 
   const sectionSlots = await getSectionSlots({
     params,
-    searchParams,
     fetcher,
     routes,
   });

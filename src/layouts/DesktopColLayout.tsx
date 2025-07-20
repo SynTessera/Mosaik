@@ -12,7 +12,6 @@ export const DesktopColLayout = async ({
   slots,
 }: PropsWithChildren<{
   slots: Awaited<ReturnType<typeof getDesktopSlots>>;
-  searchParams: any;
 }>) => {
 
   return (

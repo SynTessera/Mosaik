@@ -7,7 +7,7 @@ export const BlogPost = ({ data = [], className }: any) => {
   const { title, coverImage, content, documentId, slug } = data?.[0];
 
   return (
-    <article className="flex gap-4 bg-gray-400/40 max-h-full w-full overflow-y-auto overflow-x-hidden">
+    <article className="flex flex-col lg:flex-row gap-4 bg-gray-400/40 max-h-full w-full overflow-y-auto overflow-x-hidden">
       <img
         src={coverImageLink(coverImage?.url)}
         className={clsx(

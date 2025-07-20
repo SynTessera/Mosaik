@@ -1,7 +1,6 @@
 // SynTessera\aegis\src\blocks\DesktopContent.tsx
 
 import React from "react";
-import { Slot } from "@/modules/Slot"; // Adjust imports to your structure
 import { getThemedComponent } from "@/lib/server/getThemedComponent";
 import clsx from "clsx";
 
@@ -24,7 +23,6 @@ export const Content = async ({ children, ...props }: any) => {
 
   return (
     <Cmp {...props}>
-      <Slot name="main" slots={{}}></Slot>
       {children}
     </Cmp>
   );
