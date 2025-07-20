@@ -7,7 +7,7 @@ import { PropsWithChildren } from "react";
 
 export const SidebarContent = ({
   children,
-  state = { sidebar: { expanded: 2 } },
+  state = { sidebar: { expanded: undefined } },
   className,
 }: PropsWithChildren<{
   state?: State;
