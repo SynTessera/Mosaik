@@ -4,6 +4,7 @@ import { Effect } from "@/types/Effect";
 import { useEffect } from "react";
 import { useAppState } from "@/context/StateContext";
 import * as effectRunners from "@/lib/effects";
+
 export const Effects = ({
   effects = [],
   when,

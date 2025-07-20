@@ -3,7 +3,6 @@
 import { DesktopContent } from "@/blocks/DesktopContent";
 import { Desktop } from "@/modules/Desktop";
 import { PropsWithChildren } from "react";
-import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
 import { ThemedComponent } from "@/blocks/ThemedComponent";
 import { getDesktopSlots } from "@/slots/getDesktopSlots";
 
@@ -30,12 +29,6 @@ export const DesktopColLayout = async ({
         {children}
       </DesktopContent>
       {slots.desktopfooter}
-      <AutoCollapseSidebarOnMobileEffect />
-      {/* <Effects
-        when="mount"
-        effects={[{ type: "syncCollapsedState", actions: { success: [] } }]}
-        deps={undefined}
-      /> */}
     </Desktop>
   );
 };

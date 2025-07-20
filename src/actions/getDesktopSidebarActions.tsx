@@ -8,7 +8,7 @@ export const getDesktopSidebarActions = ({
 }) => {
   const actions = {} as Record<string, any>;
 
-  if (serverState.sidebar.expanded < 2) actions.expand = expand();
+  if (Number(serverState.sidebar.expanded) < 2) actions.expand = expand();
   if (serverState.sidebar.expanded == 2) actions.collapse = collapse();
 
   return actions;

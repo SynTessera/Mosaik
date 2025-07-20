@@ -1,3 +1,3 @@
+// Re export effect components here
 
-export * from './AutoCollapseSidebarOnMobile'
-export * from './SyncCollapsedStateToUrl'
+export const noop = () => null;
