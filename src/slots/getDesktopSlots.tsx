@@ -39,7 +39,7 @@ export const getDesktopSlots = async ({
                 <Icon
                   icon={
                     clsx({
-                      FaChevronRight: Number(state?.sidebar.expanded) < 2,
+                      FaChevronRight: !state?.sidebar?.expanded ||  Number(state?.sidebar.expanded) < 2,
                       FaChevronLeft: state?.sidebar.expanded === 2,
                     }) as IconNames
                   }

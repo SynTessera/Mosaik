@@ -15,7 +15,7 @@ export const SidebarActionbarClient = createHydratableComponent(
     const ActionBar = useThemedComponent("ActionBar");
     const actions = useMemo(() => {
       const actions = {} as any;
-      if (Number(state?.sidebar?.expanded) < 2) actions.expand = expand();
+      if (!state?.sidebar?.expanded || Number(state?.sidebar?.expanded) < 2) actions.expand = expand();
       if (state?.sidebar?.expanded === 2) actions.collapse = collapse();
       return actions;
     }, [state]);
@@ -28,7 +28,7 @@ export const SidebarActionbarClient = createHydratableComponent(
               <Icon
                 icon={
                   clsx({
-                    FaChevronRight: Number(state?.sidebar.expanded) < 2,
+                    FaChevronRight: !state?.sidebar?.expanded || Number(state?.sidebar.expanded) < 2,
                     FaChevronLeft: state?.sidebar.expanded === 2,
                   }) as IconNames
                 }

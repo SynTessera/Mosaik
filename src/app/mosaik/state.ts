@@ -2,6 +2,6 @@ import { State } from "@/types/State";
 
 export const initialState: State = {
   sidebar: {
-    expanded: 2,
+    expanded: undefined,
   },
 };
