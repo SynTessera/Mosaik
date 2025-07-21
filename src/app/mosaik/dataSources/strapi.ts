@@ -61,8 +61,6 @@ export async function fetchMetadata(path: string): Promise<Page> {
     `${process.env.STRAPI_API}/pages?filters[pathname][$eq]=${path}&populate=*`
   );
 
-
-
   if (!res.ok) {
     console.warn("Failed to fetch metadata for", path, res.status);
     return {
@@ -73,5 +71,14 @@ export async function fetchMetadata(path: string): Promise<Page> {
 
   const data = await res.json();
   const page = data?.data?.[0];
-  return page;
+
+  if (!page && path !== "*") {
+    return fetchMetadata("*");
+  }
+  return (
+    page || {
+      title: "Mosaik",
+      description: "Composable headless UI architecture",
+    }
+  );
 }

@@ -11,6 +11,7 @@ import { coverImageLink } from "@/lib/util/links";
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const meta: Page = await fetchMetadata(`/mosaik/${(await params).section}`);
+  console.log ("META", meta);
   const title = meta.ogTitle || meta.twitterTitle || meta.title || "";
   const description =
     meta.ogDescription || meta.twitterDescription || meta.description || "";
