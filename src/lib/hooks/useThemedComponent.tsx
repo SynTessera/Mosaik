@@ -3,18 +3,17 @@
 
 import { useEffect, useState } from "react";
 import { loadThemedComponent } from "@/lib/util/loadThemedComponent";
-import { useTheme } from "@/context/ThemeContext";
+import { settings } from "@/themes";
 
 export function useThemedComponent(
   slot: string,
   ...fallbackSlots: string[]
 ): React.FC<any> {
-  const { settings } = useTheme() || {};
   const [Component, setComponent] = useState<React.FC<any>>(() => () => null);
 
   useEffect(() => {
     let cancelled = false;
-    const theme = settings?.theme || "light";
+    const theme = settings?.theme || "default";
 
     const load = async () => {
       const allSlots = [slot, ...fallbackSlots];

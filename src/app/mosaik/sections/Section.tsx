@@ -1,5 +1,5 @@
 import { ScrollContainer } from "@/components/ScrollContainer";
-import { MarkdownContainer } from "@/themes/light/MarkdownContainer";
+import { MarkdownContainer } from "@/themes/default/MarkdownContainer";
 
 const Section = ({
   content,

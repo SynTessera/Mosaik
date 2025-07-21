@@ -1,7 +1,7 @@
 import { fetchMOTD } from "@/app/mosaik/dataSources/strapi";
 import { AppNavigation } from "@/blocks/AppRoutes";
 import { ThemedComponent } from "@/blocks/ThemedComponent";
-import { MOTDProps } from "@/themes/light/MOTD";
+import { MOTDProps } from "@/themes/default/MOTD";
 
 export const getSectionSlots = async ({
   params,

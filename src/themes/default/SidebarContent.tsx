@@ -26,6 +26,7 @@ export const SidebarContent = ({
       className
     )}
   >
+
     {children}
   </div>
 );

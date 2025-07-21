@@ -1,9 +1,7 @@
-import light from "./light/theme.module.css";
 import { Theme } from "@/context/ThemeContext";
+import themeClasses from './default/theme.module.css';
 
-export const theme = process.env.MOSAIK_THEME || "light";
-
-export const themeClasses = light;
+export const theme = process.env.MOSAIK_THEME || "default";
 
 export const settings: Theme["settings"] = {
   theme,
@@ -21,3 +19,5 @@ export const settings: Theme["settings"] = {
     autoMode: ["system"],
   },
 };
+
+export { themeClasses }
