@@ -28,8 +28,10 @@ async function createComponent() {
         fs.mkdirSync(dir, { recursive: true });
     }
 
-    const contents = `import clsx from "clsx";
-import { PropwsWithChildren } from 'reacht';
+    if (!theme || !component) throw new Error('Invalid arguments.');
+    
+    const contents = `import clsx from "clsx";  
+import { PropsWithChildren } from 'react';
 
 export const ${component} = ({ children, className, ...props }: PropsWithChildren<{className?: string}>) => {
   return (

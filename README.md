@@ -6,41 +6,30 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 Clone the project.
 
+```bash
+git clone https://github.com/SynTessera/Mosaik.git my-mosaik-project
+```
+
 Create a *.env* file and paste these variables:
 ```env
 STRAPI_API=https://mosaik-cms-production.up.railway.app/api
 NEXT_PUBLIC_STRAPI_BASE=https://mosaik-cms-production.up.railway.app
 STRAPI_TOKEN=61914051cd1191eb556fa934ab7317c134551022d8f6d9412d7213ed3828ca7ee1896c08e0dd520a01d2702af2bcde243cce528449608c60e47f202f56ba824c550d6f8426c312e5e29651c61b9fa157274b88cc0beee8f06bd6c6d9e363acf9a5f9b7d5c6171e2c3d3bc47e0c2ec56d26bd09702ff55c911760deb46fa22ff5
 ```
+*No worries. This is a public read only token.*
 
-Then, run the development server:
+Run the development server:
 
 ```bash
 yarn
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. It should redirect you to */mosaik/about*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You can start editing the page by modifying `@/slots/getDesktopSlots.tsx`. The page auto-updates as you edit the file.
 
 *Note:* If you want to wire up your a local CMS or extend CMS functionality, head over to [this project](https://github.com/SynTessera/mosaik-cms) and follow the instruction.
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## 🧩 Mosaik — Build Sites from Themeable Components. Ship Static-Fast. Scale Forever.
 
@@ -59,7 +48,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 -   **No Vendor Lock:** It’s just Next.js, your content, and your edge. No hidden runtime, no extra backend, no rent to pay.
     
 
-🛠️ **Status:** Mosaik is **experimental** — it’s powering its own docs today (via Strapi on Railway). It’s small, open-source, and ready for your ideas. **PRs welcome!**
+🛠️ **Status:** Mosaik is **experimental** — it’s powering [its own docs](https://mosaik.javascript.moe) today (via Strapi on Railway). It’s small, open-source, and ready for your ideas. **PRs welcome!**
 
 --------
 
@@ -159,3 +148,53 @@ Everything stays decoupled — yet works seamlessly together.
 ----------
 
 ## 🧩 **Mosaik** — your UI, piece by piece.
+
+----------
+
+## Linking the `mosaik-cli` Package Locally
+
+To link the `mosaik-cli` package from `./packages/mosaik-cli` using Yarn, follow these steps:
+
+1. Navigate to the `mosaik-cli` package directory and run:
+
+```bash
+yarn link
+```
+
+2. In your project where you want to use the CLI, run:
+
+```bash
+yarn link mosaik-cli
+```
+
+This will create a symlink to your local `mosaik-cli` package.
+
+---
+
+### Using the CLI
+
+Once linked, you can run the CLI command:
+
+```bash
+yarn mosaik component
+```
+
+This command will prompt you to enter a theme and a component name. It then scaffolds a themed component that includes a `div`, uses `clsx`, and passes `className` through.
+
+---
+
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
