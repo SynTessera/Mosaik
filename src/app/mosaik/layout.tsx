@@ -53,3 +53,5 @@ export default async function RootLayout({
     </StateProvider>
   );
 }
+
+export const revalidate = 30;
