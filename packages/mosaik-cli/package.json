@@ -1,0 +1,18 @@
+{
+  "name": "mosaik-cli",
+  "version": "1.0.0",
+  "description": "A cli helper for the Mosaik framework. https://mosaik.javascript.moe",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "mosaik": "./index.js"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2"
+  }
+}

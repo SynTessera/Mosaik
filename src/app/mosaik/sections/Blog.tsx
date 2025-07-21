@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { DataProvider } from "@/context/DataContext";
 import { fetchBlogPosts } from "../dataSources/strapi";
-import { clientOnly } from "@/lib/util/isomorphic";
-import { DataView } from "@/blocks/DataView";
+import { ThemedComponent } from "@/blocks/ThemedComponent";
 
-const Blog = async ({ data }: any) => {
+const Blog = async () => {
+  const blogPosts = await fetchBlogPosts();
   return (
-    <DataProvider fetcher={clientOnly(fetchBlogPosts)} initialData={data} type={""}>
-      <DataView initialData={data} container="BlogPosts" type="BlogPostTeaser" themeName="light" />
-    </DataProvider>
+    <ThemedComponent name="BlogPosts">
+      {blogPosts.map((post: any) => (
+        <ThemedComponent key={post.documentId} name="BlogPostTeaser" {...post} />
+      ))}
+    </ThemedComponent>
   );
 };
 
