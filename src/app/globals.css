@@ -27,7 +27,6 @@
   --background: var(--color-success-100);
   --foreground: #171717;
 
-
 }
 
 
@@ -138,6 +137,8 @@ body {
   @apply overflow-hidden;
 }
 
+
+
 article > p {
   margin-bottom: 1rem;
   font-weight: 200;
@@ -159,7 +160,7 @@ article p > code {
 
 article ul li {
   /* margin-bottom: 1rem; */
-  @apply ml-8;
+  @apply ml-8 pr-8;
 }
 
 article hr {
@@ -170,7 +171,7 @@ h1 {
   @apply text-4xl;
 }
 article h1 {
-  @apply mb-4 text-[3rem];
+  @apply text-[3rem] p-2 bg-white/20 dark:bg-black/20;
 }
 
 article h2 {
@@ -184,3 +185,5 @@ article h3 {
 article h4 {
   @apply ml-0 my-2 text-[1.2rem] font-semibold;
 }
+
+

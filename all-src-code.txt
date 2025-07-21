@@ -1,0 +1,2926 @@
+
+
+### FILE: src/actions/getDesktopSidebarActions.tsx ###
+
+import { collapse, expand } from "@/app/mosaik/actions";
+import { State } from "@/types/State";
+
+export const getDesktopSidebarActions = ({
+  serverState,
+}: {
+  serverState: State;
+}) => {
+  const actions = {} as Record<string, any>;
+
+  if (Number(serverState.sidebar.expanded) < 2) actions.expand = expand();
+  if (serverState.sidebar.expanded == 2) actions.collapse = collapse();
+
+  return actions;
+};
+
+
+### FILE: src/app/globals.css ###
+
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@theme {
+  --color-hover: #00000022;
+  --color-active: #00000044;
+
+  --color-success-100: #aae2f9;
+  --color-info-100: #387842;
+
+  --color-info-200: oklch(0.98 0.04 113.22);
+  --color-info-300: oklch(0.94 0.11 115.03);
+  --color-info-400: oklch(0.92 0.19 114.08);
+  --color-info-500: oklch(0.84 0.18 117.33);
+  --color-info-600: oklch(0.53 0.12 118.34);
+  --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+}
+
+:root {
+  --background: var(--color-success-100);
+  --foreground: #171717;
+
+
+}
+
+
+ /* Apply to a wrapper element */
+  .scrollable:not(.hidden) {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Base thin scrollbar */
+  .scrollable::-webkit-scrollbar {
+    width: 2px;
+    height: 6px;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+
+  .scrollable::-webkit-scrollbar-track {
+    background: #00000011;
+  }
+
+  .scrollable::-webkit-scrollbar-thumb {
+    background-color: #00000022;
+    border-radius: 4px;
+    width: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  .scrollable::-webkit-scrollbar-thumb:hover {
+    background-color: #00000022;
+  }
+
+  /* On hover: widen scrollbar */
+  .scrollable:hover::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Firefox */
+  .scrollable:hover {
+    scrollbar-width: 12px;
+    scrollbar-color: #00000011;
+
+    margin-right: 0px;
+  }
+
+  .scrollable:hover {
+    scrollbar-width: auto; /* fallback: default width when hovered */
+  }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-info-100);
+    --foreground: #ededed;
+  }
+  /* Apply to a wrapper element */
+  .scrollable {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Base thin scrollbar */
+  .scrollable::-webkit-scrollbar {
+    width: 2px;
+    height: 6px;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+
+  .scrollable::-webkit-scrollbar-track {
+    background: #ffffff11;
+  }
+
+  .scrollable::-webkit-scrollbar-thumb {
+    background-color: #ffffff22;
+    border-radius: 4px;
+    width: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  .scrollable::-webkit-scrollbar-thumb:hover {
+    background-color: #ffffff22;
+  }
+
+  /* On hover: widen scrollbar */
+  .scrollable:hover::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Firefox */
+  .scrollable:hover {
+    scrollbar-width: 12px;
+    scrollbar-color: #ffffff11;
+
+    margin-right: 0px;
+  }
+
+  .scrollable:hover {
+    scrollbar-width: auto; /* fallback: default width when hovered */
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Roboto, Helvetica, sans-serif;
+  font-size: var(--text-1xl); /* 1.5rem (24px) */
+  line-height: var(--text-1xl--line-height); /* calc(2 / 1.5) */
+  @apply overflow-hidden;
+}
+
+article > p {
+  margin-bottom: 1rem;
+  font-weight: 200;
+  font-size: 1.4rem;
+}
+
+article > p > p {
+  @apply overflow-x-auto max-w-full my-4;
+}
+
+article p > pre {
+  margin-bottom: 1rem;
+  @apply overflow-x-auto max-w-full bg-white/10;
+}
+
+article p > code {
+  @apply overflow-x-auto overflow-y-clip max-w-full py-1.5 px-2 bg-[#0D111744] leading-[2] rounded-md border-[1.5px] border-black;
+}
+
+article ul li {
+  /* margin-bottom: 1rem; */
+  @apply ml-8;
+}
+
+article hr {
+  @apply my-4;
+}
+
+h1 {
+  @apply text-4xl;
+}
+article h1 {
+  @apply mb-4 text-[3rem];
+}
+
+article h2 {
+  @apply ml-0 my-7 text-[2rem] font-semibold leading-[2rem];
+}
+
+article h3 {
+  @apply ml-0 my-3 text-[1.4rem] font-semibold;
+}
+
+article h4 {
+  @apply ml-0 my-2 text-[1.2rem] font-semibold;
+}
+
+
+### FILE: src/app/layout.tsx ###
+
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Mosaik - Rethinking Headless Architecture",
+  description:
+    "Mosaik — A flexible React/Next.js framework with headless CMS integration, modern state management, and dynamic theming for building scalable web apps.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <head>
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-96x96.png"
+          sizes="96x96"
+        />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="11e43a2b-3205-4bda-b639-7f9b671a44f0"
+        ></script>
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
+
+
+### FILE: src/app/mosaik/[...section]/page.tsx ###
+
+import { routes as staticRoutes } from "@/app/mosaik/routes";
+
+import { AppRouter } from "@/modules/UrlDetailView";
+import { fetchRoutes } from "../routes";
+import Section from "../sections/Section";
+
+export default async function Page({ params }: any) {
+  const routes = [...(await fetchRoutes()), ...staticRoutes];
+
+  return (
+    <AppRouter
+      Component={Section}
+      data={[]}
+      routes={routes}
+      section={(await params).section?.[0]}
+    />
+  );
+}
+
+
+### FILE: src/app/mosaik/actions/collapse.ts ###
+
+import { ActionGenerator } from "@/types/Action";
+
+export const collapse: ActionGenerator = () => ({ type: "COLLAPSE", payload: {}, effects: [], icon: "FaChevronLeft"});
+
+
+### FILE: src/app/mosaik/actions/expand.ts ###
+
+import { ActionGenerator } from "@/types/Action";
+
+export const expand: ActionGenerator = () => ({ type: "EXPAND", payload: {}, effects: [], icon: 'FaChevronRight'});
+
+
+### FILE: src/app/mosaik/actions/index.ts ###
+
+import { collapse } from "./collapse";
+import { expand } from "./expand";
+export { collapse, expand };
+
+
+### FILE: src/app/mosaik/blog/[...slug]/page.tsx ###
+
+import { makeMosaikPage } from "@/lib/server/makeMosaikPage";
+import { fetchBlogPost } from "../../dataSources/strapi";
+import { BlogPost } from "@/themes/light/BlogPost";
+
+export default makeMosaikPage({
+  Component: BlogPost,
+  fetcher: async function fetch({ params }) {
+    const id = (await params).slug?.[0]?.split("-").pop();
+    const blogPost = await fetchBlogPost(id);
+    return [blogPost];
+  },
+  view: "blog",
+});
+
+
+### FILE: src/app/mosaik/blog/page.tsx ###
+
+import Blog from "@/app/mosaik/sections/Blog";
+import { makeMosaikPage } from "@/lib/server/makeMosaikPage";
+import { strapi } from "../dataSources";
+
+export default makeMosaikPage({
+  Component: Blog,
+  fetcher: strapi.fetchBlogPosts,
+  view: "blog",
+});
+
+
+### FILE: src/app/mosaik/dataSources/index.ts ###
+
+import * as strapi from "./strapi";
+
+export { strapi };
+
+
+### FILE: src/app/mosaik/dataSources/strapi.ts ###
+
+export const fetchBlogPosts = async () => {
+  const url = `${process.env.STRAPI_API}/blog-posts?[pagination][pageSize]=1000&populate=*`;
+  const prom = await fetch(url, {
+    headers: {
+      Authorization: process.env.STRAPI_TOKEN || "",
+    },
+    next: {
+      revalidate: 30,
+    },
+  });
+  const json = await prom.json();
+  return json.data;
+};
+
+export const fetchBlogPost = async (id: string) => {
+  const url = `${process.env.STRAPI_API}/blog-posts/${id}?populate=*`;
+  const prom = await fetch(url, {
+    headers: {
+      Authorization: process.env.STRAPI_TOKEN || "",
+    },
+    next: {
+      revalidate: 30,
+    },
+  });
+  const json = await prom.json();
+  return json.data;
+};
+
+export const fetchSections = async () => {
+  const url = `${process.env.STRAPI_API}/sections?populate=*`;
+  const prom = await fetch(url, {
+    headers: {
+      Authorization: process.env.STRAPI_TOKEN || "",
+    },
+    next: {
+      revalidate: 30,
+    },
+  });
+  const json = await prom.json();
+  return json.data;
+};
+
+export const fetchMOTD = async () => {
+  const url = `${process.env.STRAPI_API}/motd?populate=*`;
+  const prom = await fetch(url, {
+    headers: {
+      Authorization: process.env.STRAPI_TOKEN || "",
+    },
+    next: {
+      revalidate: 30,
+    },
+  });
+  const json = await prom.json();
+  return json.data;
+};
+
+
+### FILE: src/app/mosaik/layout.tsx ###
+
+// SynTessera\aegis\src\app\mosaik\layout.tsx
+
+import type { Metadata } from "next";
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
+import { fetchRoutes } from "./routes";
+import { getDesktopSlots } from "@/slots/getDesktopSlots";
+import { StateProvider } from "@/context/StateContext";
+import { App } from "@/modules/App";
+import { DesktopColLayout } from "@/layouts/DesktopColLayout";
+import { appReducer } from "./reducers";
+import { initialState } from "./state";
+import { routes as staticRoutes } from "@/app/mosaik/routes";
+import { headers } from "next/headers";
+import { matchParams } from "@/lib/util/matchParams";
+
+// import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
+
+export const metadata: Metadata = {
+  title: "Mosaik - Rethinking Headless Architecture",
+  description:
+    "Mosaik — A flexible React/Next.js framework with headless CMS integration, modern state management, and dynamic theming for building scalable web apps.",
+};
+
+export default async function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+  params: Promise<object>;
+}>) {
+  const Container = await getThemedComponent(
+    "FluidContainer",
+    process.env.MOSAIK_THEME
+  );
+
+  const pathname = (await headers()).get("x-next-url") ?? "";
+  const params = matchParams(pathname, "/mosaik/[...section]");
+
+  const routes = [...(await fetchRoutes()), ...staticRoutes];
+  const slots = await getDesktopSlots({
+    params, // pass shared params if needed
+    fetcher: () => Promise.resolve([]), // stub if needed
+    routes,
+    children,
+  });
+
+  return (
+    <StateProvider reducer={appReducer} initialState={initialState}>
+      <App slug="/mosaik">
+        <Container>
+          <DesktopColLayout slots={slots}></DesktopColLayout>
+        </Container>
+      </App>
+    </StateProvider>
+  );
+}
+
+
+### FILE: src/app/mosaik/page.tsx ###
+
+import { redirect } from "next/navigation";
+
+const Page = async () => {
+  return redirect("/mosaik/about");
+};
+
+export default Page;
+
+
+### FILE: src/app/mosaik/reducers/collapse.ts ###
+
+import { State } from "@/types/State";
+
+export type collapsePayload = object;
+
+export const collapse = (
+  state: State,
+) => {
+  const newState = { ...state };
+
+  newState.sidebar.expanded = 0;
+
+  return newState;
+};
+
+
+### FILE: src/app/mosaik/reducers/expand.ts ###
+
+import { State } from "@/types/State";
+
+export type expandPayload = object;
+
+export const expand = (state: State) => {
+  const newState = { sidebar: { ...state?.sidebar } };
+
+  newState.sidebar.expanded = ((Number(newState.sidebar.expanded) + 1) % 3) as
+    | 0
+    | 1
+    | 2;
+  return newState;
+};
+
+
+### FILE: src/app/mosaik/reducers/index.ts ###
+
+"use client";
+
+import { Action } from "@/types/Action";
+import { State } from "@/types/State";
+import { collapse } from "./collapse";
+import { expand } from "./expand";
+
+export const appReducer = (
+  state: State,
+  action: Action<string, string, object>
+) => {
+  switch (action.type) {
+    case "COLLAPSE":
+      return collapse(state);
+    case "EXPAND":
+      return expand(state);
+    case "HYDRATE":
+      return action.payload as State;
+    default:
+      return state;
+  }
+};
+
+
+### FILE: src/app/mosaik/routes.ts ###
+
+import { ExternalRoute, Route } from "@/types/Route";
+import { strapi } from "./dataSources";
+import { Section } from "@/typesCMS/Section";
+
+export const fetchRoutes = async () => {
+  const sections = (await strapi.fetchSections()) as Section[];
+  return sections.map(({ slug, icon, title: label, content, order }) => {
+    return { slug, icon, label, content, order };
+  });
+};
+
+export const routes: Array<Route | ExternalRoute> = [
+  { slug: "blog", label: "Blog", icon: "FaBlog", order: 100 },
+  {
+    href: "https://github.com/SynTessera/Mosaik",
+    label: "Github",
+    icon: "FaGithub",
+    order: 999,
+  },
+];
+
+
+### FILE: src/app/mosaik/sections/Blog.tsx ###
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { DataProvider } from "@/context/DataContext";
+import { fetchBlogPosts } from "../dataSources/strapi";
+import { clientOnly } from "@/lib/util/isomorphic";
+import { DataView } from "@/blocks/DataView";
+
+const Blog = async ({ data }: any) => {
+  return (
+    <DataProvider fetcher={clientOnly(fetchBlogPosts)} initialData={data} type={""}>
+      <DataView initialData={data} container="BlogPosts" type="BlogPostTeaser" themeName="light" />
+    </DataProvider>
+  );
+};
+
+export default Blog;
+
+
+### FILE: src/app/mosaik/sections/Section.tsx ###
+
+import { ScrollContainer } from "@/components/ScrollContainer";
+import { MarkdownContainer } from "@/themes/light/MarkdownContainer";
+import { ExternalRoute, Route } from "@/types/Route";
+
+const Section = ({
+  routes,
+  section,
+}: {
+  routes: Array<Route | ExternalRoute>;
+  section: string;
+}) => {
+  const { content = "" } = routes.find((r) => {
+    return (r as Route).slug === section;
+  }) || { content: "" };
+  return (
+    <ScrollContainer>
+      <MarkdownContainer>{content}</MarkdownContainer>
+    </ScrollContainer>
+  );
+};
+
+export default Section;
+
+
+### FILE: src/app/mosaik/state.ts ###
+
+import { State } from "@/types/State";
+
+export const initialState: State = {
+  sidebar: {
+    expanded: undefined,
+  },
+};
+
+
+### FILE: src/app/page.tsx ###
+
+import { redirect } from "next/navigation";
+
+
+export default function Home() {
+  return redirect("/mosaik/about");
+}
+  
+
+
+### FILE: src/blocks/ActionButtons/CollapseButton.tsx ###
+
+"use client";
+
+import { collapse } from "@/app/mosaik/actions";
+import useDispatch from "@/lib/hooks/useAction";
+import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+
+export const CollapseButton = () => {
+  const Cmp = useThemedComponent("CollapseButton", "ActionTrigger", "Button");
+  const dispatch = useDispatch(collapse());
+  return <Cmp onClick={dispatch}>Collapse</Cmp>;
+};
+
+
+### FILE: src/blocks/ActionButtons/ExpandButton.tsx ###
+
+"use client";
+
+import { expand } from "@/app/mosaik/actions";
+import useDispatch from "@/lib/hooks/useAction";
+import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+
+export const ExpandButton = () => {
+  const Cmp = useThemedComponent("ExpandButton", "ActionTrigger", "Button");
+  const dispatch = useDispatch(expand());
+  return <Cmp onClick={dispatch} />;
+};
+
+
+### FILE: src/blocks/ActionButtons/index.tsx ###
+
+import { CollapseButton } from "./CollapseButton";
+import { ExpandButton } from "./ExpandButton";
+
+export const COLLAPSE = CollapseButton;
+export const EXPAND = ExpandButton;
+
+
+### FILE: src/blocks/ActionTrigger.tsx ###
+
+import * as ActionButtons from "@/blocks/ActionButtons";
+import { Icon } from "@/components/Icon";
+import { ActionButton } from "@/blocks/hybrid/ActionButton";
+import { Action } from "@/types/Action";
+
+export type ActionTriggerTypes = keyof typeof ActionButtons;
+export const ActionTrigger = ({
+  action,
+}: {
+  action: Action<string, string, object>;
+}) => {
+  return (
+    <ActionButton action={action} label={action.type}>
+      <Icon icon={action.icon} className="h-6 w-6" />
+    </ActionButton>
+  );
+};
+
+
+### FILE: src/blocks/AppRoutes.tsx ###
+
+import { AppNavigationProps } from "@/types/AppNavigationProps";
+import { ExternalRoute, Route } from "@/types/Route";
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
+import { NavigationLink } from "./hybrid/NavigationLink";
+import { getServerUiState } from "@/lib/util/getServerUIState";
+
+export async function AppNavigation({
+  routes,
+  slug,
+  baseUrl = "",
+}: AppNavigationProps) {
+  const state = await getServerUiState();
+  const Nav = await getThemedComponent("Navigation");
+  return (
+    <Nav>
+      {routes
+        .sort((a, b) => a.order - b.order)
+        .map((r) => {
+          const route = r as Route;
+          const externalRoute = r as ExternalRoute;
+
+          return (
+            <NavigationLink
+              icon={r.icon}
+              key={route.slug || externalRoute.href}
+              href={externalRoute.href || `${baseUrl}/${route.slug}`}
+              label={r.label}
+              isActive={slug === route.slug}
+              external={!!externalRoute.href}
+              iconOnly={state?.sidebar.expanded == 1}
+            />
+          );
+        })}
+    </Nav>
+  );
+}
+
+
+### FILE: src/blocks/Button.tsx ###
+
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
+import { PropsWithChildren } from "react";
+
+export const Button = async ({
+  children,
+  ...props
+}: PropsWithChildren<any>) => {
+  if (!props.label)
+    throw new Error("Buttons need a label to comply with WCAG.");
+
+  const Cmp = await getThemedComponent("Button");
+  return <Cmp {...props}>{children}</Cmp>;
+};
+
+
+### FILE: src/blocks/DataView.tsx ###
+
+"use server";
+
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useData } from "@/context/DataContext";
+import { DataViewProps } from "@/types/DataViewProps";
+
+export const DataView = async ({
+  initialData,
+  type,
+  container,
+  themeName = "light",
+}: DataViewProps) => {
+  let data;
+  try {
+    data = useData();
+  } catch {
+    data = initialData;
+  }
+  const arr = Array.isArray(data) ? data : [data];
+  const Container = (await import(`@/themes/${themeName}/${container}.tsx`))[
+    container
+  ];
+  const Cmp = (await import(`@/themes/${themeName}/${type}.tsx`))[type];
+
+  return (
+    <Container>
+      {arr.map((child, i) => (
+        <Cmp key={type + i} {...child} />
+      ))}
+    </Container>
+  );
+};
+
+
+### FILE: src/blocks/DesktopContent.tsx ###
+
+// SynTessera\aegis\src\blocks\DesktopContent.tsx
+
+import React from "react";
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
+import clsx from "clsx";
+
+export const DesktopContent = async ({ children, className }: any) => {
+  return (
+    <div
+      className={clsx(
+        "flex grow overflow-hidden max-h-screen w-full h-full ",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Example sub-components:
+export const Content = async ({ children, ...props }: any) => {
+  const Cmp = await getThemedComponent("DesktopContent");
+
+  return (
+    <Cmp {...props}>
+      {children}
+    </Cmp>
+  );
+};
+
+
+### FILE: src/blocks/ThemedClientComponent.tsx ###
+
+"use client";
+import { PropsWithChildren } from "react";
+import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+
+export const ThemedClientComponent = ({
+  name,
+  ...props
+}: PropsWithChildren<{ name: string }>) => {
+  const Cmp = useThemedComponent(name);
+  return <Cmp name={name} {...props} />;
+};
+
+
+### FILE: src/blocks/ThemedComponent.tsx ###
+
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
+import { PropsWithChildren } from "react";
+
+export const ThemedComponent = async <P extends object>({
+  name,
+  ...props
+}: PropsWithChildren<{ name: string } & P>) => {
+  const Cmp = await getThemedComponent(name);
+  return <Cmp {...props} />;
+};
+
+
+### FILE: src/blocks/hybrid/ActionButton.tsx ###
+
+import { createHybridServerWrapper } from "@/lib/createHybridComponent";
+import { ActionButtonClient } from "./ActionButtonClient";
+
+export const ActionButton = createHybridServerWrapper(
+  "ActionButton",
+  ActionButtonClient
+);
+
+
+### FILE: src/blocks/hybrid/ActionButtonClient.tsx ###
+
+"use client";
+
+import { useAppState } from "@/context/StateContext";
+import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+import { createHydratableComponent } from "@/lib/createHydratableComponent ";
+
+export const ActionButtonClient = createHydratableComponent(
+  ({ action, ...props }: any) => {
+    const ActionButton = useThemedComponent("ActionButton");
+    const { dispatch } = useAppState();
+    return (
+      <ActionButton
+        {...props}
+        onClick={() => dispatch(action)}
+        label={action.type}
+      />
+    );
+  }
+);
+
+
+### FILE: src/blocks/hybrid/NavigationLink.tsx ###
+
+import { createHybridServerWrapper } from "@/lib/createHybridComponent";
+import { NavigationLinkClient } from "./NavigationLinkClient";
+
+export const NavigationLink = createHybridServerWrapper(
+  "NavigationLink",
+  NavigationLinkClient
+);
+
+
+### FILE: src/blocks/hybrid/NavigationLinkClient.tsx ###
+
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
+import { useAppState } from "@/context/StateContext";
+import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+import { createHydratableComponent } from "@/lib/createHydratableComponent ";
+
+export const NavigationLinkClient = createHydratableComponent((props: any) => {
+  const NavLink = useThemedComponent("NavigationLink");
+  const { state } = useAppState();
+  const pathname = usePathname();
+  return (
+    <NavLink
+      {...props}
+      iconOnly={state?.sidebar.expanded === 1}
+      isActive={props.href.includes(pathname)}
+    />
+  );
+});
+
+
+### FILE: src/blocks/hybrid/SidebarActionBar.tsx ###
+
+import { SidebarActionbarClient } from "./SidebarActionBarClient";
+import { createHybridServerWrapper } from "@/lib/createHybridComponent";
+
+export const SidebarActionBar = createHybridServerWrapper('ActionBar', SidebarActionbarClient)
+
+
+### FILE: src/blocks/hybrid/SidebarActionBarClient.tsx ###
+
+"use client";
+
+import { collapse, expand } from "@/app/mosaik/actions";
+import { useAppState } from "@/context/StateContext";
+import { createHydratableComponent } from "@/lib/createHydratableComponent ";
+import { useMemo } from "react";
+import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+import { ActionButtonClient } from "./ActionButtonClient";
+import { Icon, IconNames } from "@/components/Icon";
+import clsx from "clsx";
+
+export const SidebarActionbarClient = createHydratableComponent(
+  (props: any & { hydrated: boolean }) => {
+    const { state } = useAppState();
+    const ActionBar = useThemedComponent("ActionBar");
+    const actions = useMemo(() => {
+      const actions = {} as any;
+      if (!state?.sidebar?.expanded || Number(state?.sidebar?.expanded) < 2) actions.expand = expand();
+      if (state?.sidebar?.expanded === 2) actions.collapse = collapse();
+      return actions;
+    }, [state]);
+
+    return (
+      <ActionBar {...props} >
+        {Object.entries(actions).map(([key, action]) => {
+          return (
+            <ActionButtonClient key={key} action={action}>
+              <Icon
+                icon={
+                  clsx({
+                    FaChevronRight: !state?.sidebar?.expanded || Number(state?.sidebar.expanded) < 2,
+                    FaChevronLeft: state?.sidebar.expanded === 2,
+                  }) as IconNames
+                }
+              />
+            </ActionButtonClient>
+          );
+        })}
+      </ActionBar>
+    );
+  }
+);
+
+
+### FILE: src/blocks/hybrid/SidebarContent.tsx ###
+
+import { createHybridServerWrapper } from "@/lib/createHybridComponent";
+import { SidebarContentClient } from "./SidebarContentClient";
+
+export const SidebarContent = createHybridServerWrapper(
+  "SidebarContent",
+  SidebarContentClient
+);
+
+
+### FILE: src/blocks/hybrid/SidebarContentClient.tsx ###
+
+"use client";
+
+import { useAppState } from "@/context/StateContext";
+import { createHydratableComponent } from "@/lib/createHydratableComponent ";
+import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
+
+export const SidebarContentClient = createHydratableComponent(
+  (props: any & { hydrated: boolean }) => {
+    const SidebarContent = useThemedComponent("SidebarContent");
+    const { state } = useAppState();
+
+    
+    return <SidebarContent {...props} state={state} />;
+  }
+);
+
+
+### FILE: src/blocks/hybrid/StateFullComponent.tsx ###
+
+
+
+### FILE: src/components/Icon.tsx ###
+
+import clsx from "clsx";
+import { FaServer,FaChevronLeft, FaChevronRight, FaInfo, FaCircleNotch, FaLightbulb, FaRoute, FaBlog, FaGithub, FaExclamationTriangle} from "react-icons/fa";
+import { FaCheckToSlot, FaMagnifyingGlass } from "react-icons/fa6";
+
+
+const Icons = {
+  FaServer,
+  FaCheckToSlot,
+  FaChevronRight,
+  FaChevronLeft,
+  FaInfo,
+  FaCircleNotch,
+  FaLightbulb,
+  FaRoute,
+  FaMagnifyingGlass,
+  FaBlog,
+  FaGithub,
+  FaExclamationTriangle
+}
+
+export type IconNames = keyof typeof Icons; 
+export const Icon = ({icon,className}: {icon:keyof typeof Icons, className?: string}) => {
+  const Icn = (Icons as any)[icon] ;
+  if (!Icn) return <div className={clsx(icon,className)} />
+  return <Icn className={className}/>
+}
+
+
+### FILE: src/components/ScrollContainer.tsx ###
+
+import { PropsWithChildren } from "react";
+
+export const ScrollContainer = ({ children }: PropsWithChildren) => {
+  return (
+    <div className="scrollable max-h-full overflow-y-auto overflow-x-hidden text-ellipsis pr-1 w-full">
+      {children}
+    </div>
+  );
+};
+
+
+### FILE: src/components/SlotRenderer.tsx ###
+
+import React from "react";
+
+export const SlotRenderer = ({ slotKey }: any) =>
+  React.lazy(() =>
+    import(`@/themes/light/${slotKey}.tsx`).then((mod) => ({
+      default: mod[slotKey],
+    }))
+  );
+
+
+### FILE: src/components/TextContainer.tsx ###
+
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
+import { PropsWithChildren } from "react";
+
+export const TextContainer = async (props: PropsWithChildren) => {
+  const Cmp = await getThemedComponent("TextContainer", "light");
+  return <Cmp {...props} />;
+};
+
+
+### FILE: src/context/ActionContext.tsx ###
+
+"use client";
+
+import React, { PropsWithChildren, useContext } from "react";
+import { ActionsContext } from "./contexts/actions";
+import { Action } from "@/types/Action";
+
+export function ActionProvider({
+  actions,
+  children,
+}: PropsWithChildren<{
+  actions: Record<string, Action<string, string, object>>;
+}>) {
+  return (
+    <ActionsContext.Provider value={{ actions }}>
+      {children}
+    </ActionsContext.Provider>
+  );
+}
+
+export const useActions = () => {
+  return useContext(ActionsContext);
+};
+
+
+### FILE: src/context/DataContext.tsx ###
+
+"use client";
+
+import React, {
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { DataContext } from "./contexts/data";
+
+// --- 1️⃣ Slot type ---
+export type SlotRenderer = (
+  props: PropsWithChildren<{ theme: Theme }>
+) => React.ReactNode;
+
+export type Theme = {
+  slots: Record<string, SlotRenderer>;
+  settings: {
+    userPreferences: {
+      mode: "light" | "dark";
+    };
+    preferences: {
+      autoMode: ("system" | "setting" | "static")[];
+    };
+  };
+};
+
+export type StaticTheme = Record<string, React.FC> & {
+  settings: Theme["settings"];
+};
+// --- 2️⃣ Context ---
+
+export function DataProvider({
+  fetcher,
+  children,
+  initialData = null,
+  type,
+}: PropsWithChildren<{
+  fetcher: () => Promise<Response> | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  initialData: any;
+  type: string;
+}>) {
+  const [data, setData] = useState(initialData);
+  useEffect(() => {
+    if (data !== null) return;
+    (async () => {
+      const prom = await fetcher();
+      const json = await prom?.json();
+      setData(json);
+    })();
+  },[]);
+  return (
+    <DataContext.Provider value={{ data, type }}>
+      {children}
+    </DataContext.Provider>
+  );
+}
+
+export const useData = () => {
+  return useContext(DataContext)?.data;
+};
+
+
+### FILE: src/context/StateContext.tsx ###
+
+"use client";
+
+import React, {
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
+import { StateContext } from "./contexts/state";
+import { State } from "@/types/State";
+import { Action } from "@/types/Action";
+import { getCookie } from "@/lib/util/getCookie";
+
+export function StateProvider({
+  reducer,
+  initialState,
+  children,
+}: PropsWithChildren<{
+  reducer: (state: State, action: Action<string, string, object>) => State;
+  initialState: State;
+}>) {
+  let hydratedState = null;
+  try {
+    const uiStateRaw = getCookie("uiState");
+    hydratedState = uiStateRaw ? JSON.parse(uiStateRaw) : initialState;
+  } catch {}
+  const [state, dispatch] = useReducer(reducer, hydratedState);
+
+  useEffect(() => {
+    document.cookie = `uiState=${encodeURIComponent(
+      JSON.stringify(state)
+    )}; path=/; SameSite=Lax`;
+  }, [state]);
+  return (
+    <StateContext.Provider value={{ state, dispatch }}>
+      {children}
+    </StateContext.Provider>
+  );
+}
+
+export const useAppState = () => {
+  return useContext(StateContext);
+};
+
+
+### FILE: src/context/ThemeContext.tsx ###
+
+"use client";
+
+import React, {
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { ThemeContext } from "./contexts/theme";
+
+// --- 1️⃣ Slot type ---
+export type SlotRenderer = (
+  props: PropsWithChildren<{ theme: Theme }>
+) => React.ReactNode;
+
+export type Theme = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  settings: {
+    classNames?: Record<string, string>;
+    theme: string;
+    navigation: {
+      showTooltip: boolean;
+    };
+    userPreferences: {
+      mode: "light" | "dark";
+    };
+    preferences: {
+      autoMode: ("system" | "setting" | "static")[];
+    };
+  };
+};
+
+export type StaticTheme = {
+  settings: Theme["settings"];
+} & Theme;
+// --- 2️⃣ Context ---
+
+export function ThemeProvider({
+  theme,
+  children,
+}: {
+  theme: Theme;
+  children: React.ReactNode;
+}) {
+  const [tmpTheme, setTheme] = useState(theme);
+
+  useEffect(() => {
+    const renderedTheme = tmpTheme;
+    if (
+      renderedTheme.settings.preferences.autoMode[0] === "system" &&
+      window.matchMedia
+    ) {
+      const query = window.matchMedia("(prefers-color-scheme: dark)");
+
+      if (query.matches) {
+        renderedTheme.settings.userPreferences.mode = "dark";
+      } else {
+        if (!query.matches)
+          renderedTheme.settings.userPreferences.mode = "light";
+      }
+
+      setTheme(() => renderedTheme);
+    }
+  }, []);
+
+  return (
+    <ThemeContext.Provider value={tmpTheme}>{children}</ThemeContext.Provider>
+  );
+}
+
+export const useTheme = () => {
+  return useContext(ThemeContext);
+};
+
+
+### FILE: src/context/contexts/actions.tsx ###
+
+import { ActionContext } from "@/types/ActionContext";
+import { createContext } from "react";
+
+export const ActionsContext = createContext<ActionContext | undefined>(
+  undefined
+);
+
+
+### FILE: src/context/contexts/data.tsx ###
+
+import { DataContextShape } from "@/types/DataContextShape";
+import { createContext } from "react";
+
+export const DataContext = createContext<DataContextShape | null>(null);
+
+
+### FILE: src/context/contexts/state.tsx ###
+
+"use client" 
+
+import { initialState } from "@/app/mosaik/state";
+import { State } from "@/types/State";
+import { createContext, Dispatch } from "react";
+
+export const StateContext = createContext<{
+  state: State | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  dispatch: Dispatch<any>;
+}>({ state: initialState, dispatch: () => null });
+
+
+### FILE: src/context/contexts/theme.tsx ###
+
+import { createContext } from "react";
+import { Theme } from "../ThemeContext";
+
+export const ThemeContext = createContext<Theme | undefined>(undefined);
+
+
+### FILE: src/layouts/DesktopColLayout.tsx ###
+
+// SynTessera\aegis\src\layouts\DesktopColLayout.tsx
+
+import { DesktopContent } from "@/blocks/DesktopContent";
+import { Desktop } from "@/modules/Desktop";
+import { PropsWithChildren } from "react";
+import { ThemedComponent } from "@/blocks/ThemedComponent";
+import { getDesktopSlots } from "@/slots/getDesktopSlots";
+
+export const DesktopColLayout = async ({
+  children,
+  slots,
+}: PropsWithChildren<{
+  slots: Awaited<ReturnType<typeof getDesktopSlots>>;
+}>) => {
+
+  return (
+    <Desktop className="flex-col">
+      <div className="flex w-full">
+        {slots.sidebarheader}
+        {slots.desktopheader}
+      </div>
+      <DesktopContent className="flex-row">
+        <ThemedComponent
+          name="DesktopSidebar"
+        >
+          {slots.sidebarcontent}
+        </ThemedComponent>
+        {slots.desktopcontent}
+        {children}
+      </DesktopContent>
+      {slots.desktopfooter}
+    </Desktop>
+  );
+};
+
+
+### FILE: src/layouts/DesktopRowLayout.tsx ###
+
+import { Desktop } from "@/modules/Desktop";
+import { Slot } from "@/modules/Slot";
+import { PropsWithChildren, ReactElement } from "react";
+import { DesktopContent } from "@/blocks/DesktopContent";
+
+export const DesktopRowLayout = async ({
+  children,
+  slots,
+}: PropsWithChildren<{
+  slots: Record<string, ReactElement | ReactElement[]>;
+}>) => {
+  return (
+    <Desktop>
+      <Slot name="sidebarheader" slots={slots}></Slot>
+      <Slot name="sidebarcontent" slots={slots}></Slot>
+      <Slot name="sidebarfooter" slots={slots}></Slot>
+      <DesktopContent className="flex-col">
+        <div>
+          <Slot name="desktopheader" slots={slots}></Slot>
+        </div>
+        {/* <Content> */}
+        <Slot name="desktopcontent" slots={slots}></Slot>
+        {children}
+        {/* </Content>   */}
+        <Slot name="desktopfooter" slots={slots}></Slot>
+      </DesktopContent>
+    </Desktop>
+  );
+};
+
+
+### FILE: src/lib/createHybridComponent.tsx ###
+
+export function createHybridServerWrapper(
+  componentName: string,
+  ClientComponent: any
+) {
+  return async function ServerWrapper(props: any) {
+    const { getThemedComponent } = await import(
+      "@/lib/server/getThemedComponent"
+    );
+    const Themed = await getThemedComponent(componentName);
+    // Render THEMED fully on server as fallback HTML and pass it as prop to client wrapper
+    const themedElement = <Themed key="test" {...props} />;
+    return <ClientComponent Component={themedElement} {...props} />;
+  };
+}
+
+
+### FILE: src/lib/createHydratableComponent .tsx ###
+
+// lib/utils/createHydratableComponent.tsx
+"use client";
+
+import { useState, useEffect, ReactElement, ComponentType } from "react";
+
+type BaseProps = {
+  Component: ReactElement;
+  [key: string]: any;
+};
+
+export function createHydratableComponent<T extends BaseProps>(
+  renderClient: (props: T & { hydrated: boolean }) => ReactElement | null
+): ComponentType<T> {
+  return function HydratableComponent(props: T) {
+    const { Component, ...rest } = props;
+    const [hydrated, setHydrated] = useState(false);
+
+    useEffect(() => {
+      setHydrated(true);
+    }, []);
+
+    const client = renderClient({ ...rest, Component, hydrated } as T & {
+      hydrated: boolean;
+    });
+
+    if (!hydrated) return Component;
+
+    return client;
+  };
+}
+
+
+### FILE: src/lib/effects/index.ts ###
+
+// Re export effect components here
+
+export const noop = () => null;
+
+
+### FILE: src/lib/hooks/useAction.ts ###
+
+"use client";
+
+import { useAppState } from "@/context/StateContext";
+import { Action } from "@/types/Action";
+
+const useDispatch = (action: Action<string, string, object>) => {
+  const { dispatch } = useAppState();
+
+  return () => dispatch(action);
+};
+
+export default useDispatch;
+
+
+### FILE: src/lib/hooks/useBody.tsx ###
+
+"use client";
+
+import { useEffect, useState } from "react";
+
+export function useBody(): HTMLBodyElement | null {
+  const [body, setBody] = useState<HTMLBodyElement | null>(null);
+  
+  useEffect(() => {
+    setBody(document.body as HTMLBodyElement);
+  }, []);
+
+  return body;
+}
+
+
+### FILE: src/lib/hooks/useOnClickOutside.tsx ###
+
+import { RefObject, useEffect } from "react";
+
+export const useOnClickOutside = (
+  ref: RefObject<HTMLElement | null>,
+  handler: (e: React.MouseEvent) => void,
+  active = true,
+  event = "mouseup"
+) => {
+  useEffect(
+    () => {
+      const listener = (event: React.MouseEvent) => {
+        // Do nothing if clicking ref's element or descendent elements
+
+        if (!ref.current || ref.current.contains(event.target as HTMLElement)) {
+          return true;
+        }
+        if (active) {
+          return handler(event);
+        }
+        return true;
+      };
+
+      if (active) {
+        document.addEventListener(event, listener as any);
+      }
+
+      return () => {
+        if (active) {
+          document.removeEventListener(event, listener as any);
+        }
+      };
+    },
+
+    /*
+     * Add ref and handler to effect dependencies
+     * It's worth noting that because passed in handler is a new ...
+     * ... function on every render that will cause this effect ...
+     * ... callback/cleanup to run every render. It's not a big deal ...
+     * ... but to optimize you can wrap handler in useCallback before ...
+     * ... passing it into this hook.
+     */
+    [ref.current, handler, active]
+  );
+};
+
+
+### FILE: src/lib/hooks/useThemedComponent.tsx ###
+
+// src/lib/hooks/useThemedComponent.tsx
+"use client";
+
+import { useEffect, useState } from "react";
+import { loadThemedComponent } from "@/lib/util/loadThemedComponent";
+import { useTheme } from "@/context/ThemeContext";
+
+export function useThemedComponent(
+  slot: string,
+  ...fallbackSlots: string[]
+): React.FC<any> {
+  const { settings } = useTheme() || {};
+  const [Component, setComponent] = useState<React.FC<any>>(() => () => null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const theme = settings?.theme || "light";
+
+    const load = async () => {
+      const allSlots = [slot, ...fallbackSlots];
+
+      for (const s of allSlots) {
+        const Cmp = await loadThemedComponent(theme, s);
+        if (Cmp && !cancelled) {
+          setComponent(
+            () =>
+              function ThemedComponent(props: any) {
+                return <Cmp {...props} theme={settings} />;
+              }
+          );
+          return;
+        }
+      }
+    };
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [slot, settings?.theme]);
+
+  return Component;
+}
+
+
+### FILE: src/lib/server/getThemedComponent.tsx ###
+
+export const getThemedComponent = async (
+  name: string,
+  theme: string = process.env.MOSAIK_ENV || "light"
+) => {
+  const { settings } = (await import(`@/themes/${theme}/index`)) || {};
+  const Cmp = (await import(`@/themes/${theme}/${name}.tsx`))[name];
+  return function ThemedComponent(props: any) {
+    return <Cmp {...props} theme={settings} />;
+  };
+};
+
+
+### FILE: src/lib/server/makeMosaikPage.tsx ###
+
+import { routes as staticRoutes, fetchRoutes } from "@/app/mosaik/routes";
+import { AppRouter } from "@/modules/UrlDetailView";
+
+export function makeMosaikPage({
+  Component,
+  fetcher,
+  view,
+}: {
+  Component: React.FC<any>;
+  fetcher?: (ctx: any) => Promise<any>;
+  view?: string | ((ctx: any) => Promise<any>);
+}) {
+  return async function Page({ params }: { params: any; searchParams: any }) {
+    const resolvedParams = params ? await params : {};
+    const section = resolvedParams.section?.[0] ?? view;
+    const routes = [...(await fetchRoutes()), ...staticRoutes];
+    const data = (await fetcher?.({ params: resolvedParams })) || [];
+
+    return (
+      <AppRouter
+        Component={Component}
+        data={data}
+        routes={routes}
+        section={section}
+      />
+    );
+  };
+}
+
+
+### FILE: src/lib/util/getCookie.ts ###
+
+export function getCookie(name: string) {
+  const value = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(name + "="))
+    ?.split("=")[1];
+
+  return value ? decodeURIComponent(value) : null;
+}
+
+
+### FILE: src/lib/util/getServerUIState.ts ###
+
+import { cookies } from "next/headers";
+
+export async function getServerUiState() {
+  const cookieStore = await cookies();
+  const value = cookieStore.get("uiState")?.value;
+
+  return value ? JSON.parse(value) : null;
+}
+
+
+### FILE: src/lib/util/isomorphic.ts ###
+
+export const clientOnly = (val: any) => typeof window === 'undefined' ? null : val;
+
+
+### FILE: src/lib/util/links.ts ###
+
+export const coverImageLink = (url: string) => {
+  const relativeOrAbsoluteUrl = url;
+  if (!url || url.includes("s3.eu")) return "/images/wallpaper/19.webp";
+  return relativeOrAbsoluteUrl?.startsWith("http")
+    ? relativeOrAbsoluteUrl
+    : `${
+        process.env.NEXT_PUBLIC_STRAPI_BASE ||
+        process.env.STRAPI_API?.replace("/api", "")
+      }${relativeOrAbsoluteUrl}`;
+};
+
+
+### FILE: src/lib/util/loadThemedComponent.ts ###
+
+// src/lib/themeLoader.ts
+const context = (require as any).context("@/themes", true, /\.tsx$/);
+
+export async function loadThemedComponent(theme: string, slot: string) {
+  const paths = context.keys();
+
+  // Try to find a matching path like ./light/DesktopSidebar.tsx
+  const path = paths.find((p: string) => p === `./${theme}/${slot}.tsx`);
+
+  if (!path) {
+    console.warn(`Component not found: ${theme}/${slot}`);
+    return null;
+  }
+
+  const mod = await context(path);
+  return mod[slot] || mod.default;
+}
+
+
+### FILE: src/lib/util/matchParams.ts ###
+
+// utils/matchParams.ts
+export function matchParams(
+  url: string,
+  pattern: string
+): Record<string, string[]> {
+  const urlParts = url.split("/").filter(Boolean);
+  const patternParts = pattern.split("/").filter(Boolean);
+
+  const params: Record<string, string[]> = {};
+
+  let urlIndex = 0;
+  for (let i = 0; i < patternParts.length; i++) {
+    const part = patternParts[i];
+    if (part.startsWith("[...") && part.endsWith("]")) {
+      const key = part.slice(4, -1);
+      params[key] = urlParts.slice(urlIndex);
+      break;
+    } else if (part.startsWith("[") && part.endsWith("]")) {
+      const key = part.slice(1, -1);
+      params[key] = [urlParts[urlIndex]];
+      urlIndex++;
+    } else {
+      urlIndex++; // Skip static part
+    }
+  }
+
+  return params;
+}
+
+
+### FILE: src/middleware.ts ###
+
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  const headers = new Headers(request.headers);
+  headers.set("x-next-url", request.nextUrl.pathname);
+  return NextResponse.next({ headers });
+}
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};
+
+
+### FILE: src/modules/App.tsx ###
+
+import React from "react";
+import { Slot } from "./Slot";
+
+export type AppProps = {
+  /**
+   * A slug pattern like "/notes/:view" — so we know which params to extract.
+   */
+  slug: string;
+  /**
+   * Children will receive the matched params as props.
+   */
+  children: React.ReactNode;
+};
+
+/**
+ * `<App>` automatically parses the URL params that match your slug,
+ * and injects them into all children as props.
+ */
+export const App: React.FC<AppProps> = async ({ children }) => {
+  // Inject matched params as props to each valid React element
+  return (
+    <>
+      <Slot name="app" slots={{}}></Slot>
+      {children}
+    </>
+  );
+};
+
+
+### FILE: src/modules/Desktop.tsx ###
+
+import React from "react";
+import { getThemedComponent } from "@/lib/server/getThemedComponent";
+
+export async function Desktop({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const DesktopLayout =
+    (await getThemedComponent("DesktopLayout", process.env.MOSAIK_THEME)) ||
+    (() => null);
+
+  return (
+    <DesktopLayout className={className}>
+      {children}
+    </DesktopLayout>
+  );
+}
+
+
+### FILE: src/modules/DetailView.tsx ###
+
+
+
+### FILE: src/modules/Slot.tsx ###
+
+"use client";
+
+import React, { PropsWithChildren, ReactElement } from "react";
+
+type SlotProps = {
+  slots: Record<string, ReactElement | ReactElement[]>;
+  name: string;
+  props?: PropsWithChildren<any>;
+};
+
+export const Slot = ({ name, props, slots = {} }: SlotProps) => {
+  const elements = Array.isArray(slots[name])
+    ? slots[name]
+    : !!slots[name]
+    ? [slots[name]]
+    : [];
+  if ((elements as any[])?.length === 0) return null;
+
+  return (
+    <>
+      {elements.map((element, i) => {
+        return React.cloneElement(element, {
+          ...((element?.props || {}) as any),
+          ...props,
+          key: name + i,
+        });
+      })}
+    </>
+  );
+};
+
+
+### FILE: src/modules/UrlDetailView.tsx ###
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ExternalRoute, Route } from "@/types/Route";
+
+export const AppRouter = ({
+  Component,
+  data,
+  routes,
+  section,
+}: {
+  Component: React.FC<{
+    data: any;
+    routes: Array<Route | ExternalRoute>;
+    section: string;
+  }>;
+  data: any;
+  routes?: Array<Route | ExternalRoute>;
+  section: string;
+}) => {
+  return <Component data={data} routes={routes || []} section={section} />;
+};
+
+
+### FILE: src/modules/View.tsx ###
+
+
+
+### FILE: src/modules/ViewHost.tsx ###
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+  PropsWithChildren,
+} from "react";
+
+type ViewConfig = {
+  id: string;
+  slot: string;
+  component?: React.ReactElement;
+  props?: Record<string, any>;
+  constraints?: Record<string, any>;
+  states?: string[];
+  actions?: string[];
+  effects?: string[];
+};
+
+type ViewHostContextType = {
+  registerView: (view: ViewConfig) => void;
+  slots: Record<string, React.ReactElement[]>;
+  views: ViewConfig[];
+};
+
+const ViewHostContext = createContext<ViewHostContextType | undefined>(
+  undefined
+);
+
+export const ViewHostProvider = ({ children }: PropsWithChildren) => {
+  const [views, setViews] = useState<ViewConfig[]>([]);
+
+  const registerView = useCallback(
+    (view: ViewConfig) => {
+      setViews((prev) => {
+        // // Prevent duplicate IDs:
+        if (prev.find((v) => v.slot === view.slot))
+          return prev.filter((v) => v.slot !== view.slot).concat([view]);
+        return [...prev, view];
+      });
+    },
+    [setViews]
+  );
+
+  const slots = useMemo(() => {
+    const slots: Record<string, React.ReactElement[]> = {};
+    for (const view of views) {
+      if (!slots[view.slot]) slots[view.slot] = [];
+      if (view.component)
+        slots[view.slot].push(React.cloneElement(view.component, view.props));
+    }
+    return slots;
+  }, [views]);
+
+  const mem = useMemo(
+    () => ({ registerView, slots, views }),
+    [registerView, slots, views]
+  );
+  return (
+    <ViewHostContext.Provider value={mem}>{children}</ViewHostContext.Provider>
+  );
+};
+
+export const useViewHost = (): ViewHostContextType => {
+  const ctx = useContext(ViewHostContext);
+  if (!ctx) {
+    throw new Error("useViewHost must be used within a <ViewHostProvider>");
+  }
+  return ctx;
+};
+
+
+### FILE: src/services/Effects.tsx ###
+
+"use client";
+
+import { Effect } from "@/types/Effect";
+import { useEffect } from "react";
+import { useAppState } from "@/context/StateContext";
+import * as effectRunners from "@/lib/effects";
+
+export const Effects = ({
+  effects = [],
+  when,
+  deps,
+}: {
+  effects: Effect<string>[];
+  when: string | any[];
+  deps?: any[];
+}) => {
+  const { dispatch, state } = useAppState();
+  useEffect(() => {
+    if (when === "mount") {
+      effects.forEach((effect) => {
+        const effectRunner = (effectRunners as any)[effect.type];
+        effectRunner?.({ dispatch, state });
+        try {
+          effect.actions?.success?.forEach(dispatch);
+        } catch {
+          effect.actions?.failure?.forEach(dispatch);
+        }
+      });
+    }
+    return () => {};
+  }, deps);
+
+  return null;
+};
+
+
+### FILE: src/slots/README.md ###
+
+# @/slots/ Folder
+
+```
+@/slots/
+├── getDesktopSlots.tsx
+├── getSectionSlots.tsx
+├── get<Block/Module>Slots.tsx
+```
+
+You can name the file and function as you want, but it should start with *get* and end with *Slots*, it's also helpful to include the namespace / component / block 
+this function is used for. This probably needs a clearer convention.
+
+---
+
+## Overview
+
+The `@/slots/` directory contains logic for defining **server-rendered slot layouts** used across Mosaik applications. These slots provide a clean abstraction for laying out block-based UIs like sidebars, headers, footers, and dynamic content regions — all rendered on the server while preserving full flexibility and composition.
+
+> 📚 **More on this pattern**:  
+> [Slots, Blocks, and Components in Mosaik](https://mosaik.javascript.moe/mosaik/slots-blocks-and-components)
+
+---
+
+## ✨ Motivation
+
+Mosaik aims to build fully server-rendered, modular UIs with:
+- Reusable layout components (called *blocks*)
+- Flexible injection points (called *slots*)
+- Dynamic behavior, but **with server-first rendering**
+
+However, if slots were defined only in client components, the entire system would fall back to **CSR (Client-Side Rendering)**. To avoid this, we define all slots as **functions that return a slot map on the server**. This allows us to pre-render layouts with injected content — before hydration — while still supporting dynamic behavior later on the client.
+
+---
+
+## 📦 What's in this folder?
+
+### `getDesktopSlots.tsx`
+
+- Composes the layout for **desktop screens**
+- Injects blocks like `ActionBar`, `DesktopHeader`, `SidebarContent`, `DesktopFooter`
+- Uses `Slot` + `getSectionSlots` to dynamically include page-specific navigation
+
+### `getPageSlots.tsx`
+
+- (Typically) used for composing a layout with less chrome (e.g., for mobile or standalone pages)
+- Returns layout slots like header, footer, main content
+- Similar to `getDesktopSlots` but lighter weight
+
+### `getSectionSlots.tsx`
+
+- A utility used inside both desktop/page layouts
+- Returns a `{ navigation }` slot block based on route + section
+- Allows injecting custom `AppNavigation` based on section context
+
+---
+
+## ✅ What Goes in Here?
+
+- Server-side `getXSlots()` functions
+- Each function returns an object of React elements keyed by slot name
+- Use these on the server to **inject content** into reusable page layout templates
+
+---
+
+## 💡 When to Add a New File
+
+Create a new slot function when:
+- You need a **custom layout** for a route or screen
+- You want to inject **different blocks or content** per page type
+- You want to decouple slot logic from layout rendering
+
+---
+
+## 🔁 Related Concepts
+
+- [Blocks](https://mosaik.javascript.moe/mosaik/slots-blocks-and-components)
+- [Hybrid Rendering](https://mosaik.javascript.moe/mosaik/hybrid-component-architecture)
+
+
+### FILE: src/slots/getDesktopSlots.tsx ###
+
+import { ThemedComponent } from "@/blocks/ThemedComponent";
+import { PropsWithChildren } from "react";
+import { getSectionSlots } from "./getSectionSlots";
+import { Routes } from "@/types/Route";
+import { SidebarContent } from "@/blocks/hybrid/SidebarContent";
+import { getDesktopSidebarActions } from "@/actions/getDesktopSidebarActions";
+import { getServerUiState } from "@/lib/util/getServerUIState";
+import { SidebarActionBar } from "@/blocks/hybrid/SidebarActionBar";
+import { Icon, IconNames } from "@/components/Icon";
+import clsx from "clsx";
+
+export const getDesktopSlots = async ({
+  children,
+  params,
+  fetcher,
+  routes,
+}: PropsWithChildren<{
+  params: { slug?: string[]; section?: string[]};
+  fetcher?: (ctx: any) => Promise<any>;
+  routes: Routes;
+}>) => {
+  const state = await getServerUiState();
+  const sidebarActions = await getDesktopSidebarActions({
+    serverState: { sidebar: { expanded: state?.sidebar?.expanded } },
+  });
+
+  const sectionSlots = await getSectionSlots({
+    params,
+    fetcher,
+    routes,
+  });
+  return {
+    sidebarheader: (
+      <div>
+        <SidebarActionBar actions={sidebarActions}>
+          {Object.entries(sidebarActions).map(([key, action]) => {
+            return (
+              <ThemedComponent key={key} name="ActionButton" action={action}>
+                <Icon
+                  icon={
+                    clsx({
+                      FaChevronRight: !state?.sidebar?.expanded ||  Number(state?.sidebar.expanded) < 2,
+                      FaChevronLeft: state?.sidebar.expanded === 2,
+                    }) as IconNames
+                  }
+                />
+              </ThemedComponent>
+            );
+          })}
+        </SidebarActionBar>
+      </div>
+    ),
+    desktopheader: (
+      <div className="w-full">
+        <ThemedComponent name="DesktopHeader">
+          {sectionSlots.motd}
+        </ThemedComponent>
+      </div>
+    ),
+    sidebarcontent: (
+      <div className="h-full">
+        <SidebarContent state={state}>{sectionSlots.navigation}</SidebarContent>
+      </div>
+    ),
+    desktopcontent: (
+      <div className="w-full">
+        <ThemedComponent name="DesktopContent">{children}</ThemedComponent>
+      </div>
+    ),
+    desktopfooter: (
+      <div>
+        <ThemedComponent name="DesktopFooter" />
+      </div>
+    ),
+  };
+};
+
+
+### FILE: src/slots/getSectionSlots.tsx ###
+
+import { fetchMOTD } from "@/app/mosaik/dataSources/strapi";
+import { AppNavigation } from "@/blocks/AppRoutes";
+import { ThemedComponent } from "@/blocks/ThemedComponent";
+import { MOTDProps } from "@/themes/light/MOTD";
+
+export const getSectionSlots = async ({
+  params,
+  searchParams,
+  routes,
+}: any) => {
+  const motd = await fetchMOTD();
+
+  return {
+    motd: (
+      <div>
+        {motd?.enabled && !params.slug && (
+          <ThemedComponent<MOTDProps>
+            name="MOTD"
+            severity={motd?.severity}
+            message={motd?.message}
+          />
+        )}
+      </div>
+    ),
+    navigation: (
+      <div>
+        <AppNavigation
+          baseUrl="/mosaik"
+          slug={params.section?.[0]}
+          routes={routes}
+          searchParams={searchParams}
+        />
+      </div>
+    ),
+  };
+};
+
+
+### FILE: src/themes/index.ts ###
+
+import light from "./light/theme.module.css";
+import { Theme } from "@/context/ThemeContext";
+
+export const theme = process.env.MOSAIK_THEME || "light";
+
+export const themeClasses = light;
+
+export const settings: Theme["settings"] = {
+  theme,
+  classNames: {
+    Button: '',
+    Icon: 'p-2 !h-7 !w-7'
+  },
+  navigation: {
+    showTooltip: true,
+  },
+  userPreferences: {
+    mode: "dark",
+  },
+  preferences: {
+    autoMode: ["system"],
+  },
+};
+
+
+### FILE: src/themes/light/ActionBar.tsx ###
+
+import clsx from "clsx";
+import { themeClasses as classes } from "@/themes";
+import { PropsWithChildren } from "react";
+export const ActionBar = ({ children }: PropsWithChildren) => {
+  return (
+    <div
+      className={clsx(
+        "ActionBar",
+        classes.ActionBar,
+        "h-[var(--desktop-header-min-height)] w-[var(--sidebar-min-width)]",
+        "flex p-2 justify-end border-b border-black/40 bg-white/20 dark:bg-black/20 items-center"
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+
+### FILE: src/themes/light/ActionButton.tsx ###
+
+import { Action } from "@/types/Action";
+import { Button } from "./Button";
+import clsx from "clsx";
+import { PropsWithChildren } from "react";
+
+export const ActionButton = ({
+  children,
+  className,
+  action,
+  onClick,
+}: PropsWithChildren<{ className?: string; label: string; onClick: any, action: Action<string, string, object> }>) => {
+  return (
+    <Button className={clsx(className)} label={action?.type || 'Action Button'} onClick={onClick}>
+      {children}
+    </Button>
+  );
+};
+
+
+### FILE: src/themes/light/BlogPost.tsx ###
+
+import clsx from "clsx";
+import { coverImageLink } from "@/lib/util/links";
+import Link from "next/link";
+import { MarkdownContainer } from "./MarkdownContainer";
+
+export const BlogPost = ({ data = [], className }: any) => {
+  const { title, coverImage, content, documentId, slug } = data?.[0];
+
+  return (
+    <article className="flex flex-col lg:flex-row gap-4 bg-gray-400/40 max-h-full w-full overflow-y-auto overflow-x-hidden">
+      <img
+        src={coverImageLink(coverImage?.url)}
+        className={clsx(
+          "shrink w-1/4 object-contain h-fit sticky top-4 my-4",
+          className
+        )}
+      />
+      <div className="h-full  mx-auto flex-1 grow py-4">
+        <h1>
+          <Link href={`/mosaik/blog/${slug}-${documentId}`}>{title}</Link>
+        </h1>
+        <MarkdownContainer>{content}</MarkdownContainer>
+      </div>
+    </article>
+  );
+};
+
+
+### FILE: src/themes/light/BlogPostTeaser.tsx ###
+
+import clsx from "clsx";
+import { coverImageLink } from "@/lib/util/links";
+import Link from "next/link";
+import { MarkdownContainer } from "./MarkdownContainer";
+import Image from "next/image";
+
+export const BlogPostTeaser = ({
+  title,
+  coverImage,
+  excerpt,
+  documentId,
+  slug,
+  className,
+}: {
+  title: string;
+  coverImage: any;
+  excerpt: string;
+  documentId: string;
+  slug: string;
+  className?: string;
+}) => {
+  return (
+    <article>
+      <div className="flex flex-col md:flex-row gap-4 bg-gray-400/40">
+        <Image
+          src={coverImageLink(coverImage?.url)}
+          className={clsx("w-[320px] h-[320px] object-contain", className)}
+          width={320}
+          height={320}
+          alt={`Cover image for the blog post ${title}`}
+        />
+        <div>
+          <Link href={`/mosaik/blog/${slug}-${documentId}`}>
+            <h2 className="p-2">{title}</h2>
+          </Link>
+          <MarkdownContainer>{excerpt}</MarkdownContainer>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+
+### FILE: src/themes/light/BlogPosts.tsx ###
+
+import { ScrollContainer } from "@/components/ScrollContainer";
+import React, { PropsWithChildren } from "react";
+
+export const BlogPosts = ({ children }: PropsWithChildren) => {
+  return (
+    <ScrollContainer>
+      <ul>
+        {React.Children.map(children, (child) => (
+          <li>{child}</li>
+        ))}
+      </ul>
+    </ScrollContainer>
+  );
+};
+
+
+### FILE: src/themes/light/Button.tsx ###
+
+import clsx from "clsx";
+import { PropsWithChildren } from "react";
+import { settings } from "..";
+
+export const Button = ({
+  children,
+  label,
+  className,
+  ...props
+}: PropsWithChildren<{ className?: string; label: string; onClick: any }>) => {
+  return (
+    <button
+      aria-label={label || "Button"}
+      {...props}
+      className={clsx(
+        "p-2 rounded-sm shadow-sm m-1",
+        "cursor-pointer disabled:cursor-default",
+        " !bg-white/30 hover:!bg-white/40 dark:bg-black/20 dark:hover:bg-black/10",
+        settings.classNames?.Button,
+        className
+      )}
+    >
+      {children}
+    </button>
+  );
+};
+
+
+### FILE: src/themes/light/CollapseButton.tsx ###
+
+"use client";
+
+import clsx from "clsx";
+import { Button } from "@/blocks/Button";
+import { Icon } from "@/components/Icon";
+
+export const CollapseButton = ({
+  onClick,
+  className,
+}: {
+  onClick: () => void;
+  className?: string;
+}) => {
+  return (
+    <Button onClick={onClick} label="Collapse" >
+      <Icon icon="FaChevronLeft" className={clsx("!h-6 !w-6", className)} />
+    </Button>
+  );
+};
+
+
+### FILE: src/themes/light/DesktopContent.tsx ###
+
+import clsx from "clsx";
+import { themeClasses as classes } from "@/themes";
+
+export const DesktopContent = ({ children, className }: any) => (
+  <main
+    className={clsx(
+      classes.DesktopContent,
+      "flex-1 p-0 md:p-2 lg:p-4 bg-transparent max-w-full w-full  h-full overflow-hidden",
+      className
+    )}
+  >
+    {children}
+  </main>
+);
+
+
+### FILE: src/themes/light/DesktopFooter.tsx ###
+
+import clsx from "clsx";
+export const DesktopFooter = ({ className }: any) => (
+  <div
+    className={clsx("p-4 border-t dark:border-t-gray-800 mt-auto", className)}
+  >
+    <small>v0.0.1</small>
+  </div>
+);
+
+
+### FILE: src/themes/light/DesktopHeader.tsx ###
+
+import clsx from "clsx";
+export const DesktopHeader = ({ children, className }: any) => (
+  <div
+    className={clsx(
+      "p-4 border-black/40 border-b w-full h-[var(--desktop-header-min-height)] flex items-center grow",
+      className
+    )}
+  >
+    <h1>Mosaik</h1>
+    <span className="ml-auto -mt-4 -mr-8">{children}</span>
+  </div>
+);
+
+
+### FILE: src/themes/light/DesktopLayout.tsx ###
+
+import clsx from "clsx";
+import { themeClasses as classes } from "@/themes";
+
+export const DesktopLayout = ({ children, className }: any) => {
+  return (
+    <div
+      className={clsx(
+        "DesktopLayout",
+        classes.DesktopLayout,
+        "w-full h-full flex max-w-screen max-h-screen overflow-hidden",
+        "bg-sky-100 dark:bg-gray-900",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+
+### FILE: src/themes/light/DesktopSidebar.tsx ###
+
+import clsx from "clsx";
+import { PropsWithChildren } from "react";
+import { themeClasses as classes } from "@/themes";
+
+export const DesktopSidebar = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string; hidden: boolean }>) => {
+  return (
+    <aside
+      className={clsx(
+        "DesktopSidebar",
+        classes.DesktopSidebar,
+        "w-fit",
+        "bg-white/20 dark:bg-black/40",
+        "shadow-md shadow-black min-h-full",
+        "h-full flex flex-col shrink-0 ",
+        className
+      )}
+    >
+      {children}
+    </aside>
+  );
+};
+
+
+### FILE: src/themes/light/ExpandButton.tsx ###
+
+"use client"
+
+import clsx from "clsx";
+import { Button } from "@/blocks/Button";
+import { Icon } from "@/components/Icon";
+
+export const ExpandButton = ({
+  onClick,
+  className,
+}: {
+  onClick: () => void;
+  className?: string;
+}) => {
+  return (
+    <Button onClick={onClick} className={clsx("p-2 ", className)} label="Expand">
+      <Icon icon="FaChevronRight" className="!h-6 !w-6" />
+    </Button>
+  );
+};
+
+
+### FILE: src/themes/light/FluidContainer.tsx ###
+
+import clsx from "clsx";
+import { PropsWithChildren } from "react";
+
+export const FluidContainer = ({ children,
+  className }: PropsWithChildren<{ className?: string }>) => {
+  return (
+    <div className="w-full h-full flex justify-center">
+      <div className={clsx("max-w-[1440px] grow", className)}>{children}</div>
+    </div>
+  );
+};
+
+
+### FILE: src/themes/light/MOTD.tsx ###
+
+import { Icon } from "@/components/Icon";
+import clsx from "clsx";
+import { PropsWithChildren } from "react";
+
+export type MOTDProps = PropsWithChildren<{
+  className?: string;
+  message: string;
+  severity: "info" | "warning" | "success" | "error";
+}>;
+export const MOTD = ({ message, className, severity }: MOTDProps) => {
+  return (
+    <div
+      className={clsx(
+        "p-3 rounded-b-sm border border-black/40 flex gap-2 items-center mx-2 group h-12",
+        {
+          "bg-orange-400": severity === "warning",
+        },
+        className
+      )}
+    >
+      <Icon
+        icon={clsx({ FaExclamationTriangle: severity === "warning" }) as any}
+        className="h-6 w-6"
+      />
+      <span className="group-hover:w-full w-0 overflow-hidden">{message}</span>
+    </div>
+  );
+};
+
+
+### FILE: src/themes/light/MarkdownContainer.tsx ###
+
+import { marked, Renderer } from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/github-dark.css";
+import bash from "highlight.js/lib/languages/bash";
+import powershell from "highlight.js/lib/languages/powershell";
+import footnote from "marked-footnote";
+import { PropsWithChildren } from "react";
+import clsx from "clsx";
+
+hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("powershell", powershell);
+
+const renderer = new Renderer();
+
+renderer.code = function ({ text, lang = "bash" }) {
+  const validLang = lang && hljs.getLanguage(lang);
+  const highlighted = validLang
+    ? hljs.highlight(text, { language: lang }).value
+    : hljs.highlightAuto(text).value;
+
+  return `<pre><code class="hljs language-${
+    lang || "plaintext"
+  }">${highlighted}</code></pre>`;
+};
+
+marked.use({ renderer });
+marked.use(footnote());
+
+export const MarkdownContainer = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
+  const htmlContent = marked(children?.toString() || "");
+
+  return (
+    <article className="bg-white/20 dark:bg-black/20 p-2 md:p-4 post ">
+      <div
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+        className={clsx("max-w-[80ch] prose prose-invert", className)}
+      />
+    </article>
+  );
+};
+
+
+### FILE: src/themes/light/MobileHeaderNavigation.tsx ###
+
+import clsx from "clsx";
+import { PropsWithChildren } from "react";
+
+export const MobileHeaderNavigation = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
+  return <div className={clsx("flex gap-1 overflow-x-auto", className)}>{children}</div>;
+};
+
+
+### FILE: src/themes/light/Navigation.tsx ###
+
+import clsx from "clsx";
+import { PropsWithChildren } from "react";
+
+export const Navigation = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
+  return (
+    <nav className={clsx("overflow-y-auto max-h-full", className)}>
+      {children}
+    </nav>
+  );
+};
+
+
+### FILE: src/themes/light/NavigationLink.tsx ###
+
+import { Icon } from "@/components/Icon";
+import clsx from "clsx";
+import Link from "next/link";
+import { themeClasses as classes } from "@/themes";
+import { NavigationLinkProps } from "@/types/NavigationLinkProps";
+// import { Tooltip } from "react-tooltip";
+
+export const NavigationLink = ({
+  label,
+  href,
+  icon,
+  iconOnly = false,
+  isActive = false,
+  external = false,
+  className,
+}: NavigationLinkProps) => {
+  const id = href.split("/").pop();
+  return (
+    <Link
+      id={id}
+      href={href}
+      target={external ? "_blank" : "_self"}
+      className={clsx(
+        classes.NavigationLink,
+        "flex gap-2 items-center",
+        {
+          [classes.active]: isActive,
+        },
+        className
+      )}
+    >
+      <Icon icon={icon} className={clsx({ "mx-auto": iconOnly })} />
+      {!iconOnly && label}
+    </Link>
+  );
+};
+
+
+### FILE: src/themes/light/SidebarContent.tsx ###
+
+"use client"
+
+import clsx from "clsx";
+import { themeClasses as classes } from "@/themes";
+import { State } from "@/types/State";
+import { PropsWithChildren } from "react";
+
+export const SidebarContent = ({
+  children,
+  state = { sidebar: { expanded: undefined } },
+  className,
+}: PropsWithChildren<{
+  state?: State;
+  className?: string;
+}>) => (
+  <div
+    className={clsx(
+      "SidebarContent",
+      classes.SidebarContent,
+      "min-w-[var(--sidebar-min-width)] flex-1 h-full scrollable pr-[10px] hover:mr-0 hover:pr-[0px]",
+      {
+        hidden: state?.sidebar?.expanded === 0,
+          "hidden md:block": typeof state?.sidebar?.expanded === 'undefined',
+        "block": Number(state?.sidebar?.expanded) > 0
+      },
+      className
+    )}
+  >
+    {children}
+  </div>
+);
+
+
+### FILE: src/themes/light/SidebarFooter.tsx ###
+
+import clsx from "clsx";
+export const SidebarFooter = ({ className }: any) => (
+  <div
+    className={clsx("p-4 border-t dark:border-t-gray-800 mt-auto", className)}
+  >
+    <small>v0.0.1</small>
+  </div>
+);
+
+
+### FILE: src/themes/light/TextContainer.tsx ###
+
+import clsx from "clsx";
+import { PropsWithChildren } from "react";
+
+export const TextContainer = ({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) => {
+  return <p className={clsx("max-w-[70ch]", className)}>{children}</p>;
+};
+
+
+### FILE: src/themes/light/index.tsx ###
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Theme } from "@/context/ThemeContext";
+
+export const settings: Theme["settings"] = {
+  theme: "light",
+  navigation: {
+    showTooltip: true,
+  },
+  userPreferences: {
+    mode: "dark",
+  },
+  preferences: {
+    autoMode: ["system"],
+  },
+};
+
+
+### FILE: src/themes/light/theme.module.css ###
+
+@reference '../../app/globals.css';
+
+/** Mosaik Theme Variables */
+.DesktopLayout {
+  --app-content-padding: 8px;
+  --desktop-header-min-height: 4rem;
+  --sidebar-min-width: 4rem;
+}
+
+.NavigationLink {
+  @apply p-4  hover:bg-white/20 dark:hover:bg-white/10 
+}
+
+.NavigationLink.active {
+  @apply bg-white/70 hover:bg-white/50 dark:bg-white/10 dark:hover:bg-white/20;
+}
+
+.DesktopContent {
+  padding: var(--app-content-padding);
+}
+
+.DesktopSidebar .ActionBar {
+  @apply h-[var(--desktop-header-min-height)];
+}
+
+.DesktopContent article ul {
+  @apply max-w-full w-full;
+}
+/** List Styles */
+.DesktopContent article ul li {
+  @apply mb-4  max-w-full w-full;
+}
+
+.DesktopContent article ul li::before {
+  content: "—";
+  @apply mr-2 font-bold inline-flex;
+}
+
+
+### FILE: src/types/Action.ts ###
+
+import { IconNames } from "@/components/Icon";
+import { Effect } from "./Effect";
+
+export type Action<
+  EffectTypes extends string,
+  ActionTypes extends string,
+  P
+> = {
+  type: ActionTypes;
+  icon: IconNames;
+  payload: P;
+  effects?: Effect<EffectTypes>[];
+};
+
+export type ActionGenerator = () => Action<string, string, object>;
+
+
+### FILE: src/types/ActionContext.ts ###
+
+import { Action } from "./Action";
+
+export type ActionContext = {
+  actions: Record<string, Action<string, string, object>>;
+};
+
+
+### FILE: src/types/AppNavigationProps.ts ###
+
+import { ExternalRoute, Route } from "./Route";
+
+export type AppNavigationProps = {
+  slug: string;
+  baseUrl: string;
+  routes: Array<Route | ExternalRoute>;
+  slot?: string;
+  searchParams: any;
+};
+
+
+### FILE: src/types/DataContextShape.ts ###
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type DataContextShape = { type: string; data: any };
+
+
+### FILE: src/types/DataViewProps.ts ###
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type DataViewProps = {
+  initialData: any;
+  type: string;
+  container: string;
+  themeName: string;
+};
+
+
+### FILE: src/types/Effect.ts ###
+
+import { Action } from "./Action";
+
+export type Effect<EffectTypes extends string> = {
+  type: EffectTypes;
+  actions?: {
+     success: Action<string, string, object>[] 
+     failure?: Action<string, string, object>[] 
+    };
+};
+
+
+### FILE: src/types/NavigationLinkProps.ts ###
+
+import { IconNames } from "@/components/Icon";
+import { Theme } from "@/context/ThemeContext";
+
+export type NavigationLinkProps = {
+  className?: string;
+  href: string;
+  label: string;
+  icon: IconNames;
+  iconOnly?: boolean;
+  isActive?: boolean;
+  theme: Theme["settings"];
+  external: boolean;
+};
+
+
+### FILE: src/types/Route.ts ###
+
+export type Route = {
+  slug: string;
+  label: string;
+  icon: string;
+  content?: string;
+  order: number;
+};
+
+export type ExternalRoute = {
+  href: string;
+  label: string;
+  icon: string;
+  content?: string;
+  order: number;
+};
+
+export type Routes = Array<Route | ExternalRoute>;
+
+
+### FILE: src/types/State.ts ###
+
+export type SidebarState = {
+    expanded?: 0 | 1 | 2;
+}
+
+export type State = {
+    sidebar: SidebarState;
+}
+
+
+### FILE: src/typesCMS/Section.ts ###
+
+export type Section = {
+  title: string;
+  icon: string;
+  slug: string;
+  content: string;
+  order: number;
+};
