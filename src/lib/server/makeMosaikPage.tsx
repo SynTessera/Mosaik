@@ -1,5 +1,4 @@
 import { routes as staticRoutes, fetchRoutes } from "@/app/mosaik/routes";
-import { AppRouter } from "@/modules/UrlDetailView";
 
 export function makeMosaikPage({
   Component,
@@ -17,8 +16,7 @@ export function makeMosaikPage({
     const data = (await fetcher?.({ params: resolvedParams })) || [];
 
     return (
-      <AppRouter
-        Component={Component}
+      <Component
         data={data}
         routes={routes}
         section={section}

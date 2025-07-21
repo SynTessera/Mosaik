@@ -1,5 +1,6 @@
-export const fetchBlogPosts = async () => {
-  const url = `${process.env.STRAPI_API}/blog-posts?[pagination][pageSize]=1000&populate=*`;
+import { Page } from "@/types/content/Page";
+
+const fetchMany = async (url: string) => {
   const prom = await fetch(url, {
     headers: {
       Authorization: process.env.STRAPI_TOKEN || "",
@@ -10,81 +11,40 @@ export const fetchBlogPosts = async () => {
   });
   const json = await prom.json();
   return json.data;
+};
+
+const fetchOne = async (url: string) => {
+  return (await fetchMany(url))?.[0];
+};
+
+export const fetchBlogPosts = async () => {
+  const url = `${process.env.STRAPI_API}/blog-posts?[pagination][pageSize]=1000&populate=*`;
+  return fetchMany(url);
 };
 
 export const fetchBlogPost = async (id: string) => {
   const url = `${process.env.STRAPI_API}/blog-posts/${id}?populate=*`;
-  const prom = await fetch(url, {
-    headers: {
-      Authorization: process.env.STRAPI_TOKEN || "",
-    },
-    next: {
-      revalidate: 30,
-    },
-  });
-  const json = await prom.json();
-  return json.data;
+  return fetchMany(url);
 };
 
 export const fetchSections = async () => {
   const url = `${process.env.STRAPI_API}/sections?populate=*`;
-  const prom = await fetch(url, {
-    headers: {
-      Authorization: process.env.STRAPI_TOKEN || "",
-    },
-    next: {
-      revalidate: 30,
-    },
-  });
-  const json = await prom.json();
-  return json.data;
+  return fetchMany(url);
 };
 
 export const fetchSection = async (slug: string) => {
   const url = `${process.env.STRAPI_API}/sections?filters[slug][$eq]=${slug}&populate=*`;
-  const prom = await fetch(url, {
-    headers: {
-      Authorization: process.env.STRAPI_TOKEN || "",
-    },
-    next: {
-      revalidate: 30,
-    },
-  });
-  const json = await prom.json();
-  return json.data[0];
+  return fetchOne(url);
 };
 
 export const fetchMOTD = async () => {
   const url = `${process.env.STRAPI_API}/motd?populate=*`;
-  const prom = await fetch(url, {
-    headers: {
-      Authorization: process.env.STRAPI_TOKEN || "",
-    },
-    next: {
-      revalidate: 30,
-    },
-  });
-  const json = await prom.json();
-  return json.data;
+  return fetchMany(url);
 };
 
-import { Page } from "@/types/content/Page";
-
 export async function fetchMetadata(path: string): Promise<Page> {
-  const res = await fetch(
-    `${process.env.STRAPI_API}/pages?filters[pathname][$eq]=${path}&populate=*`
-  );
-
-  if (!res.ok) {
-    console.warn("Failed to fetch metadata for", path, res.status);
-    return {
-      title: "Mosaik",
-      description: "Composable headless UI architecture",
-    };
-  }
-
-  const data = await res.json();
-  const page = data?.data?.[0];
+  const url = `${process.env.STRAPI_API}/pages?filters[pathname][$eq]=${path}&populate=*`;
+  const page = await fetchOne(url);
 
   if (!page && path !== "*") {
     return fetchMetadata("*");
