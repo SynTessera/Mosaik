@@ -1,6 +1,8 @@
+![Mosaik Logo](https://mosaik-cms-production.up.railway.app/uploads/getimg_ai_img_Bdjui_S0sjp_W5r_Ma_Mod_S_Og_85c2f94ecd.jpeg)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-[**Live Demo**](https://mosaik.javascript.moe)  
+# Docs: [**https://mosaik.javascript.moe**](https://mosaik.javascript.moe)
 
 ## Getting Started
 
