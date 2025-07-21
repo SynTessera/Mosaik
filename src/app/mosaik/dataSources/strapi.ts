@@ -40,6 +40,20 @@ export const fetchSections = async () => {
   return json.data;
 };
 
+export const fetchSection = async (slug: string) => {
+  const url = `${process.env.STRAPI_API}/sections?filters[slug][$eq]=${slug}&populate=*`;
+  const prom = await fetch(url, {
+    headers: {
+      Authorization: process.env.STRAPI_TOKEN || "",
+    },
+    next: {
+      revalidate: 30,
+    },
+  });
+  const json = await prom.json();
+  return json.data[0];
+};
+
 export const fetchMOTD = async () => {
   const url = `${process.env.STRAPI_API}/motd?populate=*`;
   const prom = await fetch(url, {

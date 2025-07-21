@@ -1,17 +1,17 @@
-import { routes as staticRoutes } from "@/app/mosaik/routes";
-
-import { fetchRoutes } from "../routes";
 import Section from "../sections/Section";
-import { AppRouter } from "@/modules/UrlDetailView";
 
 import type { Metadata } from "next";
-import { fetchMetadata } from "../dataSources/strapi";
+import {
+  fetchMetadata,
+  fetchSection,
+} from "../dataSources/strapi";
 import { Page } from "@/types/content/Page";
 import { coverImageLink } from "@/lib/util/links";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const meta: Page = await fetchMetadata(`/mosaik/${(await params).section}`);
-  console.log ("META", meta);
+
   const title = meta.ogTitle || meta.twitterTitle || meta.title || "";
   const description =
     meta.ogDescription || meta.twitterDescription || meta.description || "";
@@ -41,15 +41,11 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   };
 }
 
-export default async function DynamicPage({ params }: any) {
-  const routes = [...(await fetchRoutes()), ...staticRoutes];
+export default async function DynamicPage({ params: paramsProm }: any) {
+  const params = await paramsProm;
+  const { content } = await fetchSection(params.section[0]);
 
-  return (
-    <AppRouter
-      Component={Section}
-      data={[]}
-      routes={routes}
-      section={(await params).section?.[0]}
-    />
-  );
+  if (!content) return notFound();
+
+  return <Section content={content} />;
 }
