@@ -10,6 +10,8 @@ import { DesktopColLayout } from "@/layouts/DesktopColLayout";
 import { appReducer } from "./reducers";
 import { initialState } from "./state";
 import { routes as staticRoutes } from "@/app/mosaik/routes";
+import { headers } from "next/headers";
+import { matchParams } from "@/lib/util/matchParams";
 
 // import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
 
@@ -21,22 +23,24 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<object>
+  params: Promise<object>;
 }>) {
   const Container = await getThemedComponent(
     "FluidContainer",
     process.env.MOSAIK_THEME
   );
 
+  const pathname = (await headers()).get("x-next-url") ?? "";
+  const params = matchParams(pathname, "/mosaik/[...section]");
+
   const routes = [...(await fetchRoutes()), ...staticRoutes];
   const slots = await getDesktopSlots({
-    params: await params, // pass shared params if needed
+    params, // pass shared params if needed
     fetcher: () => Promise.resolve([]), // stub if needed
     routes,
-    children
+    children,
   });
 
   return (
