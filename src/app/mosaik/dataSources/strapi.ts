@@ -53,3 +53,25 @@ export const fetchMOTD = async () => {
   const json = await prom.json();
   return json.data;
 };
+
+import { Page } from "@/types/content/Page";
+
+export async function fetchMetadata(path: string): Promise<Page> {
+  const res = await fetch(
+    `${process.env.STRAPI_API}/pages?filters[pathname][$eq]=${path}&populate=*`
+  );
+
+
+
+  if (!res.ok) {
+    console.warn("Failed to fetch metadata for", path, res.status);
+    return {
+      title: "Mosaik",
+      description: "Composable headless UI architecture",
+    };
+  }
+
+  const data = await res.json();
+  const page = data?.data?.[0];
+  return page;
+}
