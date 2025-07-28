@@ -2,7 +2,7 @@
 
 import { useAppState } from "@/context/StateContext";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
-import { createHydratableComponent } from "@/lib/createHydratableComponent ";
+import { createHydratableComponent } from "@/lib/createHydratableComponent";
 
 export const ActionButtonClient = createHydratableComponent(
   ({ action, ...props }: any) => {

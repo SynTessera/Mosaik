@@ -6,8 +6,7 @@ export const collapse = (
   state: State,
 ) => {
   const newState = { ...state };
-
-  newState.sidebar.expanded = 0;
+  newState.header.collapsed = true;
 
   return newState;
 };

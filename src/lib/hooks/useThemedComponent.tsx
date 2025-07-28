@@ -14,7 +14,6 @@ export function useThemedComponent(
   useEffect(() => {
     let cancelled = false;
     const theme = settings?.theme || "default";
-
     const load = async () => {
       const allSlots = [slot, ...fallbackSlots];
 

@@ -27,6 +27,8 @@ export type Theme = {
     preferences: {
       autoMode: ("system" | "setting" | "static")[];
     };
+    components?: {}
+    blocks?: Record <string,React.ComponentType<any>>
   };
 };
 

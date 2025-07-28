@@ -2,7 +2,7 @@
 
 import { collapse, expand } from "@/app/mosaik/actions";
 import { useAppState } from "@/context/StateContext";
-import { createHydratableComponent } from "@/lib/createHydratableComponent ";
+import { createHydratableComponent } from "@/lib/createHydratableComponent";
 import { useMemo } from "react";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 import { ActionButtonClient } from "./ActionButtonClient";

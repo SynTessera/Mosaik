@@ -1,0 +1,26 @@
+@reference '../../app/globals.css';
+
+@font-face {
+  font-family: "Space Grotesk V 16 Latin 600";
+  src: url(/fonts/spacegrotesk600.woff2)
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+article .markdown {
+  @apply m-0;
+}
+article .markdown p, .section .markdown p {
+  @apply my-4 text-[1.5rem];
+}
+
+
+:global(.swiper-slide) .markdown p {
+  @apply text-[18px] leading-[150%];
+}
+
+/* .DesktopContent :global(.swiper-pagination) {
+  @apply flex justify-start;
+} */

@@ -30,26 +30,7 @@ export const getDesktopSlots = async ({
     routes,
   });
   return {
-    sidebarheader: (
-      <div>
-        <SidebarActionBar actions={sidebarActions}>
-          {Object.entries(sidebarActions).map(([key, action]) => {
-            return (
-              <ThemedComponent key={key} name="ActionButton" action={action}>
-                <Icon
-                  icon={
-                    clsx({
-                      FaChevronRight: !state?.sidebar?.expanded ||  Number(state?.sidebar.expanded) < 2,
-                      FaChevronLeft: state?.sidebar.expanded === 2,
-                    }) as IconNames
-                  }
-                />
-              </ThemedComponent>
-            );
-          })}
-        </SidebarActionBar>
-      </div>
-    ),
+    sidebarheader: (null),
     desktopheader: (
       <div className="w-full">
         <ThemedComponent name="DesktopHeader">

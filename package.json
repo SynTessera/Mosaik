@@ -10,6 +10,7 @@
     "mosaik": "node ./node_modules/mosaik-cli/index.js"
   },
   "dependencies": {
+    "@svgr/webpack": "^8.1.0",
     "clsx": "^2.1.1",
     "highlight.js": "^11.11.1",
     "marked": "^16.0.0",
@@ -18,7 +19,9 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "react-tooltip": "^5.29.1"
+    "react-swiper": "^0.1.5",
+    "react-tooltip": "^5.29.1",
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -28,7 +31,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5"
   }
 }

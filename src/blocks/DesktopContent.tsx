@@ -8,7 +8,7 @@ export const DesktopContent = async ({ children, className }: any) => {
   return (
     <div
       className={clsx(
-        "flex grow overflow-hidden max-h-screen w-full h-full ",
+        "flex grow max-h-screen w-full h-full ",
         className
       )}
     >

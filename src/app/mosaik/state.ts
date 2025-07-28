@@ -1,7 +1,9 @@
 import { State } from "@/types/State";
 
 export const initialState: State = {
-  sidebar: {
-    expanded: undefined,
+  __noHydrate: true,
+  header: {
+
+    collapsed: false,
   },
 };

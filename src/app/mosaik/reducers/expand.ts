@@ -3,11 +3,8 @@ import { State } from "@/types/State";
 export type expandPayload = object;
 
 export const expand = (state: State) => {
-  const newState = { sidebar: { ...state?.sidebar } };
+  const newState = { header: { ...state?.header } };
 
-  newState.sidebar.expanded = ((Number(newState.sidebar.expanded) + 1) % 3) as
-    | 0
-    | 1
-    | 2;
+  newState.header.collapsed = false;
   return newState;
 };

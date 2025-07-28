@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useAppState } from "@/context/StateContext";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
-import { createHydratableComponent } from "@/lib/createHydratableComponent ";
+import { createHydratableComponent } from "@/lib/createHydratableComponent";
 
 export const NavigationLinkClient = createHydratableComponent((props: any) => {
   const NavLink = useThemedComponent("NavigationLink");

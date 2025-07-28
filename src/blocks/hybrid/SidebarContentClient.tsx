@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppState } from "@/context/StateContext";
-import { createHydratableComponent } from "@/lib/createHydratableComponent ";
+import { createHydratableComponent } from "@/lib/createHydratableComponent";
 import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 
 export const SidebarContentClient = createHydratableComponent(

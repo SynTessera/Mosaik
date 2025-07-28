@@ -1,13 +1,14 @@
 import { Theme } from "@/context/ThemeContext";
-import themeClasses from './default/theme.module.css';
+import themeClasses from "./digitas/theme.module.css";
 
-export const theme = process.env.MOSAIK_THEME || "default";
+export const theme =
+  process.env.MOSAIK_THEME || process.env.NEXT_PUBLIC_MOSAIK_THEME || "default";
 
 export const settings: Theme["settings"] = {
   theme,
   classNames: {
-    Button: '',
-    Icon: 'p-2 !h-7 !w-7'
+    Button: "",
+    Icon: "p-2 !h-7 !w-7",
   },
   navigation: {
     showTooltip: true,
@@ -17,7 +18,7 @@ export const settings: Theme["settings"] = {
   },
   preferences: {
     autoMode: ["system"],
-  },
+  }
 };
 
-export { themeClasses }
+export { themeClasses };
