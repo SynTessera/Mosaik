@@ -8,7 +8,9 @@ export const getThemedComponent = async (
   try {
     mod = await import(`@/themes/${theme}/${name}.tsx`);
   } catch {
-    mod = await import(`@/themes/default/${name}.tsx`);
+    try {
+      mod = await import(`@/themes/default/${name}.tsx`);
+    } catch {}
   }
 
   const Cmp = mod[name] || mod.default;

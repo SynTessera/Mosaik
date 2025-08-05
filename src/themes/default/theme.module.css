@@ -1,0 +1,41 @@
+@reference '../../app/globals.css';
+
+/** Mosaik Theme Variables */
+.DesktopLayout {
+  --app-content-padding: 8px;
+  --desktop-header-min-height: 4rem;
+  --sidebar-min-width: 4rem;
+}
+
+.NavigationLink {
+  @apply p-4  hover:bg-white/20 dark:hover:bg-white/10;
+}
+
+.NavigationLink.active {
+  @apply bg-white/70 hover:bg-white/50 dark:bg-white/10 dark:hover:bg-white/20;
+}
+
+.DesktopContent {
+  padding: var(--app-content-padding);
+}
+
+.DesktopSidebar .ActionBar {
+  @apply h-[var(--desktop-header-min-height)];
+}
+
+.DesktopContent article ul {
+  @apply max-w-full w-full;
+}
+/** List Styles */
+.DesktopContent article ul li {
+  @apply mb-4  max-w-full w-full;
+} 
+
+.DesktopContent article ul li::before {
+  content: "—";
+  @apply mr-2 font-bold inline-flex;
+}
+
+.BlogPost {
+  @apply text-2xl;
+}

@@ -42,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootPage() {
-  const slots = await getSlots({});
+  const slots = await getSlots();
 
   return (
     <StateProvider reducer={appReducer} initialState={initialState}>
