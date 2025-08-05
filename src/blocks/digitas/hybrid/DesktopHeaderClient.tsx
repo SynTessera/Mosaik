@@ -15,7 +15,7 @@ export const DesktopHeaderClient = createHydratableComponent(
     const ele = document.getElementsByClassName("scrollcontainer")?.[0];
 
       ele?.addEventListener("scroll", () => {
-        if (ele.scrollTop > 48) {
+        if (ele.scrollTop > 128) {
           dispatch(collapse());
         } else if (ele.scrollTop === 0) {
           dispatch(expand());
