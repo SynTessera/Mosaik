@@ -10,4 +10,6 @@ export default makeMosaikPage({
     return [blogPost];
   },
   view: "blog",
+  revalidate: 30, // Revalidate
 });
+
