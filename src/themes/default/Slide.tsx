@@ -21,6 +21,6 @@ export const Slide = ({ children, className, headline, image, content , link}: a
     {headline}
     {content}
 
-    <a href={link} children={headline} />
+    <a href={link}>{headline}</a>
   </div>
 );

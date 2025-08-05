@@ -5,7 +5,7 @@ import Image from "next/image";
 import { coverImageLink } from "@/lib/util/links";
 import { Seperator } from "./Seperator";
 
-export const HeroText = ({ children, className, content }: any) => (
+export const HeroText = ({ className, content }: any) => (
   <div
     className={clsx(
       "relative bg-digitas flex justify-between items-start",
@@ -15,8 +15,8 @@ export const HeroText = ({ children, className, content }: any) => (
     )}
   >
     <div>
-      <HeroTextHeadline children={content.headline} />
-      {content.content && <HeroTextContent children={content.content} />}
+      <HeroTextHeadline>{content.headline}</HeroTextHeadline>
+      {content.content && <HeroTextContent>{content.content}</HeroTextContent>}
     </div>
     {content?.image && (
       <Image
