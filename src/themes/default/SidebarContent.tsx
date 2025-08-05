@@ -10,7 +10,7 @@ export const SidebarContent = ({
   state = { sidebar: { expanded: undefined } },
   className,
 }: PropsWithChildren<{
-  state?: State;
+  state?: any;
   className?: string;
 }>) => (
   <div

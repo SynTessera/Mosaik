@@ -1,16 +1,13 @@
 // SynTessera\aegis\src\layouts\DesktopColLayout.tsx
 
-import { DesktopContent } from "@/blocks/DesktopContent";
 import { Desktop } from "@/modules/Desktop";
 import { PropsWithChildren } from "react";
-import { ThemedComponent } from "@/blocks/ThemedComponent";
-import { getDesktopSlots } from "@/slots/getDesktopSlots";
+import { getArticleSlots } from "@/slots/digitas/getArticleSlots";
 
 export const ArticleLayout = async ({
-  children,
   slots,
 }: PropsWithChildren<{
-  slots: Awaited<ReturnType<typeof getDesktopSlots>>;
+  slots: Awaited<ReturnType<typeof getArticleSlots>>;
 }>) => {
   return (
     <Desktop className="flex-col">

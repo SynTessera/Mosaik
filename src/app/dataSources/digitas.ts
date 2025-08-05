@@ -1,20 +1,25 @@
+import { PageProps } from "@/types/components/Page";
 import { Page } from "@/types/content/Page";
 
 const fetchMany = async (url: string) => {
-  const prom = await fetch(url, {
-    headers: {
-      Authorization: process.env.STRAPI_TOKEN || "",
-    },
-    next: {
-      revalidate: 30,
-    },
-  });
-  const json = await prom.json();
-  return json.data;
+  try {
+    const prom = await fetch(url, {
+      headers: {
+        Authorization: process.env.STRAPI_TOKEN || "",
+      },
+      next: {
+        revalidate: 30,
+      },
+    });
+    const json = await prom.json();
+    return json.data;
+  } catch (e) {
+    console.log("Error fetching data from Strapi", e);
+  }
 };
 
 const fetchOne = async (url: string) => {
-  return (await fetchMany(url))
+  return await fetchMany(url);
 };
 
 const populateBlocks = {
@@ -40,9 +45,9 @@ export const fetchSiteConfig = async () => {
   return fetchMany(url);
 };
 
-export const fetchPages = async () => {
+export const fetchPages = async (): Promise<PageProps[]> => {
+  // const url = `${process.env.STRAPI_API}/pages`;
   const url = `${process.env.STRAPI_API}/pages?populate[content][populate]=*`;
-  // const url = `${process.env.STRAPI_API}/pages?populate=*`;
   // const url = `${process.env.STRAPI_API}/pages?populate[content][on][shared.slider][populate][slides][populate]=image&populate[content][on][shared.hero]=image&populate[content][on][shared.herotext]=image`;
 
   return fetchMany(url);

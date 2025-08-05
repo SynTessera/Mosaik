@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Page } from "@/types/content/Page";
 import { coverImageLink } from "@/lib/util/links";
-import { notFound } from "next/navigation";
 import { fetchSiteConfig } from "./dataSources/digitas";
 import { getSlots } from "@/slots/digitas/getSlots";
 import { StateProvider } from "@/context/StateContext";
 
-import { App } from "@/modules/App";
-import { appReducer } from "./mosaik/reducers";
+import { appReducer } from "@/reducers/digitas/index";
 import { initialState } from "./mosaik/state";
 import { DesktopLayout } from "@/layouts/digitas/DesktopLayout";
 

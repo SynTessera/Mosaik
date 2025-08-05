@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "localhost",
+        hostname: "127.0.0.1",
         // Optional: Restrict to specific paths
         pathname: "/uploads/**",
       },

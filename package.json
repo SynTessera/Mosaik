@@ -10,8 +10,10 @@
     "mosaik": "node ./node_modules/mosaik-cli/index.js"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@svgr/webpack": "^8.1.0",
     "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
     "highlight.js": "^11.11.1",
     "marked": "^16.0.0",
     "marked-footnote": "^1.4.0",

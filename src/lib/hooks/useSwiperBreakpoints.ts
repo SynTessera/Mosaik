@@ -17,8 +17,8 @@ export function useSwiperBreakpoints(
     const swiperConfig: Record<number, any> = {};
 
     for (const [key, value] of Object.entries(config)) {
-      const px = breakpoints[key];
-      if (typeof px !== 'undefined') {
+      const px = breakpoints[key as keyof typeof breakpoints];
+      if (typeof px !== "undefined") {
         swiperConfig[px] = value;
       }
     }

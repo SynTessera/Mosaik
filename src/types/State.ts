@@ -3,7 +3,7 @@ export type SidebarState = {
 };
 
 export type State = {
-    __noHydrate: true,
+    __noHydrate?: true,
   header: {
     collapsed: boolean;
   };
