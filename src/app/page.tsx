@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Page } from "@/types/content/Page";
 import { coverImageLink } from "@/lib/util/links";
-import { fetchSiteConfig } from "./dataSources/digitas";
+import { fetchSiteConfig } from "@/lib/dataSources/digitas";
 import { getSlots } from "@/slots/digitas/getSlots";
 import { StateProvider } from "@/context/StateContext";
 
 import { appReducer } from "@/reducers/digitas/index";
-import { initialState } from "./mosaik/state";
 import { DesktopLayout } from "@/layouts/digitas/DesktopLayout";
+import { initialState } from "@/lib/state";
 
 export async function generateMetadata(): Promise<Metadata> {
   const meta: Page = await fetchSiteConfig();

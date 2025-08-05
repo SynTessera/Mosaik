@@ -4,7 +4,8 @@ import { useThemedComponent } from "@/lib/hooks/useThemedComponent";
 import { useEffect } from "react";
 import { useAppState } from "@/context/StateContext";
 import { createHydratableComponent } from "@/lib/createHydratableComponent";
-import { collapse, expand } from "@/app/mosaik/actions";
+import { collapse, expand } from "@/lib/actions";
+
 export const DesktopHeaderClient = createHydratableComponent(
   ({ canExpand, ...props }: any) => {
     const { dispatch, state } = useAppState();

@@ -1,6 +1,6 @@
 import { ThemedComponent } from "@/blocks/ThemedComponent";
 import { PropsWithChildren } from "react";
-import { fetchSiteConfig } from "@/app/dataSources/digitas";
+import { fetchSiteConfig } from "@/lib/dataSources/digitas";
 import { DesktopHeader } from "@/blocks/digitas/hybrid/DesktopHeader";
 import { Content } from "@/blocks/digitas/Content";
 import { ArticleProps } from "@/types/components/Article";

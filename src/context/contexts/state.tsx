@@ -1,6 +1,6 @@
 "use client" 
 
-import { initialState } from "@/app/mosaik/state";
+import { initialState } from "@/lib/state";
 import { State } from "@/types/State";
 import { createContext, Dispatch } from "react";
 

@@ -1,5 +1,5 @@
 import { ThemedComponent } from "@/blocks/ThemedComponent";
-import { fetchPages, fetchSiteConfig } from "@/app/dataSources/digitas";
+import { fetchPages, fetchSiteConfig } from "@/lib/dataSources/digitas";
 import { DesktopHeader } from "@/blocks/digitas/hybrid/DesktopHeader";
 import { Content } from "@/blocks/digitas/Content";
 import { FragmentProps } from "@/types/components/Fragment";
@@ -7,7 +7,7 @@ import { FragmentProps } from "@/types/components/Fragment";
 export const getSlots = async () => {
   const siteConfig = await fetchSiteConfig();
   const page = (await fetchPages())?.[0];
-  const slots =
+  const slotsMap =
     page?.slots?.reduce((acc, cur) => {
       acc[cur.name] = cur.fragment;
       return acc;
@@ -29,8 +29,8 @@ export const getSlots = async () => {
     ),
     footer: (
       <ThemedComponent name="DesktopFooter">
-        {slots.footer?.content
-          ? slots.footer.content.map((c: any) => (
+        {slotsMap.footer?.content
+          ? slotsMap.footer.content.map((c: any) => (
               <Content content={c} key={c.id} />
             ))
           : null}
