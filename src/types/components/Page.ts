@@ -1,4 +1,3 @@
-import { getArticleSlots } from "@/slots/digitas/getArticleSlots";
 import { SlotProps } from "./Slot";
 import { ContentElementProps } from "./Content";
 
