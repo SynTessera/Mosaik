@@ -2,7 +2,6 @@
   "shared.hero": "HeroImage",
   "shared.animatedherotext": "AnimatedHeroText",
   "shared.animatedblock": "AnimatedBlock",
-  "shared.animatedsection": "AnimatedSection",
   "shared.herotext": "HeroText",
   "shared.slider": "Slider",
   "shared.slide": "Slide",

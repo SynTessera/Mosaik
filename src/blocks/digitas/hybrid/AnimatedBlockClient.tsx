@@ -51,8 +51,6 @@ export const AnimatedBlockClient = createHydratableComponent(
       ScrollTrigger.refresh();
     }, [boxRef.current, scrollContainerRef.current]);
 
-    console.log("ANIMATED BLOCK CLIENT", from, to, className, component);
-    const { dispatch, state } = useAppState();
     return (
       <ThemedClientComponent
         name="AnimatedBlock"

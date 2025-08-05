@@ -8,17 +8,16 @@ import { FragmentProps } from "@/types/components/Fragment";
 export const getSlots = async ({}: PropsWithChildren<{}>) => {
   const siteConfig = await fetchSiteConfig();
   const page = (await fetchPages())?.[0];
-  console.log ("PAGE", page)
-
   const slots = page.slots?.reduce((acc, cur) => {
     acc[cur.name] = cur.fragment;
     return acc;
   }, {} as Record<string, FragmentProps>);
+  
   return {
     sidebarheader: null,
     header: (
-      <div className="w-full !h-0 overflow-hidden">
-        <DesktopHeader  {...siteConfig}></DesktopHeader>
+      <div className="w-full overflow-hidden">
+        <DesktopHeader canExpand {...siteConfig}></DesktopHeader>
       </div>
     ),
     content: (

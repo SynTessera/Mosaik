@@ -61,7 +61,6 @@ export const SliderClient = ({ children, className, content }: any) => {
     activeIndex < (Math.ceil(content.slides?.length / slidesPerView) - 1);
   const hasPrev = activeIndex > 0;
 
-  console.log("SlidesPerView", currentBreakpoint, slidesPerView);
   return (
     <Slider headline={content.headline}>
       <Swiper

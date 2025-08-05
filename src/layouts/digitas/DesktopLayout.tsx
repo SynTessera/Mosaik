@@ -15,7 +15,6 @@ export const DesktopLayout = async ({
   return (
     <Desktop className="flex-col">
       <div className="flex w-full sticky top-0 z-10">
-        {slots.sidebarheader}
         {slots.header}
       </div>
       <ThemedComponent name="DesktopContent">{slots.content}</ThemedComponent>

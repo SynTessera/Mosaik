@@ -2,16 +2,12 @@
 
 import type { Metadata } from "next";
 import { getThemedComponent } from "@/lib/server/getThemedComponent";
-import { fetchRoutes } from "./routes";
-import { getDesktopSlots } from "@/slots/getDesktopSlots";
 import { StateProvider } from "@/context/StateContext";
-import { App } from "@/modules/App";
-import { DesktopColLayout } from "@/layouts/DesktopColLayout";
-import { appReducer } from "./reducers";
 import { initialState } from "./state";
-import { routes as staticRoutes } from "@/app/mosaik/routes";
 import { headers } from "next/headers";
-import { matchParams } from "@/lib/util/matchParams";
+import { appReducer } from "@/reducers/digitas";
+import { DesktopLayout } from "@/layouts/digitas/DesktopLayout";
+import { getSlots } from "@/slots/digitas/getSlots";
 
 // import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
 
@@ -33,23 +29,15 @@ export default async function RootLayout({
   );
 
   const pathname = (await headers()).get("x-next-url") ?? "";
-  const params = matchParams(pathname, "/mosaik/[...section]");
-
-  const routes = [...(await fetchRoutes()), ...staticRoutes];
-  const slots = await getDesktopSlots({
-    params, // pass shared params if needed
-    fetcher: () => Promise.resolve([]), // stub if needed
-    routes,
+  const slots = await getSlots({
     children,
   });
 
   return (
     <StateProvider reducer={appReducer} initialState={initialState}>
-      <App slug="/mosaik">
-        <Container>
-          <DesktopColLayout slots={slots}></DesktopColLayout>
-        </Container>
-      </App>
+      <Container>
+        <DesktopLayout slots={slots}></DesktopLayout>
+      </Container>
     </StateProvider>
   );
 }

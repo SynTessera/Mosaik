@@ -9,7 +9,7 @@ import { appReducer } from "@/reducers/digitas/index";
 import { initialState } from "./mosaik/state";
 import { DesktopLayout } from "@/layouts/digitas/DesktopLayout";
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const meta: Page = await fetchSiteConfig();
 
   const title = meta.ogTitle || meta.twitterTitle || meta.title || "";
@@ -41,15 +41,8 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   };
 }
 
-export default async function RootPage({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-  params: Promise<object>;
-}>) {
-  const slots = await getSlots({
-    children,
-  });
+export default async function RootPage() {
+  const slots = await getSlots({});
 
   return (
     <StateProvider reducer={appReducer} initialState={initialState}>

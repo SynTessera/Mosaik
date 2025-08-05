@@ -42,10 +42,8 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 }
 
 export default async function RootPage({
-  children,
   params,
 }: Readonly<{
-  children: React.ReactNode;
   params: Promise<{ slug: string[] }>;
 }>) {
   const article = await fetchArticle((await params).slug?.[0]);
@@ -55,7 +53,7 @@ export default async function RootPage({
   const slots = await getArticleSlots({
     article,
   });
-
+  
   return (
     <StateProvider reducer={appReducer} initialState={initialState}>
       <ArticleLayout slots={slots}></ArticleLayout>
