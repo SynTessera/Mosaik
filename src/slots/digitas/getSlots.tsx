@@ -1,40 +1,39 @@
 import { ThemedComponent } from "@/blocks/ThemedComponent";
-import { PropsWithChildren } from "react";
 import { fetchPages, fetchSiteConfig } from "@/app/dataSources/digitas";
 import { DesktopHeader } from "@/blocks/digitas/hybrid/DesktopHeader";
 import { Content } from "@/blocks/digitas/Content";
 import { FragmentProps } from "@/types/components/Fragment";
 
-export const getSlots = async ({}: PropsWithChildren<{}>) => {
+export const getSlots = async () => {
   const siteConfig = await fetchSiteConfig();
   const page = (await fetchPages())?.[0];
-  const slots = page.slots?.reduce((acc, cur) => {
-    acc[cur.name] = cur.fragment;
-    return acc;
-  }, {} as Record<string, FragmentProps>);
-  
+  const slots =
+    page?.slots?.reduce((acc, cur) => {
+      acc[cur.name] = cur.fragment;
+      return acc;
+    }, {} as Record<string, FragmentProps>) ?? {};
+
   return {
     sidebarheader: null,
     header: (
       <div className="w-full overflow-hidden">
-        <DesktopHeader canExpand {...siteConfig}></DesktopHeader>
+        <DesktopHeader canExpand {...siteConfig} />
       </div>
     ),
     content: (
       <div className="w-full max-h-min">
-        {page.content.map(({ component, ...content }: any) => {
-          return (
-            <Content key={content.id} content={content} component={component} />
-          );
-        })}
+        {page?.content?.map(({ component, ...content }: any) => (
+          <Content key={content.id} content={content} component={component} />
+        ))}
       </div>
     ),
     footer: (
       <ThemedComponent name="DesktopFooter">
-        {slots.footer &&
-          slots.footer.content?.map((c) => {
-            return <Content content={c} key={c.id} />;
-          })}
+        {slots.footer?.content
+          ? slots.footer.content.map((c: any) => (
+              <Content content={c} key={c.id} />
+            ))
+          : null}
       </ThemedComponent>
     ),
   };

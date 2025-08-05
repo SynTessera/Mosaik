@@ -2,7 +2,7 @@ import Image from "next/image";
 import { coverImageLink } from "@/lib/util/links";
 import { Link } from "./Link";
 
-export const ArticleAuthor = ({ children, className, author }: any) => {
+export const ArticleAuthor = ({ author }: any) => {
   return (
     <div className="flex gap-4 p-4">
       <div className="rounded-full overflow-hidden">

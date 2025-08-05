@@ -9,7 +9,7 @@ export const SlideClient = createHydratableComponent<any>(
     const Cmp = useThemedComponent("Slide");
     return (
       <SwiperSlide>
-        <Cmp {...props} />
+        <Cmp className={className} {...props} />
       </SwiperSlide>
     );
   }

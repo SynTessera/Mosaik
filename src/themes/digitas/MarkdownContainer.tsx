@@ -29,7 +29,6 @@ marked.use(footnote());
 
 export const MarkdownContainer = ({
   children,
-  className,
 }: PropsWithChildren<{ className?: string }>) => {
   const htmlContent = marked(children?.toString() || "");
   const mdContent = (

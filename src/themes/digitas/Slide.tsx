@@ -1,8 +1,6 @@
 import clsx from "clsx";
-import { MarkdownContainer } from "./MarkdownContainer";
 import Image from "next/image";
 import { coverImageLink } from "@/lib/util/links";
-import { themeClasses } from "..";
 import { TextHeadline } from "./TextHeadline";
 import { TextTeaser } from "./TextTeaser";
 import { InternalLink } from "./InternalLink";

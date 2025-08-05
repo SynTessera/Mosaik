@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-export const Spacer = ({ children, spacing }: any) => {
+export const Spacer = ({ spacing }: any) => {
   return (
     <div
       className={clsx("bg-digitas", {

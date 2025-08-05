@@ -34,7 +34,7 @@ const breakpointsTailwind = {
   },
 } as any;
 
-export const SliderClient = ({ children, className, content }: any) => {
+export const SliderClient = ({ content }: any) => {
   const [activeIndex, setIndex] = useState(0);
   const Slider = useThemedComponent("Slider");
   const Slide = useThemedComponent("Slide");
@@ -68,7 +68,7 @@ export const SliderClient = ({ children, className, content }: any) => {
         modules={[Pagination]}
         pagination={{ clickable: true }}
         onActiveIndexChange={() =>
-          setIndex(sliderRef.current?.swiper?.activeIndex!)
+          setIndex(sliderRef.current?.swiper?.activeIndex || 0)
         }
         spaceBetween={4}
         breakpoints={breakpoints}

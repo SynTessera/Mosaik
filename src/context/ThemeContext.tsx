@@ -14,7 +14,7 @@ export type SlotRenderer = (
 ) => React.ReactNode;
 
 export type Theme = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   settings: {
     classNames?: Record<string, string>;
     theme: string;
@@ -27,7 +27,7 @@ export type Theme = {
     preferences: {
       autoMode: ("system" | "setting" | "static")[];
     };
-    components?: {}
+    components?: any
     blocks?: Record <string,React.ComponentType<any>>
   };
 };

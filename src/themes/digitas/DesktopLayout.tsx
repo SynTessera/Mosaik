@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { HeaderSection } from "./HeaderSection";
 
 export const DesktopLayout = ({ children, className }: any) => (
   <div

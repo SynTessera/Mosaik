@@ -37,7 +37,7 @@ export function DataProvider({
   type,
 }: PropsWithChildren<{
   fetcher: () => Promise<Response> | null;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   initialData: any;
   type: string;
 }>) {

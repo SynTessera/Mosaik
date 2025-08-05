@@ -4,7 +4,6 @@ import Image from "next/image";
 import { coverImageLink } from "@/lib/util/links";
 
 export const HeroImage = ({
-  children,
   className,
   content: {
     image: { url, height, width },

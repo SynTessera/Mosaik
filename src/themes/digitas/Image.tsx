@@ -3,7 +3,6 @@ import NextImage from "next/image";
 import { coverImageLink } from "@/lib/util/links";
 
 export const Image = ({
-  children,
   className,
   content: {
     image: { url, height, width },

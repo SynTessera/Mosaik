@@ -1,8 +1,3 @@
-import clsx from "clsx";
-import { HeaderSection } from "./HeaderSection";
-import DigitasLogo from "@/assets/digitaslogo.svg";
-import Arrow from "@/assets/arrowdiagonal.svg";
-import { InternalLink } from "./InternalLink";
 import { Seperator } from "./Seperator";
 import { ArticleAuthor } from "./ArticleAuthor";
 export const ArticleFooter = ({ children, ...article }: any) => {

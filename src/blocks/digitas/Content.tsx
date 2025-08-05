@@ -1,6 +1,5 @@
 import { getAlias } from "@/lib/util/getAlias";
 import { ThemedComponent } from "../ThemedComponent";
-import { getThemedComponent } from "@/lib/server/getThemedComponent";
 import { PropsWithChildren } from "react";
 import { blocks } from "@/themes/mappings";
 import { getClientComponent } from "@/lib/server/getClientComponent";

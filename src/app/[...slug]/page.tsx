@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import { ArticleLayout } from "@/layouts/digitas/ArticleLayout";
 import { getArticleSlots } from "@/slots/digitas/getArticleSlots";
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
+export async function generateMetadata({ }: any): Promise<Metadata> {
   const meta: Page = await fetchSiteConfig();
 
   const title = meta.ogTitle || meta.twitterTitle || meta.title || "";

@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import IconNext from "@/assets/arrowright.svg";
 import { PropsWithChildren } from "react";
 
 export type SwiperNavigationProps = PropsWithChildren<{

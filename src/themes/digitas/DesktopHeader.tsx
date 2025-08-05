@@ -1,15 +1,12 @@
 import clsx from "clsx";
 import { HeaderSection } from "./HeaderSection";
 import DigitasLogo from "@/assets/digitaslogo.svg";
-import Arrow from "@/assets/arrowdiagonal.svg";
 import { InternalLink } from "./InternalLink";
 export const DesktopHeader = ({
-  children,
   className,
   headline,
   subline,
   link,
-  linkText,
   collapsed,
 }: any) => {
   return <div

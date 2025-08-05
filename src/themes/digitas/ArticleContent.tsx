@@ -1,8 +1,4 @@
 import clsx from "clsx";
-import { HeaderSection } from "./HeaderSection";
-import DigitasLogo from "@/assets/digitaslogo.svg";
-import Arrow from "@/assets/arrowdiagonal.svg";
-import { InternalLink } from "./InternalLink";
 import { MarkdownContainer } from "./MarkdownContainer";
 export const ArticleContent = ({ content, className }: any) => {
   return (

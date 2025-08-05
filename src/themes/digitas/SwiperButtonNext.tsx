@@ -8,7 +8,6 @@ export type SwiperButtonNextProps = {
 };
 
 export const SwiperButtonNext = ({
-  children,
   className,
   onClick,
   disabled,

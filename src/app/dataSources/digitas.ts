@@ -1,5 +1,4 @@
 import { PageProps } from "@/types/components/Page";
-import { Page } from "@/types/content/Page";
 
 const fetchMany = async (url: string) => {
   try {
@@ -22,23 +21,6 @@ const fetchOne = async (url: string) => {
   return await fetchMany(url);
 };
 
-const populateBlocks = {
-  "shared.slider": "slides.image",
-  "shared.hero": "*",
-  "shared.herotext": "*",
-};
-
-const buildPopulateQuery = (blocks: Record<string, string>) =>
-  Object.entries(blocks)
-    .map(
-      ([component, fields]) =>
-        `populate[content][on][${component}][populate]=${fields}`
-    )
-    .join("&");
-
-const url = `${process.env.STRAPI_API}/pages?${buildPopulateQuery(
-  populateBlocks
-)}`;
 
 export const fetchSiteConfig = async () => {
   const url = `${process.env.STRAPI_API}/site-config?populate=*`;

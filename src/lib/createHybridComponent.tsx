@@ -2,7 +2,7 @@ import { getAlias } from "./util/getAlias";
 
 export function createHybridServerWrapper(
   componentName: string,
-  ClientComponent: any
+  ClientComponent: React.ComponentType<any>
 ) {
   return async function ServerWrapper({ component, ...props }: any) {
     const { getThemedComponent } = await import(
@@ -11,18 +11,15 @@ export function createHybridServerWrapper(
     const Themed = await getThemedComponent(componentName);
     const Childs = component?.__component
       ? await getThemedComponent(getAlias(component.__component))
-      : () => null;
+      : null;
+
     // Render THEMED fully on server as fallback HTML and pass it as prop to client wrapper
     const themedElement = (
-      <Themed
-        {...props}
-        component={component}
-        children={
-          component?.__component ? <Childs content={component} /> : <div>TEST</div>
-        }
-      />
+      <Themed {...props} component={component}>
+        {Childs ? <Childs content={component} /> : null}
+      </Themed>
     );
-    
+
     return (
       <ClientComponent
         Component={themedElement}
