@@ -1,4 +1,4 @@
-import { JSX, ReactNode } from 'react';
+import { JSX } from 'react';
 import { AppNavigation } from "@/blocks/AppRoutes";
 import { ThemedComponent } from "@/blocks/ThemedComponent";
 import { Routes } from "@/types/Route";

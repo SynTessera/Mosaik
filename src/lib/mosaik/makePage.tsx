@@ -4,7 +4,6 @@ export function makeMosaikPage({
   Component,
   fetcher,
   view,
-  revalidate = 30
 }: {
   Component: React.FC<any>;
   fetcher?: (ctx: any) => Promise<any>;

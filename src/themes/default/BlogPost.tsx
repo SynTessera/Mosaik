@@ -3,10 +3,11 @@ import clsx from "clsx";
 import { coverImageLink } from "@/lib/util/links";
 import Link from "next/link";
 import { MarkdownContainer } from "./MarkdownContainer";
+import NextImage from "next/image";
+// import { ImageColorContainer } from "@/components/ImageColorContainer";
 
 export const BlogPost = ({ data = [], className }: any) => {
   const { title, coverImage, content, documentId, slug } = data?.[0];
-
   return (
     <article className="flex flex-col lg:flex-row gap-4 bg-white/10 max-h-full w-full overflow-y-auto overflow-x-hidden">
       <div className="h-full mx-auto flex-1 grow pb-4 relative">
@@ -16,7 +17,10 @@ export const BlogPost = ({ data = [], className }: any) => {
         <div className="relative overflow-hidden flex justify-center">
           <img
             src={coverImageLink(coverImage?.url)}
-            className={clsx("w-full sm:w-2/3 md:w-1/2 lg:w-1/3  mx-auto", className)}
+            className={clsx(
+              "w-full sm:w-2/3 md:w-1/2 lg:w-1/3  mx-auto",
+              className
+            )}
             alt={"Blog Post Cover Image"}
           />
           <img
@@ -27,19 +31,23 @@ export const BlogPost = ({ data = [], className }: any) => {
             )}
             alt={"Blog Post Cover Image"}
           />
-          <img
+          <NextImage
             src={coverImageLink(coverImage?.url)}
             className={clsx(
               "absolute w-full sm:w-2/3 md:w-1/2 lg:w-1/3 mx-auto z-30",
               className
             )}
+            width={320}
+            height={320}
             alt={"Blog Post Cover Image"}
           />
         </div>
 
-        <MarkdownContainer className={classes.BlogPost}>
-          {content}
-        </MarkdownContainer>
+        {/* <ImageColorContainer imgUrl={coverImageLink(coverImage?.url)}> */}
+          <MarkdownContainer className={classes.BlogPost}>
+            {content}
+          </MarkdownContainer>
+        {/* </ImageColorContainer> */}
       </div>
     </article>
   );
