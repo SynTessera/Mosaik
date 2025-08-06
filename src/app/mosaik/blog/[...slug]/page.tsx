@@ -1,5 +1,5 @@
+import { fetchBlogPost } from "@/lib/mosaik/dataSources/strapi";
 import { makeMosaikPage } from "@/lib/server/makeMosaikPage";
-import { fetchBlogPost } from "../../dataSources/strapi";
 import { BlogPost } from "@/themes/default/BlogPost";
 
 export default makeMosaikPage({
@@ -12,3 +12,4 @@ export default makeMosaikPage({
   view: "blog",
 });
 
+export const revalidate = 30;

@@ -24,5 +24,3 @@ export function makeMosaikPage({
     );
   };
 }
-
-export const revalidate = 30;
