@@ -26,55 +26,53 @@
 :root {
   --background: var(--color-success-100);
   --foreground: #171717;
-
 }
 
+/* Apply to a wrapper element */
+.scrollable:not(.hidden) {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
- /* Apply to a wrapper element */
-  .scrollable:not(.hidden) {
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
+/* Base thin scrollbar */
+.scrollable::-webkit-scrollbar {
+  width: 2px;
+  height: 6px;
+  transition: width 0.3s ease, height 0.3s ease;
+}
 
-  /* Base thin scrollbar */
-  .scrollable::-webkit-scrollbar {
-    width: 2px;
-    height: 6px;
-    transition: width 0.3s ease, height 0.3s ease;
-  }
+.scrollable::-webkit-scrollbar-track {
+  background: #00000011;
+}
 
-  .scrollable::-webkit-scrollbar-track {
-    background: #00000011;
-  }
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: #00000022;
+  border-radius: 4px;
+  width: 8px;
+  transition: background-color 0.3s ease;
+}
 
-  .scrollable::-webkit-scrollbar-thumb {
-    background-color: #00000022;
-    border-radius: 4px;
-    width: 8px;
-    transition: background-color 0.3s ease;
-  }
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background-color: #00000022;
+}
 
-  .scrollable::-webkit-scrollbar-thumb:hover {
-    background-color: #00000022;
-  }
+/* On hover: widen scrollbar */
+.scrollable:hover::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
 
-  /* On hover: widen scrollbar */
-  .scrollable:hover::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-  }
+/* Firefox */
+.scrollable:hover {
+  scrollbar-width: 12px;
+  scrollbar-color: #00000011;
 
-  /* Firefox */
-  .scrollable:hover {
-    scrollbar-width: 12px;
-    scrollbar-color: #00000011;
+  margin-right: 0px;
+}
 
-    margin-right: 0px;
-  }
-
-  .scrollable:hover {
-    scrollbar-width: auto; /* fallback: default width when hovered */
-  }
+.scrollable:hover {
+  scrollbar-width: auto; /* fallback: default width when hovered */
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -137,15 +135,21 @@ body {
   @apply overflow-hidden;
 }
 
+article strong {
+  font-weight: 700;
+}
 
+article a[href] {
+  text-decoration: underline;
+}
 
-article > p {
+article p {
   margin-bottom: 1rem;
   font-weight: 200;
   font-size: 1.4rem;
 }
 
-article > p > p {
+article p > p {
   @apply overflow-x-auto max-w-full my-4;
 }
 
@@ -185,5 +189,3 @@ article h3 {
 article h4 {
   @apply ml-0 my-2 text-[1.2rem] font-semibold;
 }
-
-
