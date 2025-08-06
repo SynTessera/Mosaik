@@ -3,6 +3,7 @@ import { getServerUiState } from '@/lib/util/getServerUIState';
 import { sidebarActions } from './actions';
 import { ThemedComponent } from '@/blocks/ThemedComponent';
 import { SidebarContent } from '@/blocks/hybrid/SidebarContent';
+import { JSX } from 'react';
 
 export interface SidebarSlots {
   sidebarHeader: JSX.Element;

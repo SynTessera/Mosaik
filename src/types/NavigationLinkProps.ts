@@ -1,5 +1,5 @@
 import { IconNames } from "@/components/Icon";
-import { Theme } from "@/context/ThemeContext";
+import { Theme } from "./Theme";
 
 export type NavigationLinkProps = {
   className?: string;

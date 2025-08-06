@@ -1,4 +1,4 @@
-import { Theme } from "@/context/ThemeContext";
+import { Theme } from '@/types/Theme';
 import themeClasses from './default/theme.module.css';
 
 export const theme = process.env.MOSAIK_THEME || "default";
