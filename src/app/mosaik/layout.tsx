@@ -2,16 +2,16 @@
 
 import type { Metadata } from "next";
 import { getThemedComponent } from "@/lib/server/getThemedComponent";
-import { fetchRoutes } from "./routes";
+import { fetchRoutes, defaultRoutes as staticRoutes } from "@/lib/mosaik/routes";
 import { getDesktopSlots } from "@/slots/getDesktopSlots";
 import { StateProvider } from "@/context/StateContext";
 import { App } from "@/modules/App";
 import { DesktopColLayout } from "@/layouts/DesktopColLayout";
 import { appReducer } from "./reducers";
 import { initialState } from "./state";
-import { routes as staticRoutes } from "@/app/mosaik/routes";
 import { headers } from "next/headers";
 import { matchParams } from "@/lib/util/matchParams";
+import { strapi } from "@/lib/mosaik/dataSources";
 
 // import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
 
@@ -37,8 +37,7 @@ export default async function RootLayout({
 
   const routes = [...(await fetchRoutes()), ...staticRoutes];
   const slots = await getDesktopSlots({
-    params, // pass shared params if needed
-    fetcher: () => Promise.resolve([]), // stub if needed
+    params,
     routes,
     children,
   });

@@ -4,10 +4,11 @@ import clsx from "clsx";
 import { themeClasses as classes } from "@/themes";
 import { State } from "@/types/State";
 import { PropsWithChildren } from "react";
+import { initialState } from "@/app/mosaik/state";
 
 export const SidebarContent = ({
   children,
-  state = { sidebar: { expanded: undefined } },
+  state = initialState,
   className,
 }: PropsWithChildren<{
   state?: State;
@@ -17,7 +18,7 @@ export const SidebarContent = ({
     className={clsx(
       "SidebarContent",
       classes.SidebarContent,
-      "min-w-[var(--sidebar-min-width)] flex-1 h-full scrollable pr-[10px] hover:mr-0 hover:pr-[0px]",
+      "min-w-max flex-1 h-full scrollable pr-[10px] hover:mr-0 hover:pr-[0px]",
       {
         hidden: state?.sidebar?.expanded === 0,
           "hidden md:block": typeof state?.sidebar?.expanded === 'undefined',

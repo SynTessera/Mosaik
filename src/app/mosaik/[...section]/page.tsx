@@ -1,13 +1,11 @@
 import Section from "../sections/Section";
 
 import type { Metadata } from "next";
-import {
-  fetchMetadata,
-  fetchSection,
-} from "../dataSources/strapi";
+
 import { Page } from "@/types/content/Page";
 import { coverImageLink } from "@/lib/util/links";
 import { notFound } from "next/navigation";
+import { fetchMetadata, fetchSection } from "@/lib/mosaik/dataSources/strapi";
 
 export async function generateMetadata({ params }: any): Promise<Metadata> {
   const meta: Page = await fetchMetadata(`/mosaik/${(await params).section}`);
