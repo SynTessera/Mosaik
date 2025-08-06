@@ -21,10 +21,10 @@ export const ImageColorContainer = ({
       <NextImage
         ref={imgRef}
         src={imgUrl}
-        className=""
+        className="absolute opacity-0"
         alt={"Blog Post Cover Image"}
-        height={0}
-        width={0}
+        height={128}
+        width={128}
       />
       {children}
     </div>
