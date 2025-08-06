@@ -9,11 +9,11 @@ import {
 import { StateProvider } from "@/context/StateContext";
 import { App } from "@/modules/App";
 import { DesktopColLayout } from "@/layouts/DesktopColLayout";
-import { initialState } from "./state";
 import { headers } from "next/headers";
 import { matchParams } from "@/lib/util/matchParams";
 import { getDesktopSlots } from "@/features/desktop/getSlots";
 import { sidebarReducer } from "@/features/sidebar/reducers";
+import { initialState } from "@/lib/mosaik/state";
 
 // import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
 

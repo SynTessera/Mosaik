@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { themeClasses as classes } from "@/themes";
 import { State } from "@/types/State";
 import { PropsWithChildren } from "react";
-import { initialState } from "@/app/mosaik/state";
+import { initialState } from "@/lib/mosaik/state";
 
 export const SidebarContent = ({
   children,
