@@ -9,7 +9,7 @@ import NextImage from "next/image";
 export const BlogPost = ({ data = [], className }: any) => {
   const { title, coverImage, content, documentId, slug } = data?.[0];
   return (
-    <article className="flex flex-col lg:flex-row gap-4 bg-white/10 max-h-full w-full overflow-y-auto overflow-x-hidden">
+    <article className="flex flex-col lg:flex-row gap-4 bg-white/10 max-h-full w-full overflow-y-auto overflow-x-hidden scrollable">
       <div className="h-full mx-auto flex-1 grow pb-4 relative">
         <h1>
           <Link href={`/mosaik/blog/${slug}-${documentId}`}>{title}</Link>
