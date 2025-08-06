@@ -2,7 +2,7 @@ import { useState, useEffect, RefObject } from "react";
 import { getMedianColorFromImageRef } from "../util/getMedianColor";
 
 export const useImageColor = (
-  imgRef: RefObject<HTMLImageElement>
+  imgRef: RefObject<HTMLImageElement | null>
 ): { r: number; g: number; b: number } | null => {
   const [color, setColor] = useState<{ r: number; g: number; b: number } | null>(null);
 
