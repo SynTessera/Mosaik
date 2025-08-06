@@ -1,6 +1,6 @@
 import Blog from "@/app/mosaik/sections/Blog";
+import { strapi } from "@/lib/mosaik/dataSources";
 import { makeMosaikPage } from "@/lib/server/makeMosaikPage";
-import { strapi } from "../dataSources";
 
 export default makeMosaikPage({
   Component: Blog,

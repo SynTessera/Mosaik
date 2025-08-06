@@ -1,5 +1,5 @@
-import { fetchBlogPosts } from "../dataSources/strapi";
 import { ThemedComponent } from "@/blocks/ThemedComponent";
+import { fetchBlogPosts } from "@/lib/mosaik/dataSources/strapi";
 
 const Blog = async () => {
   const blogPosts = await fetchBlogPosts();

@@ -1,5 +1,5 @@
+import { strapi } from "@/lib/mosaik/dataSources";
 import { ExternalRoute, Route } from "@/types/Route";
-import { strapi } from "./dataSources";
 import { Section } from "@/typesCMS/Section";
 
 export const fetchRoutes = async () => {

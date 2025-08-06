@@ -18,7 +18,7 @@ export const SidebarContent = ({
     className={clsx(
       "SidebarContent",
       classes.SidebarContent,
-      "min-w-max flex-1 h-full scrollable pr-[10px] hover:mr-0 hover:pr-[0px]",
+      "min-w-max flex-1 h-full pr-[10px] hover:mr-0 hover:pr-[0px]",
       {
         hidden: state?.sidebar?.expanded === 0,
           "hidden md:block": typeof state?.sidebar?.expanded === 'undefined',

@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
-import { fetchMOTD } from "@/app/mosaik/dataSources/strapi";
+import { JSX, ReactNode } from 'react';
 import { AppNavigation } from "@/blocks/AppRoutes";
 import { ThemedComponent } from "@/blocks/ThemedComponent";
 import { Routes } from "@/types/Route";
-import { MOTDProps } from '@/types/MOTD';
+import { fetchMOTD } from '@/lib/mosaik/dataSources/strapi';
+import { MOTDProps } from '@/themes/default/MOTD';
 
 interface GetSectionSlotsParams {
   params: { slug?: string[]; section?: string[] };

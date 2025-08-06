@@ -5,7 +5,7 @@ import { State } from "@/types/State";
 import { collapse } from "./collapse";
 import { expand } from "./expand";
 
-export const appReducer = (
+export const sidebarReducer = (
   state: State,
   action: Action<string, string, object>
 ) => {

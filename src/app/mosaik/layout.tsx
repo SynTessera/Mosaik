@@ -2,16 +2,18 @@
 
 import type { Metadata } from "next";
 import { getThemedComponent } from "@/lib/server/getThemedComponent";
-import { fetchRoutes, defaultRoutes as staticRoutes } from "@/lib/mosaik/routes";
-import { getDesktopSlots } from "@/slots/getDesktopSlots";
+import {
+  fetchRoutes,
+  defaultRoutes as staticRoutes,
+} from "@/lib/mosaik/routes";
 import { StateProvider } from "@/context/StateContext";
 import { App } from "@/modules/App";
 import { DesktopColLayout } from "@/layouts/DesktopColLayout";
-import { appReducer } from "./reducers";
 import { initialState } from "./state";
 import { headers } from "next/headers";
 import { matchParams } from "@/lib/util/matchParams";
-import { strapi } from "@/lib/mosaik/dataSources";
+import { getDesktopSlots } from "@/features/desktop/getSlots";
+import { sidebarReducer } from "@/features/sidebar/reducers";
 
 // import { AutoCollapseSidebarOnMobileEffect } from "@/lib/effects/components/AutoCollapseSidebarOnMobile";
 
@@ -43,7 +45,7 @@ export default async function RootLayout({
   });
 
   return (
-    <StateProvider reducer={appReducer} initialState={initialState}>
+    <StateProvider reducer={sidebarReducer} initialState={initialState}>
       <App slug="/mosaik">
         <Container>
           <DesktopColLayout slots={slots}></DesktopColLayout>

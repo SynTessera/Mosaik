@@ -6,7 +6,7 @@ export const BlogPosts = ({ children }: PropsWithChildren) => {
     <ScrollContainer>
       <ul>
         {React.Children.map(children, (child) => (
-          <li>{child}</li>
+          <li className="odd:bg-amber-900 even:bg-blue-900">{child}</li>
         ))}
       </ul>
     </ScrollContainer>
