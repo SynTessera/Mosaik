@@ -2,33 +2,26 @@
 
 import React, {
   PropsWithChildren,
+  createContext,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { ThemeContext } from "./contexts/theme";
+import type { Theme } from "@/types/Theme";
+
+interface ThemeContextType {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+}
+
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined
+);
 
 // --- 1️⃣ Slot type ---
 export type SlotRenderer = (
   props: PropsWithChildren<{ theme: Theme }>
 ) => React.ReactNode;
-
-export type Theme = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  settings: {
-    classNames?: Record<string, string>;
-    theme: string;
-    navigation: {
-      showTooltip: boolean;
-    };
-    userPreferences: {
-      mode: "light" | "dark";
-    };
-    preferences: {
-      autoMode: ("system" | "setting" | "static")[];
-    };
-  };
-};
 
 export type StaticTheme = {
   settings: Theme["settings"];
@@ -64,10 +57,14 @@ export function ThemeProvider({
   }, []);
 
   return (
-    <ThemeContext.Provider value={tmpTheme}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme: tmpTheme, setTheme }}>{children}</ThemeContext.Provider>
   );
 }
 
 export const useTheme = () => {
-  return useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
 };

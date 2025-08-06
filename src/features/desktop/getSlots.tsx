@@ -1,6 +1,5 @@
-  import { ThemedComponent } from "@/blocks/ThemedComponent";
-import { PropsWithChildren } from "react";
-import { getSectionSlots } from "./getSectionSlots";
+import { ThemedComponent } from "@/blocks/ThemedComponent";
+import { JSX, PropsWithChildren } from "react";
 import { Routes } from "@/types/Route";
 import { SidebarContent } from "@/blocks/hybrid/SidebarContent";
 import { getDesktopSidebarActions } from "@/actions/getDesktopSidebarActions";
@@ -8,6 +7,15 @@ import { getServerUiState } from "@/lib/util/getServerUIState";
 import { SidebarActionBar } from "@/blocks/hybrid/SidebarActionBar";
 import { Icon, IconNames } from "@/components/Icon";
 import clsx from "clsx";
+import { getSectionSlots } from "../sections/getSlots";
+
+export interface DesktopSlots {
+  sidebarheader: JSX.Element;
+  desktopheader: JSX.Element;
+  sidebarcontent: JSX.Element;
+  desktopcontent: JSX.Element;
+  desktopfooter: JSX.Element;
+}
 
 export const getDesktopSlots = async ({
   children,
@@ -18,7 +26,7 @@ export const getDesktopSlots = async ({
   params: { slug?: string[]; section?: string[]};
   fetcher?: (ctx: any) => Promise<any>;
   routes: Routes;
-}>) => {
+}>): Promise<DesktopSlots> => {
   const state = await getServerUiState();
   const sidebarActions = await getDesktopSidebarActions({
     serverState: { sidebar: { expanded: state?.sidebar?.expanded } },
@@ -29,6 +37,7 @@ export const getDesktopSlots = async ({
     fetcher,
     routes,
   });
+
   return {
     sidebarheader: (
       <div>
@@ -39,7 +48,7 @@ export const getDesktopSlots = async ({
                 <Icon
                   icon={
                     clsx({
-                      FaChevronRight: !state?.sidebar?.expanded ||  Number(state?.sidebar.expanded) < 2,
+                      FaChevronRight: !state?.sidebar?.expanded || Number(state?.sidebar.expanded) < 2,
                       FaChevronLeft: state?.sidebar.expanded === 2,
                     }) as IconNames
                   }

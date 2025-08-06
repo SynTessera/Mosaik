@@ -2,17 +2,22 @@
 
 import { DesktopContent } from "@/blocks/DesktopContent";
 import { Desktop } from "@/modules/Desktop";
-import { PropsWithChildren } from "react";
-import { ThemedComponent } from "@/blocks/ThemedComponent";
-import { getDesktopSlots } from "@/slots/getDesktopSlots";
+import { JSX, PropsWithChildren } from "react";
 
-export const DesktopColLayout = async ({
+interface DesktopSlots {
+  sidebarheader: JSX.Element;
+  desktopheader: JSX.Element;
+  sidebarcontent: JSX.Element;
+  desktopcontent: JSX.Element;
+  desktopfooter: JSX.Element;
+}
+
+export const DesktopColLayout = ({
   children,
   slots,
 }: PropsWithChildren<{
-  slots: Awaited<ReturnType<typeof getDesktopSlots>>;
+  slots: DesktopSlots;
 }>) => {
-
   return (
     <Desktop className="flex-col">
       <div className="flex w-full">
@@ -20,11 +25,7 @@ export const DesktopColLayout = async ({
         {slots.desktopheader}
       </div>
       <DesktopContent className="flex-row">
-        <ThemedComponent
-          name="DesktopSidebar"
-        >
-          {slots.sidebarcontent}
-        </ThemedComponent>
+        {slots.sidebarcontent}
         {slots.desktopcontent}
         {children}
       </DesktopContent>

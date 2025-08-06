@@ -1,7 +1,11 @@
-export type SidebarState = {
-    expanded?: 0 | 1 | 2;
+export interface SidebarState {
+  expanded: 0 | 1 | 2;
+  lastState?: SidebarState;
+  animation?: boolean;
 }
 
-export type State = {
-    sidebar: SidebarState;
+export interface State {
+  sidebar: SidebarState;
+  theme?: string;
+  preferences?: Record<string, any>;
 }
